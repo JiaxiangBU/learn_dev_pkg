@@ -5,3 +5,4 @@
 
 1.  add r proj and readme
 2.  template for coc and license
+3.  add combine\_two\_issues.Rmd
