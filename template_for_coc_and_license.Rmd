@@ -1,0 +1,21 @@
+参考
+https://github.com/rstudio/gt/blob/master/README.Rmd
+
+`use_tidy_coc()`: equivalent to `use_code_of_conduct()`, but puts the document in a .github/ subdirectory.
+
+<input type="checkbox" id="checkbox1" class="styled">`ANY_CHAR %R% ()` 就是函数
+https://usethis.r-lib.org/reference/tidyverse.html
+
+```{r}
+browse_github_issues(package = 'JiaxiangBU/add2md', number = 8)
+```
+
+```
+Error in idesc_create_package(self, private, package) : Cannot find DESCRIPTION for installed package JiaxiangBU/add2md
+```
+
+不懂
+https://usethis.r-lib.org/reference/browse-this.html
+
+https://usethis.r-lib.org/reference/index.html
+很不错
