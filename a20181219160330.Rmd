@@ -1,0 +1,18 @@
+add2md 继续开始做包
+
+让mini学会使用 git 和 github
+
+The case of files and directories is important. All sub-directories should be lower-case, except for R/. A citation file, if present, should be in inst/CITATION. Rename as needed.
+
+http://r-pkgs.had.co.nz/check.html
+
+等R的回复。
+
+目前包没有弄好。
+
+就是 notes 导致的
+
+http://r-pkgs.had.co.nz/check.html
+
+Oh no!
+You tried to trigger a build for JiaxiangBU/add2md but the request was rejected.
