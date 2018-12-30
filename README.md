@@ -1,6 +1,9 @@
-### 2018-12-30 16:29:15
 
-1. 
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+### 2018-12-30 16:29:28
+
+1.  add github related rmd
 
 ### 2018-12-18 20:23:48
 
