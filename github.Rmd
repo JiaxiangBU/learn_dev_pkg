@@ -9,3 +9,4 @@ output: github_document
 ✔ Setting BugReports field in DESCRIPTION to 'https://github.com/JiaxiangBU/regex4impala/issues'
 ```
 
+参考[usethis](https://usethis.r-lib.org/reference/use_github_links.html)
