@@ -1,0 +1,11 @@
+---
+output: github_document
+---
+
+
+```{r eval=F}
+> use_github_links()
+✔ Setting URL field in DESCRIPTION to 'https://github.com/JiaxiangBU/regex4impala'
+✔ Setting BugReports field in DESCRIPTION to 'https://github.com/JiaxiangBU/regex4impala/issues'
+```
+
