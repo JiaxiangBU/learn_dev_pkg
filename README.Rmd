@@ -11,13 +11,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-### 2018-12-30 16:29:28
+这个项目记录了
 
-1. add github related rmd
-1. add author related rmd but fail
+1. R包开发的相关问题和解答
+1. 开发中未解决问题的日志和解决方向
 
-### 2018-12-18 20:23:48
-
-1. add r proj and readme
-1. template for coc and license
-1. add combine_two_issues.Rmd
