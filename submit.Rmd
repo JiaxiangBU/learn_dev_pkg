@@ -1,0 +1,11 @@
+---
+output: github_document
+---
+
+上传网站
+: https://cran.r-project.org/submit.html
+
+```{r}
+knitr::include_graphics("figure/vocation_notice.png")
+```
+

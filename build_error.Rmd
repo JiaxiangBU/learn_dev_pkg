@@ -1,0 +1,23 @@
+
+```
+❯ checking package dependencies ... ERROR
+  Namespace dependencies not required: ‘magrittr’ ‘rebus’ ‘stringr’
+  
+  See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+  manual.
+
+1 error ✖ | 0 warnings ✔ | 0 notes ✔
+错误: R CMD check found ERRORs
+停止执行
+```
+
+[Stack Overflow](https://stackoverflow.com/questions/13085481/namespace-dependencies-not-required)
+
+`use_package`
+
+```
+❯ checking DESCRIPTION meta-information ... WARNING
+  Dependence on R version ‘3.5.1’ not with patchlevel 0
+```
+
+修改成3.5.0

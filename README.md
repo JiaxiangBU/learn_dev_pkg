@@ -1,8 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-### 2018-12-18 20:23:48
+这个项目记录了
 
-1.  add r proj and readme
-2.  template for coc and license
-3.  add combine\_two\_issues.Rmd
+1.  R包开发的相关问题和解答
+2.  开发中未解决问题的日志和解决方向

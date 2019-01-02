@@ -1,0 +1,10 @@
+```{r eval=F}
+options(
+  usethis.description = list(
+    `Authors@R` = 'person("Jiaxiang", "Li", role = c("aut", "cre"), email = "alex.lijiaxiang@foxmail.com"),',
+    License = "GPL 3.0 + file LICENSE",
+    Language = "es"
+  )
+)
+```
+
