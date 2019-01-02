@@ -1,0 +1,7 @@
+ui
+edit
+template 
+
+三部分函数都很不错
+
+`rstudioapi::navigateToFile`参考 `usethis`包的源代码`edit.R`
