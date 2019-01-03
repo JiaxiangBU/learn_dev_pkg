@@ -9,3 +9,42 @@ output: github_document
 knitr::include_graphics("figure/vocation_notice.png")
 ```
 
+`devtools::submit_cran()`更方便。
+
+```
+> devtools::submit_cran()
+Is your email address alex.lijiaxiang@foxmail.com?
+1: No
+2: Not yet
+3: Yeah
+
+Selection: 3
+Ready to submit to CRAN?
+1: Yes
+2: I forget
+3: Uhhhh... Maybe?
+
+Selection: 1
+Building
+pdflatex not found! Not building PDF manual.
+√  checking for file 'D:\work\regex4impala/DESCRIPTION' (421ms)
+-  preparing 'regex4impala': (903ms)
+√  checking DESCRIPTION meta-information ... 
+-  checking for LF line-endings in source and make files and shell scripts (404ms)
+-  checking for empty or unneeded directories
+-  building 'regex4impala_0.1.4.tar.gz'
+   
+Submitting file: C:\Users\LIJIAX~1\AppData\Local\Temp\Rtmpw9foez/regex4impala_0.1.4.tar.gz
+File size: 28.6 Kb
+Uploading package & comments
+Confirming submission
+Package submission successful.
+Check your email for confirmation link.
+Don't forget to tag this release once accepted by CRAN
+✔ Setting active project to 'D:/work/regex4impala'
+✔ Adding '^CRAN-RELEASE$' to '.Rbuildignore'
+Warning message:
+Can't find cran-comments.md.
+This file gives CRAN volunteers comments about the submission,
+Create it with use_cran_comments().
+```

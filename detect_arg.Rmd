@@ -1,0 +1,20 @@
+---
+output: github_document
+title: "detect arg"
+---
+
+```{r eval=F}
+library(xfun)
+library(tidyverse)
+
+data_frame(
+    name = list.files("R")
+    ,result = list.files("R") %>% 
+        map_int(
+            ~read_utf8(file.path("R",.)) %>% 
+                str_detect('@export') %>%
+                max
+        )
+) %>% 
+    arrange(result)
+```

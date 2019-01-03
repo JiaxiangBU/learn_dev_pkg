@@ -1,0 +1,10 @@
+---
+output: github_document
+---
+
+Prepare for next version
+
+http://r-pkgs.had.co.nz/release.html
+
+非常规范的开发流程
+

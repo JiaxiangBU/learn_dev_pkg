@@ -1,0 +1,5 @@
+---
+output: github_document
+---
+
+[Stack Overflow](https://stackoverflow.com/questions/18343235/importing-two-functions-with-same-name-using-roxygen2)

@@ -5,3 +5,20 @@ template
 三部分函数都很不错
 
 `rstudioapi::navigateToFile`参考 `usethis`包的源代码`edit.R`
+
+```{r eval=F}
+append_archive <- function(orig_path = "archive.Rmd"){
+    if (file.exists(orig_path)) {
+        file.create(orig_path)
+    }
+    previous_doc <- readLines(orig_path, encoding = "UTF-8")
+    append_doc <- select_lines()
+    xfun::write_utf8(
+        c(previous_doc,"",append_doc)
+        ,news_path
+        )
+}
+```
+
+`""`的加入，可以空一行。
+学习`use_news_heading`函数，进行 append 文档。

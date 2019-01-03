@@ -12,7 +12,20 @@ http://r-pkgs.had.co.nz/check.html
 
 就是 notes 导致的
 
-http://r-pkgs.had.co.nz/check.html
 
 Oh no!
 You tried to trigger a build for JiaxiangBU/add2md but the request was rejected.
+
+>
+`NOTEs`: Mild problems. If you are submitting to CRAN, you should strive to eliminate all NOTEs, even if they are false positives. If you have no NOTEs, human intervention is not required, and the package submission process will be easier. If it’s not possible to eliminate a NOTE, you’ll need describe why it’s OK in your submission comments, as described in release notes. If you’re not submitting to CRAN, carefully read each NOTE, but don’t go out of your way to fix things that you don’t think are problems.
+[Reference](http://r-pkgs.had.co.nz/check.html)
+
+所以连 NOTES 也要全部删除
+
+>
+`.Rbuildignore` (so it’s not included in the package)
+
+```
+> use_build_ignore("docs")
+✔ Adding '^docs$' to '.Rbuildignore'
+```
