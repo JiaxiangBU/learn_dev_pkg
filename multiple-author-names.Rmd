@@ -1,0 +1,12 @@
+---
+title: "项目和包的作者名字"
+output: github_document
+---
+
+>
+Name of the copyright holder or holders. Separate multiple individuals with `;`. You can supply a global default with `options(usethis.full_name = "My name")`.
+
+```{r eval=F}
+licenses {usethis}	
+options(usethis.full_name = "Jiaxiang Li;Ruiqi Wu;Xiaosong Jin")
+```
