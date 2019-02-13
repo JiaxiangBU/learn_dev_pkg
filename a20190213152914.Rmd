@@ -1,0 +1,5 @@
+---
+output: github_document
+---
+
+todo 写一个建立包的快速 code 指南
