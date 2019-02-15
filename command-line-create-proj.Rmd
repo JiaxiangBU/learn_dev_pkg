@@ -1,0 +1,11 @@
+---
+title: "使用命令创建项目"
+output: github_document
+---
+
+```{r eval=F}
+library(devtools)
+create_project("../learn_pagerank")
+```
+
+比一个个交互的点击方便多了。
