@@ -1,0 +1,134 @@
+---
+title: "usethis 开发包的流程"
+author: "李家翔"
+date: "`r Sys.Date()`"
+output: github_document
+bibliography: add.bib
+---
+
+```{r setup}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, eval= FALSE)
+```
+
+
+参考 @Hvitfeldt2019 ，作者已经总结得很好，这里只是中文翻译稿，方便自己总结和加深。
+
+```{r}
+library(devtools)
+library(roxygen2)
+library(usethis)
+```
+
+>
+The available package can help you evaluate possible names to make sure they don’t clash with other names and that they don’t mean something rude.
+
+给包命名时，先要保证之前已经没有作者申请过。
+
+```{r}
+library(available)
+available("add2md")
+```
+
+但是产生了报错，提交了[Github Issue 46](https://github.com/ropenscilabs/available/issues/46)。
+
+
+```{r}
+create_package("../test4pkg")
+```
+
+在新打开的 RStudio 界面中，输入
+
+```{r}
+library(devtools)
+use_git()
+```
+
+RStudio 重启后，在 github 上创建空的项目，然后进行终端输入
+
+```
+git remote add origin https://github.com/JiaxiangBU/test4pkg.git
+git push -u origin master
+```
+
+
+```{r}
+library(devtools)
+use_github()
+```
+
+```
+Error: No GitHub `auth_token`.
+Provide explicitly or make available as an environment variable.
+See `browse_github_pat()` for help setting this up.
+```
+
+输入
+
+```{r}
+browse_github_pat()
+```
+
+输入
+
+```{r}
+edit_r_environ()
+```
+
+然后根据提示，将 token 填入。
+
+```{r}
+use_github()
+```
+
+就可以使用了。
+
+修改 `Author@R`，点开
+
+```
+Package: test4pkg
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "First",
+           family = "Last",
+           role = c("aut", "cre"),
+           email = "first.last@example.com")
+Description: What the package does (one paragraph).
+License: What license it uses
+Encoding: UTF-8
+LazyData: true
+```
+
+发现只要手动修改即可。
+
+```{r}
+options(usethis.full_name = "Jiaxiang Li")
+use_mit_license()
+```
+
+>
+Next we will setup some continuous integration,
+>
+copy badges to the readme (typically placed right under the main title “# utwf”) and copy the code snippet to the .travis.yml file.
+
+```{r}
+use_travis()
+use_appveyor()
+use_coverage(type = c("codecov"))
+```
+
+```{r}
+use_testthat()
+```
+
+```{r}
+use_spell_check()
+```
+
+```{r}
+use_news_md()
+```
+
+参考的试验包见[github](https://github.com/JiaxiangBU/test4pkg)，可以查看 Commit 记录和以上笔记进行比较。   
+
+todo 剩下两个 badge 没有成功。
