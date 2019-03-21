@@ -99,6 +99,10 @@ Encoding: UTF-8
 LazyData: true
 ```
 
+1. 修改 `Author@R`
+1. `Title`
+1. `Description`
+
 发现只要手动修改即可。
 
 ```{r}
@@ -132,3 +136,5 @@ use_news_md()
 参考的试验包见[github](https://github.com/JiaxiangBU/test4pkg)，可以查看 Commit 记录和以上笔记进行比较。   
 
 todo 剩下两个 badge 没有成功。
+
+- [ ] pkgdown 还没有加入
