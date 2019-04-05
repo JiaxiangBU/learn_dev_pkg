@@ -1,0 +1,12 @@
+
+参考
+http://r-pkgs.had.co.nz/man.html
+和
+https://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf
+
+```
+#' \dontrun{
+#' sum("a")
+#' }
+```
+

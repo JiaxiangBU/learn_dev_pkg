@@ -1,3 +1,7 @@
+### 2019-04-05 12:13:58
+
+1. add add-examples-dontrun.Rmd
+
 ### 2019-02-20 17:30:01
 
 1. add usethis 开发包的流程
