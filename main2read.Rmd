@@ -1,0 +1,11 @@
+---
+author: Jiaxiang Li
+date: "`r Sys.Date()`"
+output: github_document
+---
+
+http://r-pkgs.had.co.nz/
+
+https://usethis.r-lib.org/reference/index.html
+
+主要参考这两个资源。
