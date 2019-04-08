@@ -1,0 +1,21 @@
+
+```
+citHeader("To cite add2md in publications use:")
+
+citEntry(
+  entry    = "Article",
+  title    = ,
+  author   = ,
+  journal  = ,
+  year     = ,
+  volume   = ,
+  number   = ,
+  pages    = ,
+  url      = ,
+  textVersion = paste(
+
+  )
+)
+```
+
+会插入如上。

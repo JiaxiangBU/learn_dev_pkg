@@ -1,3 +1,7 @@
+### 2019-04-08 23:07:03
+
+1. add use_citation
+
 ### 2019-04-05 12:13:58
 
 1. add add-examples-dontrun.Rmd
