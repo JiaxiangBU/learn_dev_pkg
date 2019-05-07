@@ -1,0 +1,6 @@
+参考 [yihui](https://yihui.name/en/2019/04/naming-common-words/)
+
+>
+I guess the new lesson learned here is that a common word as a software package name is probably fine, but you’d better avoid words related to the pop culture or the entertainment industry. If you search for a word on Google and Google shows you YouTube videos or images, it is likely to be a bad idea.
+
+不是说common word 不能用，而是要避开主流文化，如果包的名字，出现什么视频或者图片等，最好是避免的。
