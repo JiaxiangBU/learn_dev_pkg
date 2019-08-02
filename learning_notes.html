@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>R 开发包学习笔记</title>
+  <meta name="description" content="R 开发包学习笔记">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="R 开发包学习笔记" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="R 开发包学习笔记" />
+  
+  
+  
+
+<meta name="author" content="李家翔">
+
+
+<meta name="date" content="2019-08-03">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path=""><a href="#section-1"><i class="fa fa-check"></i><b>1</b> 首次准备工作</a></li>
+<li class="chapter" data-level="2" data-path=""><a href="#section-2"><i class="fa fa-check"></i><b>2</b> 快速创建包</a></li>
+<li class="chapter" data-level="3" data-path=""><a href="#dump"><i class="fa fa-check"></i><b>3</b> 使用<code>dump</code>录入函数</a></li>
+<li class="chapter" data-level="4" data-path=""><a href="#section-4"><i class="fa fa-check"></i><b>4</b> 测试函数</a></li>
+<li class="chapter" data-level="5" data-path=""><a href="#use_testthat"><i class="fa fa-check"></i><b>5</b> <code>use_testthat()</code></a></li>
+<li class="chapter" data-level="6" data-path=""><a href="#help-"><i class="fa fa-check"></i><b>6</b> help 文档模版</a><ul>
+<li class="chapter" data-level="6.1" data-path=""><a href="#section-6.1"><i class="fa fa-check"></i><b>6.1</b> 解读模版</a></li>
+<li class="chapter" data-level="6.2" data-path=""><a href="#list"><i class="fa fa-check"></i><b>6.2</b> List</a></li>
+<li class="chapter" data-level="6.3" data-path=""><a href="#help"><i class="fa fa-check"></i><b>6.3</b> 包的help文档</a></li>
+<li class="chapter" data-level="6.4" data-path=""><a href="#datahelp"><i class="fa fa-check"></i><b>6.4</b> 给data加help文档</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path=""><a href="#section-7"><i class="fa fa-check"></i><b>7</b> 加入数据</a></li>
+<li class="chapter" data-level="8" data-path=""><a href="#-vignettes"><i class="fa fa-check"></i><b>8</b> 加入 Vignettes</a></li>
+<li class="chapter" data-level="9" data-path=""><a href="#-link"><i class="fa fa-check"></i><b>9</b> 加入 link</a></li>
+<li class="chapter" data-level="10" data-path=""><a href="#-mit"><i class="fa fa-check"></i><b>10</b> 加入 MIT</a></li>
+<li class="chapter" data-level="11" data-path=""><a href="#section-11"><i class="fa fa-check"></i><b>11</b> 加入需要使用的包</a><ul>
+<li class="chapter" data-level="11.1" data-path=""><a href="#depends--imports-"><i class="fa fa-check"></i><b>11.1</b> Depends 和 Imports 的区别</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path=""><a href="#-badge"><i class="fa fa-check"></i><b>12</b> 加入 badge</a></li>
+<li class="chapter" data-level="13" data-path=""><a href="#-travis-ci"><i class="fa fa-check"></i><b>13</b> 加入 Travis CI</a></li>
+<li class="chapter" data-level="14" data-path=""><a href="#-vignette"><i class="fa fa-check"></i><b>14</b> 加入 vignette</a></li>
+<li class="chapter" data-level="15" data-path=""><a href="#-description"><i class="fa fa-check"></i><b>15</b> 修改 Description</a></li>
+<li class="chapter" data-level="16" data-path=""><a href="#namespace"><i class="fa fa-check"></i><b>16</b> namespace</a></li>
+<li class="chapter" data-level="17" data-path=""><a href="#-.rmd-readme"><i class="fa fa-check"></i><b>17</b> 使用 <code>.Rmd</code> Readme</a></li>
+<li class="chapter" data-level="18" data-path=""><a href="#news.md-"><i class="fa fa-check"></i><b>18</b> NEWS.md 作用</a></li>
+<li class="chapter" data-level="19" data-path=""><a href="#git-"><i class="fa fa-check"></i><b>19</b> Git 使用注意事项</a><ul>
+<li class="chapter" data-level="19.1" data-path=""><a href="#cant-do-a-git-pull"><i class="fa fa-check"></i><b>19.1</b> Can’t do a git pull</a></li>
+<li class="chapter" data-level="19.2" data-path=""><a href="#1000"><i class="fa fa-check"></i><b>19.2</b> 超过1000个文件</a></li>
+<li class="chapter" data-level="19.3" data-path=""><a href="#section-19.3"><i class="fa fa-check"></i><b>19.3</b> 撤销修改</a></li>
+<li class="chapter" data-level="19.4" data-path=""><a href="#section-19.4"><i class="fa fa-check"></i><b>19.4</b> 跳过检验</a></li>
+<li class="chapter" data-level="19.5" data-path=""><a href="#-100-mb-"><i class="fa fa-check"></i><b>19.5</b> 上传 100 MB 文件</a></li>
+<li class="chapter" data-level="19.6" data-path=""><a href="#-50-mb-"><i class="fa fa-check"></i><b>19.6</b> 上传 50 MB 文件</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path=""><a href="#section-20"><i class="fa fa-check"></i><b>20</b> 版本设置</a></li>
+<li class="chapter" data-level="21" data-path=""><a href="#section-21"><i class="fa fa-check"></i><b>21</b> 拼写检查</a></li>
+<li class="chapter" data-level="22" data-path=""><a href="#section-22"><i class="fa fa-check"></i><b>22</b> 快捷键</a></li>
+<li class="chapter" data-level="23" data-path=""><a href="#if-"><i class="fa fa-check"></i><b>23</b> 使用if 判断写函数</a></li>
+<li class="chapter" data-level="24" data-path=""><a href="#pkgdown"><i class="fa fa-check"></i><b>24</b> pkgdown</a><ul>
+<li class="chapter" data-level="24.1" data-path=""><a href="#fail-to-build_site"><i class="fa fa-check"></i><b>24.1</b> fail to <code>build_site</code></a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path=""><a href="#check"><i class="fa fa-check"></i><b>25</b> <code>check</code></a></li>
+<li class="chapter" data-level="26" data-path=""><a href="#addins"><i class="fa fa-check"></i><b>26</b> addins</a></li>
+<li class="chapter" data-level="27" data-path=""><a href="#github--collaborators"><i class="fa fa-check"></i><b>27</b> Github 加入 collaborators</a></li>
+<li class="chapter" data-level="28" data-path=""><a href="#github"><i class="fa fa-check"></i><b>28</b> 安装特定版本的github包</a></li>
+<li class="chapter" data-level="29" data-path=""><a href="#-rproj-"><i class="fa fa-check"></i><b>29</b> 更新功能能够在其他 Rproj 使用</a></li>
+<li class="chapter" data-level="30" data-path=""><a href="#-r-cran-"><i class="fa fa-check"></i><b>30</b> 上传 R CRAN 官方</a></li>
+<li class="chapter" data-level="31" data-path=""><a href="#import-pipeline"><i class="fa fa-check"></i><b>31</b> import pipeline</a></li>
+<li class="chapter" data-level="32" data-path=""><a href="#section-32"><i class="fa fa-check"></i><b>32</b> 版本控制</a></li>
+<li class="chapter" data-level="33" data-path=""><a href="#importfrom"><i class="fa fa-check"></i><b>33</b> importFrom</a></li>
+<li class="chapter" data-level="34" data-path=""><a href="#warning"><i class="fa fa-check"></i><b>34</b> 加入warning</a></li>
+<li class="chapter" data-level="35" data-path=""><a href="#stop"><i class="fa fa-check"></i><b>35</b> 加入stop</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#e99984e5bd95"><i class="fa fa-check"></i>附录</a><ul>
+<li class="chapter" data-level="35.1" data-path=""><a href="#section-35.1"><i class="fa fa-check"></i><b>35.1</b> 更新</a><ul>
+<li class="chapter" data-level="35.1.1" data-path=""><a href="#section"><i class="fa fa-check"></i><b>35.1.1</b> 2018-12-27 09:25:42</a></li>
+<li class="chapter" data-level="35.1.2" data-path=""><a href="#section-1"><i class="fa fa-check"></i><b>35.1.2</b> 2018-12-18 20:34:50</a></li>
+<li class="chapter" data-level="35.1.3" data-path=""><a href="#section-2"><i class="fa fa-check"></i><b>35.1.3</b> 2018-12-18 20:13:36</a></li>
+<li class="chapter" data-level="35.1.4" data-path=""><a href="#section-3"><i class="fa fa-check"></i><b>35.1.4</b> 2018-12-18 13:59:21</a></li>
+<li class="chapter" data-level="35.1.5" data-path=""><a href="#section-4"><i class="fa fa-check"></i><b>35.1.5</b> 2018-12-18 13:14:22</a></li>
+<li class="chapter" data-level="35.1.6" data-path=""><a href="#section-5"><i class="fa fa-check"></i><b>35.1.6</b> 2018-11-23 09:21:15</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R 开发包学习笔记</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">R 开发包学习笔记</h1>
+<h4 class="author"><em>李家翔</em></h4>
+<h4 class="date"><em>2019-08-03</em></h4>
+</div>
+<ol style="list-style-type: decimal">
+<li>使用 RMarkdown 的 <code>child</code> 参数，进行文档拼接。</li>
+<li>这样拼接以后的笔记方便复习。</li>
+<li>相关问题提交到 <a href="https://github.com/JiaxiangBU/tutoring/issues/new">GitHub</a></li>
+</ol>
+<p>本文主要介绍了R开发包的内容，主要需要了解几个相关内容</p>
+<ol style="list-style-type: decimal">
+<li>Git 和 Github相关</li>
+<li><code>devtools</code>包<span class="citation">(<span class="citeproc-not-found" data-reference-id="Wickhamusethis"><strong>???</strong></span>)</span>的相关函数</li>
+</ol>
+<p>建议在一个已经完成的包上进行学习，copy 函数、vignette等。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">eval=</span>F)</a></code></pre></div>
+<div id="section-1" class="section level1">
+<h1><span class="header-section-number">1</span> 首次准备工作</h1>
+<ol style="list-style-type: decimal">
+<li>下载Git</li>
+<li>打开Git Bash</li>
+<li>输入<code>pwd</code>，查看当前路径</li>
+<li>更改路径，<code>cd d:/lijiaxiang</code>，就是更改到D盘lijiaxiang这个文件夹</li>
+<li><code>git clone https://github.com/JiaxiangBU/add2md</code>，会在当前文件夹内产生一个add2md文件夹，这就是我们现在一起开发的包</li>
+<li>点击<code>.Rproj</code>文件</li>
+<li><code>command + .</code> 打开文件<code>DESCRIPTION</code>，修改<code>author</code>，加上自己。
+<ol style="list-style-type: decimal">
+<li>这里建议在<a href="https://github.com/JiaxiangBU/add2md">Github</a>修改，比较友好，少代码。</li>
+<li>在Git Bash ，
+<ol style="list-style-type: decimal">
+<li><code>cd add2md</code></li>
+<li><code>git status</code></li>
+<li><code>git add -A</code></li>
+<li><code>git commit -m 'add author name'</code></li>
+<li><code>git push</code>，第一次记得输入账号和密码
+<ol style="list-style-type: decimal">
+<li>免密码的方式，参考博客</li>
+</ol></li>
+</ol></li>
+</ol></li>
+<li><code>git config</code> 设置下自己的邮箱和名字</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&#39;JiaxiangBU/add2md&#39;</span>)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&#39;JiaxiangBU/add2md@m-func&#39;</span>)</a></code></pre></div>
+<p><code>@m-func</code>是我们使用Git开发包，master是branch的主线，<code>m-func</code>是另外一个branch，主要做预发布。</p>
+</div>
+<div id="section-2" class="section level1">
+<h1><span class="header-section-number">2</span> 快速创建包</h1>
+<p><code>devtools::create</code>函数可以直接完成，<code>path</code>为包的名称。<span class="citation">(<span class="citeproc-not-found" data-reference-id="Gott2018"><strong>???</strong></span>)</span></p>
+<p>一个包的建立最少分为五个步骤。<span class="citation">(<span class="citeproc-not-found" data-reference-id="Gott2018"><strong>???</strong></span>)</span></p>
+<ol style="list-style-type: decimal">
+<li><code>create()</code></li>
+<li><code>document()</code> - help 文档</li>
+<li><code>test()</code></li>
+<li><code>build()</code></li>
+<li><code>check()</code></li>
+</ol>
+</div>
+<div id="dump" class="section level1">
+<h1><span class="header-section-number">3</span> 使用<code>dump</code>录入函数</h1>
+<pre><code># What is in the R directory before adding a function?
+dir(&quot;datasummary/R&quot;)
+
+# Use the dump() function to write the numeric_summary function
+dump(&quot;numeric_summary&quot;, file = &quot;datasummary/R/numeric_summary.R&quot;)
+
+# Verify that the file is in the correct directory
+dir(&quot;datasummary/R&quot;)</code></pre>
+<p>我们也可以新建<code>.R</code>，把函数复制粘贴，但是这样的话，比较费时费力。
+可以尝试使用<code>dump</code>函数完成，在测试函数成功后，进行。
+<span class="citation">(<span class="citeproc-not-found" data-reference-id="Gott2018"><strong>???</strong></span>)</span></p>
+</div>
+<div id="section-4" class="section level1">
+<h1><span class="header-section-number">4</span> 测试函数</h1>
+<p>写完函数后，需要去测试，这时候不需要git push后去下载，而是
+<code>devtools::load_all()</code>就好，并且load的函数，不是在global中，放心使用。
+<a href="http://stat545.com/packages04_foofactors-package-01.html">STAT545</a></p>
+<p>使用快捷键</p>
+<p>shift + alt + L</p>
+</div>
+<div id="use_testthat" class="section level1">
+<h1><span class="header-section-number">5</span> <code>use_testthat()</code></h1>
+<blockquote>
+<p>This will create a tests directory that contains:</p>
+<ol style="list-style-type: decimal">
+<li>A script testthat.R.</li>
+<li><p>A directory testthat.
+You save your tests in the tests/testthat/ directory in files with filenames beginning with test-. So, for example, the simutils package has tests named:</p></li>
+<li><code>test-na_counter.R</code></li>
+<li><code>test-sample_from_data.R</code>
+[<span class="citation">(<span class="citeproc-not-found" data-reference-id="Gott2018"><strong>???</strong></span>)</span>,</li>
+</ol>
+<ul>
+<li><a href="https://campus.datacamp.com/courses/developing-r-packages/adding-unit-tests-to-r-packages?ex=2">Setting up the test structure | R</a>
+]</li>
+</ul>
+</blockquote>
+</div>
+<div id="help-" class="section level1">
+<h1><span class="header-section-number">6</span> help 文档模版</h1>
+<p><a href="http://stat545.com/packages05_foofactors-package-02.html">STAT545</a></p>
+<pre><code>#&#39; Get a badge for the download count of your package
+#&#39;
+#&#39; Input your github name and repo name,
+#&#39; this function will feedback the download count of your package.
+#&#39;
+#&#39; @param your_github_name character
+#&#39; @param your_github_repo character
+#&#39; @param type character
+#&#39;
+#&#39; @return character
+#&#39; @export
+#&#39; @examples
+#&#39; add2blog::badge_download(
+#&#39; your_github_name = &#39;JiaxiangBU&#39;
+#&#39; ,your_github_repo = &#39;add2prep&#39;
+#&#39; ,type = &#39;total&#39;)
+
+badge_download &lt;- function(
+    your_github_name = &#39;JiaxiangBU&#39;
+    ,your_github_repo = &#39;add2prep&#39;
+    ,type = c(&#39;total&#39;)
+){
+    glue(&#39;  [![GitHub All Releases](https://img.shields.io/github/downloads/{your_github_name}/{your_github_repo}/{type}.svg)](https://github.com/JiaxiangBU/add2prep)&#39;) %&gt;%
+        print
+    glue(&#39;&lt;&lt;&lt;Copy it above nto your README.md&gt;&gt;&gt;&gt;&#39;)
+}</code></pre>
+<div id="section-6.1" class="section level2">
+<h2><span class="header-section-number">6.1</span> 解读模版</h2>
+<pre><code>#&#39; Title goes here
+#&#39;
+#&#39; Description goes here
+#&#39;
+#&#39; Details go here</code></pre>
+<p><span class="citation">(<span class="citeproc-not-found" data-reference-id="Gott2018"><strong>???</strong></span>,
+* <a href="https://campus.datacamp.com/courses/developing-r-packages/documenting-packages?ex=2">A simple function header | R</a>)</span></p>
+<p>如果没有<code>@export</code>，那么这个函数是不会打首字母被联想输入的，因为直观上表示包的作者不想使用者使用这个函数。
+这种函数的调用不能通过<code>library</code>包或者<code>package::</code>的方式调用，而是<code>package:::</code>来调用。</p>
+<ol style="list-style-type: decimal">
+<li><code>\dontrun{}</code>让例子不跑</li>
+<li><code>\code</code>实现latex</li>
+<li><code>\link[packageName]{functionName}</code> 链接其他函数，包的名字需要主要是如果这个函数不是此包的时候。</li>
+<li><code>@seealso</code> 列出一些其他函数，读者会感兴趣。</li>
+<li><code>@notes</code> 加一些备注。</li>
+<li><code>@author Jiaxiang Li \email{alex.lijiaxiang@foxmail.com}</code> 加入作者</li>
+<li><code>@importFrom tidyr gather</code> 只引入函数
+[<span class="citation">(<span class="citeproc-not-found" data-reference-id="Gott2018"><strong>???</strong></span>)</span>,</li>
+</ol>
+<ul>
+<li><a href="https://campus.datacamp.com/courses/developing-r-packages/documenting-packages?ex=11">Additional documentation | R</a>
+]</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li><code>@param</code>的<code>arg</code>后面不要加<code>.</code>因为document后<code>.</code>会作为变量名称的一部分。</li>
+</ol>
+</div>
+<div id="list" class="section level2">
+<h2><span class="header-section-number">6.2</span> List</h2>
+<pre><code>#&#39; \itemize{
+#&#39;  \item ID
+#&#39;  \item min
+#&#39;  \item median
+#&#39;  \item sd
+#&#39;  \item max
+#&#39; }</code></pre>
+</div>
+<div id="help" class="section level2">
+<h2><span class="header-section-number">6.3</span> 包的help文档</h2>
+<p><code>?package</code></p>
+<pre><code>#&#39; add2blog: help your blog site
+#&#39;
+#&#39; The goal of add2blog is to help you build some materials like wall paper for your blog website !
+#&#39;
+#&#39; @docType package
+#&#39; @name add2blog
+#&#39; @keywords internal
+&quot;_PACKAGE&quot;</code></pre>
+<p><span class="citation">(<span class="citeproc-not-found" data-reference-id="Gott2018"><strong>???</strong></span>,
+* <a href="https://campus.datacamp.com/courses/developing-r-packages/documenting-packages?ex=14">Adding package documentation | R</a>)</span></p>
+</div>
+<div id="datahelp" class="section level2">
+<h2><span class="header-section-number">6.4</span> 给data加help文档</h2>
+<pre><code>#&#39; blogdown_meta_data blodgown meta data
+#&#39;
+#&#39; A dataset containing the real blodgown meta data
+#&#39;
+#&#39; @format A data frame of 287 rows and 6 columns
+#&#39; \describe{
+#&#39;  \item{dir}{Character}
+#&#39;  \item{author}{Character}
+#&#39;  \item{categories}{Character}
+#&#39;  \item{categories}{Character}
+#&#39;  \item{date}{Character}
+#&#39;  \item{tags}{Character}
+#&#39;  \item{title}{Character}
+#&#39; }
+#&#39; @source https://jiaxiangli.netlify.com
+&quot;blogdown_meta_data&quot;</code></pre>
+<p>不要忘记最后一个。</p>
+</div>
+</div>
+<div id="section-7" class="section level1">
+<h1><span class="header-section-number">7</span> 加入数据</h1>
+<p>R package 为了举例，需要加入举例的数据集，使用
+<code>devtools::use_data(x, mtcars)</code>完成，
+具体见
+<a href="http://r-pkgs.had.co.nz/data.html">Data · R packages</a></p>
+</div>
+<div id="-vignettes" class="section level1">
+<h1><span class="header-section-number">8</span> 加入 Vignettes</h1>
+<p><code>build_articles</code>会读取文件夹<code>vignettes</code>内的所有<code>.Rmd</code>文档，建立一个新文件夹<code>articles</code>，内含<code>.html</code>，用于展示
+具体见<a href="https://pkgdown.r-lib.org/reference/build_articles.html">pkgdown</a></p>
+</div>
+<div id="-link" class="section level1">
+<h1><span class="header-section-number">9</span> 加入 link</h1>
+<pre><code>&gt; use_github_links()
+✔ Setting active project to &#39;/Users/vija/Downloads/180805_folder_01/tmp_jli/trans/projIN/add2evaluation&#39;
+✔ Setting URL field in DESCRIPTION to &#39;https://github.com/JiaxiangBU/add2evaluation&#39;
+✔ Setting BugReports field in DESCRIPTION to &#39;https://github.com/JiaxiangBU/add2evaluation/issues&#39;</code></pre>
+<p><img src="https://raw.githubusercontent.com/JiaxiangBU/picbackup/master/addlink.png" /></p>
+</div>
+<div id="-mit" class="section level1">
+<h1><span class="header-section-number">10</span> 加入 MIT</h1>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">use_mit_license</span>(<span class="st">&quot;Jiaxiang Li&quot;</span>)</a></code></pre></div>
+</div>
+<div id="section-11" class="section level1">
+<h1><span class="header-section-number">11</span> 加入需要使用的包</h1>
+<p>注意一次加一个包
+(<a href="https://community.rstudio.com/t/error-happens-when-use-use-package/17837">Misha Balyasin</a>)</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">library</span>(usethis)</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw">use_package</span>(<span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;data.table&quot;</span>)</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="kw">use_package</span>(<span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;data.table&quot;</span>,<span class="dt">type =</span> <span class="st">&quot;Suggests&quot;</span>)</a></code></pre></div>
+<div id="depends--imports-" class="section level2">
+<h2><span class="header-section-number">11.1</span> Depends 和 Imports 的区别</h2>
+<blockquote>
+<p>In the majority of cases, you should only list the version of R required in the Depends field and the package in the Imports field.
+<span class="citation">(<span class="citeproc-not-found" data-reference-id="Gott2018"><strong>???</strong></span>,
+* <a href="https://campus.datacamp.com/courses/developing-r-packages/checking-and-building-r-packages?ex=8">Depends or imports? | R</a>)</span></p>
+</blockquote>
+</div>
+</div>
+<div id="-badge" class="section level1">
+<h1><span class="header-section-number">12</span> 加入 badge</h1>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">use_lifecycle_badge</span>(<span class="st">&#39;experimental&#39;</span>)</a></code></pre></div>
+<p>参考 <span class="citation">(<span class="citeproc-not-found" data-reference-id="Wickhamusethisbadges"><strong>???</strong></span>)</span> 可以按照不同阶段给包安装不同的徽章。
+具体可以参考
+<a href="https://www.tidyverse.org/lifecycle/#experimental">Lifecycle badges - Tidyverse</a></p>
+<pre><code>&gt; use_travis()
+✔ Writing &#39;.travis.yml&#39;
+✔ Adding &#39;^\\.travis\\.yml$&#39; to &#39;.Rbuildignore&#39;
+● Turn on travis for your repo at https://travis-ci.org/profile/JiaxiangBU
+● Add a Travis build status badge by adding the following line to your README:
+Copying code to clipboard:
+  [![Travis build status](https://travis-ci.org/JiaxiangBU/add2blog.svg?branch=master)](https://travis-ci.org/JiaxiangBU/add2blog)
+  </code></pre>
+<p>参考
+<a href="https://github.com/cboettig/template">Carl Boettiger</a></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">add2blog<span class="op">::</span><span class="kw">badge_download</span>()</a></code></pre></div>
+</div>
+<div id="-travis-ci" class="section level1">
+<h1><span class="header-section-number">13</span> 加入 Travis CI</h1>
+<blockquote>
+<p>Travis CI (continuous integration) is
+A way of running checks every time you update your code.
+<span class="citation">(<span class="citeproc-not-found" data-reference-id="Gott2018"><strong>???</strong></span>,
+* <a href="https://campus.datacamp.com/courses/developing-r-packages/checking-and-building-r-packages?ex=13">Setting a package up for using Travis | R</a>)</span></p>
+</blockquote>
+</div>
+<div id="-vignette" class="section level1">
+<h1><span class="header-section-number">14</span> 加入 vignette</h1>
+<p><code>use_vignette(&quot;intro&quot;)</code></p>
+<ol style="list-style-type: decimal">
+<li><code>&quot;intro&quot;</code>是名字，可以自定义。
+参考
+<a href="https://github.com/cboettig/template">Carl Boettiger</a></li>
+</ol>
+</div>
+<div id="-description" class="section level1">
+<h1><span class="header-section-number">15</span> 修改 Description</h1>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">options</span>(</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">  <span class="dt">usethis.name =</span> <span class="st">&quot;Jiaxiang Li&quot;</span>,</a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">  <span class="dt">usethis.description =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb15-4" data-line-number="4">    <span class="st">`</span><span class="dt">Authors@R</span><span class="st">`</span> =<span class="st"> &#39;person(&quot;Jiaxiang&quot;, &quot;Li&quot;, email = &quot;alex.lijiaxiang@foxmail.com&quot;, role = c(&quot;aut&quot;, &quot;cre&quot;))&#39;</span>,</a>
+<a class="sourceLine" id="cb15-5" data-line-number="5">    <span class="dt">License =</span> <span class="st">&quot;MIT + file LICENSE&quot;</span>,</a>
+<a class="sourceLine" id="cb15-6" data-line-number="6">    <span class="dt">Version =</span> <span class="st">&quot;0.1.0&quot;</span></a>
+<a class="sourceLine" id="cb15-7" data-line-number="7">  )</a>
+<a class="sourceLine" id="cb15-8" data-line-number="8">)</a></code></pre></div>
+</div>
+<div id="namespace" class="section level1">
+<h1><span class="header-section-number">16</span> namespace</h1>
+<p>这是R自动生成的文件，建议不要乱修改。</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">getwd</span>()</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="kw">list.files</span>(<span class="st">&#39;../picbackup&#39;</span>)</a></code></pre></div>
+</div>
+<div id="-.rmd-readme" class="section level1">
+<h1><span class="header-section-number">17</span> 使用 <code>.Rmd</code> Readme</h1>
+<p><code>use_readme_rmd()</code>
+参考
+<a href="https://github.com/cboettig/template">Carl Boettiger</a></p>
+</div>
+<div id="news.md-" class="section level1">
+<h1><span class="header-section-number">18</span> NEWS.md 作用</h1>
+<pre><code>$ git status
+On branch master
+Your branch is up to date with &#39;origin/master&#39;.
+
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+
+        modified:   .RData
+        modified:   .Rhistory
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+$ git checkout .RData
+$ git checkout .Rhistory</code></pre>
+<p><span class="citation">(<span class="citeproc-not-found" data-reference-id="Wickhamnewsmd"><strong>???</strong></span>)</span> 建议每一次改动、新增函数、新增vignette，都标注。
+并且，版本更新按照从高到低排序，这样方便使用者阅读。</p>
+</div>
+<div id="git-" class="section level1">
+<h1><span class="header-section-number">19</span> Git 使用注意事项</h1>
+<p>数据量太大，<code>git push</code>会失败，并反馈，主要重新进行Git 命令即可进行。</p>
+<div id="cant-do-a-git-pull" class="section level2">
+<h2><span class="header-section-number">19.1</span> Can’t do a git pull</h2>
+<pre><code>error: The following untracked working tree files would be overwritten by merge:
+&lt;myFileName&gt;
+Please move or remove them before you can merge.</code></pre>
+<pre><code>git clean -dn
+git clean -df</code></pre>
+<p>参考
+<a href="https://stackoverflow.com/a/30042665/8625228">Stack Overflow</a></p>
+</div>
+<div id="1000" class="section level2">
+<h2><span class="header-section-number">19.2</span> 超过1000个文件</h2>
+<pre><code>Sorry, we had to truncate this directory to 1,000 files. 6 entries were omitted from the list.</code></pre>
+<p>只是展示列表中不会显示超过1000的多余文件，但是文件不会被删除。
+(<a href="https://github.com/JuliaLang/METADATA.jl/issues/5113">Github</a>)</p>
+</div>
+<div id="section-19.3" class="section level2">
+<h2><span class="header-section-number">19.3</span> 撤销修改</h2>
+<pre><code>$ git status
+On branch master
+Your branch is up to date with &#39;origin/master&#39;.
+
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+
+        modified:   .RData
+        modified:   .Rhistory
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+$ git checkout .RData
+$ git checkout .Rhistory</code></pre>
+</div>
+<div id="section-19.4" class="section level2">
+<h2><span class="header-section-number">19.4</span> 跳过检验</h2>
+<pre><code>$ git commit -m &#39;knit readme rmd&#39;
+README.Rmd and README.md should be both staged
+use &#39;git commit --no-verify&#39; to override this check</code></pre>
+<p>报错如上。
+<code>git commit --no-verify -m &quot;commit&quot;</code> 就可以跳过代码检查。
+参考 <a href="http://www.cnblogs.com/AnnieShen/p/8029089.html">博客园</a></p>
+</div>
+<div id="-100-mb-" class="section level2">
+<h2><span class="header-section-number">19.5</span> 上传 100 MB 文件</h2>
+<ol style="list-style-type: decimal">
+<li>需要 git lfs</li>
+<li>测试 push 单位上传速度明显下降</li>
+<li>超过1GB的大文件总储存量，需要收费
+因此长期方案是拆分数据集在50MB以下。</li>
+</ol>
+<p>代码执行参考</p>
+<pre><code>git lfs track &quot;your_file&quot;
+git add
+git commit -m 
+git push</code></pre>
+<p>主要参考
+<a href="https://blog.csdn.net/miniykyk/article/details/54578839">CSDN社区</a>
+的文章。</p>
+<p>因此如果大文件如果是<code>.csv</code>文档，建议进行一定程度的压缩。
+这里使用<a href="https://github.com/wesm/feather/tree/master/R">Hadley Wickham</a> 开发的<code>feather</code>包，可以将数据压缩到一半以上，参考的代码如下。</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">creditcard &lt;-<span class="st"> </span><span class="kw">fread</span>(here<span class="op">::</span><span class="kw">here</span>(<span class="st">&#39;data&#39;</span>,<span class="st">&#39;creditcard.csv&#39;</span>))</a>
+<a class="sourceLine" id="cb24-2" data-line-number="2">creditcard <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb24-3" data-line-number="3"><span class="st">    </span>feather<span class="op">::</span><span class="kw">write_feather</span>(here<span class="op">::</span><span class="kw">here</span>(<span class="st">&#39;data&#39;</span>,<span class="st">&#39;creditcard.feather&#39;</span>))</a>
+<a class="sourceLine" id="cb24-4" data-line-number="4">creditcard2 &lt;-<span class="st"> </span>feather<span class="op">::</span><span class="kw">read_feather</span>(here<span class="op">::</span><span class="kw">here</span>(<span class="st">&#39;data&#39;</span>,<span class="st">&#39;creditcard.feather&#39;</span>))</a>
+<a class="sourceLine" id="cb24-5" data-line-number="5"><span class="kw">setequal</span>(creditcard,creditcard2)</a>
+<a class="sourceLine" id="cb24-6" data-line-number="6"><span class="co"># [1] TRUE</span></a></code></pre></div>
+<p>然后将之前错误的100MB 记录删除
+参考
+<a href="https://stackoverflow.com/questions/8083282/how-do-i-remove-a-big-file-wrongly-committed-in-git">Stack Overflow</a></p>
+<pre><code>git filter-branch --tree-filter &#39;rm -rf path/to/your/file&#39; HEAD
+
+git filter-branch --tree-filter &#39;rm -rf data/creditcard.csv&#39; HEAD</code></pre>
+<p>这一步耗时也非常长，因此不建议经常上传大文件。</p>
+<pre><code>$ git filter-branch --tree-filter &#39;rm -rf data/creditcard.csv&#39; HEAD
+Rewrite cc99ca814f02eaef4d05a419c5fbd179b22b5316 (1/12) (1 seconds passed, remaiRewrite 04aecba01e088bd3f6018111476684f39f65c17c (1/12) (1 seconds passed, remaiRewrite ada96dff71f7f63b14fca5fd83aeb4176ac00ace (3/12) (22 seconds passed, remaRewrite c3ba0ab0615483a0d8cedf53fb8aab61535533e6 (4/12) (34 seconds passed, remaRewrite 234f341434c177b8a6fb04162ed15ed859dbc3ff (5/12) (46 seconds passed, remaRewrite dad387eda4ac1c2681d7d3710a049b43ea099a32 (6/12) (59 seconds passed, remaRewrite de483472bce9e9b6c18c84ce46aa33cee17a1e32 (7/12) (70 seconds passed, remaRewrite 229764d3b115d3adfe9a98a61a45fa99c3eb5537 (8/12) (82 seconds passed, remaRewrite 88ae0043da98ce78dce3a4f93dc684dab0e7eb6d (9/12) (96 seconds passed, remaRewrite 17810ac414a4bdb32723a2d36252bff8bcf7a132 (10/12) (106 seconds passed, reRewrite 1ae5fb3512033e877e179a8b403861572c1e9635 (11/12) (120 seconds passed, reRewrite 49ca72801f3f4d288c93cfa51000ae427a7aba4f (12/12) (136 seconds passed, remaining 0 predicted)
+Ref &#39;refs/heads/master&#39; was rewritten</code></pre>
+<p>然后需要 git pull</p>
+<pre><code>$ git pull
+fatal: refusing to merge unrelated histories</code></pre>
+<p>这个时候需要对 unrelated histories 进行处理
+参考
+<a href="https://blog.csdn.net/fengyulinde/article/details/79175970">CSDN社区</a></p>
+<pre><code>git pull origin master --allow-unrelated-histories</code></pre>
+</div>
+<div id="-50-mb-" class="section level2">
+<h2><span class="header-section-number">19.6</span> 上传 50 MB 文件</h2>
+<p>安装 <a href="https://git-lfs.github.com/">git lfs</a> 即可
+但是传的很慢
+参考
+[Github]](<a href="https://help.github.com/articles/working-with-large-files/" class="uri">https://help.github.com/articles/working-with-large-files/</a>)、
+<a href="https://blog.csdn.net/zyc121561/article/details/81161664">CSDN博客</a></p>
+<pre><code>git lfs track &quot;data/creditcard.feather&quot;</code></pre>
+<p>如果是小鱼50MB的文件，传输非常快的。</p>
+</div>
+</div>
+<div id="section-20" class="section level1">
+<h1><span class="header-section-number">20</span> 版本设置</h1>
+<p>这是手动设置的
+<span class="citation">(<span class="citeproc-not-found" data-reference-id="Gott2018"><strong>???</strong></span>,
+* <a href="https://campus.datacamp.com/courses/developing-r-packages/the-r-package-structure?ex=6">Description and Namespace files | R</a>)</span></p>
+</div>
+<div id="section-21" class="section level1">
+<h1><span class="header-section-number">21</span> 拼写检查</h1>
+<p><code>devtools::check()</code>
+函数跑的比较慢。
+<span class="citation">(<span class="citeproc-not-found" data-reference-id="usethis"><strong>???</strong></span>)</span></p>
+</div>
+<div id="section-22" class="section level1">
+<h1><span class="header-section-number">22</span> 快捷键</h1>
+<ol style="list-style-type: decimal">
+<li><dl>
+<dt>console</dt>
+<dd><code>ctrl</code> + <code>2</code>
+</dd>
+</dl></li>
+<li><dl>
+<dt>terminal</dt>
+<dd><code>shift</code> + <code>alt</code> + <code>T</code>
+</dd>
+</dl></li>
+</ol>
+<p>{{&lt; hl-text [info] &gt;}}
+测试
+{{&lt; /hl-text &gt;}}</p>
+</div>
+<div id="if-" class="section level1">
+<h1><span class="header-section-number">23</span> 使用if 判断写函数</h1>
+<pre><code># Create numeric_summary() function
+numeric_summary &lt;- function(x, na.rm) {
+
+    # Include an error if x is not numeric
+    if(!is.numeric(x)){
+        stop(&quot;Data must be numeric&quot;)
+    }
+    
+    # Create data frame
+    data.frame( min = min(x, na.rm = na.rm),
+                median = median(x, na.rm = na.rm),
+                sd = sd(x, na.rm = na.rm),
+                max = max(x, na.rm = na.rm))
+}
+
+# Test numeric_summary() function
+numeric_summary(airquality$Ozone,T)</code></pre>
+<p>先判断是否字段一致等的使用。
+<span class="citation">(<span class="citeproc-not-found" data-reference-id="Gott2018"><strong>???</strong></span>)</span></p>
+</div>
+<div id="pkgdown" class="section level1">
+<h1><span class="header-section-number">24</span> pkgdown</h1>
+<p><code>options(pkgdown.internet = FALSE)</code> 不联网。</p>
+<div id="fail-to-build_site" class="section level2">
+<h2><span class="header-section-number">24.1</span> fail to <code>build_site</code></h2>
+<p>在Github上这个<code>Issue</code>给了临时答案，下一次PR会更新。</p>
+<pre><code>remotes::install_github(&quot;r-lib/pkgdown#877&quot;,force=T)
+pkgdown::build_site(new_process = FALSE)</code></pre>
+</div>
+</div>
+<div id="check" class="section level1">
+<h1><span class="header-section-number">25</span> <code>check</code></h1>
+<blockquote>
+<p>An R package check includes:
+<span class="citation">(<span class="citeproc-not-found" data-reference-id="Gott2018"><strong>???</strong></span>,
+* <a href="https://campus.datacamp.com/courses/developing-r-packages/checking-and-building-r-packages?ex=1">Why check an R package? | R</a>)</span></p>
+<ol style="list-style-type: decimal">
+<li>If the package can be installed</li>
+<li>Description information is correct</li>
+<li>Dependencies</li>
+<li>Code syntax errors</li>
+<li>Documentation is complete</li>
+<li>Tests run</li>
+<li>Vignettes build</li>
+</ol>
+</blockquote>
+</div>
+<div id="addins" class="section level1">
+<h1><span class="header-section-number">26</span> addins</h1>
+<blockquote>
+<p>it’s just allowing you to execute that function through some UI rather than manually writing and executing the function yourself.</p>
+</blockquote>
+<p>参考
+<a href="https://rstudio.github.io/rstudioaddins/">RStudio Addins</a>
+创建<code>inst/rstudio/addins.dcf</code>文件，
+可以参考RStudio的
+<a href="https://github.com/rstudio/addinexamples/blob/master/inst/rstudio/addins.dcf">例子</a></p>
+</div>
+<div id="github--collaborators" class="section level1">
+<h1><span class="header-section-number">27</span> Github 加入 collaborators</h1>
+<ul>
+<li><a href="https://help.github.com/articles/inviting-collaborators-to-a-personal-repository/">Inviting collaborators to a personal repository - User Documentation</a></li>
+</ul>
+</div>
+<div id="github" class="section level1">
+<h1><span class="header-section-number">28</span> 安装特定版本的github包</h1>
+<p><code>remotes::install_github(&quot;ThinkR-open/remedy@e278fc6&quot;)</code>
+参考<a href="https://github.com/ThinkR-open/remedy/issues/44#issuecomment-438227070">github</a></p>
+</div>
+<div id="-rproj-" class="section level1">
+<h1><span class="header-section-number">29</span> 更新功能能够在其他 Rproj 使用</h1>
+<p>如<code>load_all('../add2md')</code>
+那么在当前路径下可以使用更新的功能和函数
+但是快捷方式在Win7没有更新。</p>
+</div>
+<div id="-r-cran-" class="section level1">
+<h1><span class="header-section-number">30</span> 上传 R CRAN 官方</h1>
+<p>参考 <span class="citation">(<span class="citeproc-not-found" data-reference-id="徐静2018R开发"><strong>???</strong></span>)</span></p>
+<p>点击
+<a href="https://cran.r-project.org/submit.html">官方上传页面</a>，填写相关信息。</p>
+<p>这是所有R包的更新列表<a href="https://cran.r-project.org/">The Comprehensive R Archive Network</a>
+只更新到前一天的数据。
+因此一般需要等一天。</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&#39;/pic/add2md_upload_proof.png&#39;</span>)</a></code></pre></div>
+<p>一般开发会出现报错。</p>
+<p>注意需要将原来的文件删除，否则报错不回消除。
+参考
+<a href="https://stackoverflow.com/questions/53254282/namespace-dependencies-not-required-error-although-ive-used-imports-in-descript?noredirect=1&amp;lq=1">Stack Overflow</a></p>
+<p>其中
+WARINGS也是需要修改的</p>
+</div>
+<div id="import-pipeline" class="section level1">
+<h1><span class="header-section-number">31</span> import pipeline</h1>
+<p><code>importFrom(magrittr,&quot;%&gt;%&quot;)</code>
+参考
+<a href="https://stackoverflow.com/a/27979637/8625228">Stack Overflow</a></p>
+</div>
+<div id="section-32" class="section level1">
+<h1><span class="header-section-number">32</span> 版本控制</h1>
+<p>版本控制编码参考
+<a href="https://semver.org/">Semantic Versioning 2.0.0</a></p>
+<p>Given a version number MAJOR.MINOR.PATCH, increment the:</p>
+<ol style="list-style-type: decimal">
+<li>MAJOR version when you make incompatible API changes,</li>
+<li>MINOR version when you add functionality in a backwards-compatible manner, and</li>
+<li>PATCH version when you make backwards-compatible bug fixes.</li>
+</ol>
+<p>Additional labels for pre-release and build metadata are available as extensions to the MAJOR.MINOR.PATCH format.</p>
+<ol style="list-style-type: decimal">
+<li>主版本号：当你做了不兼容的 API 修改，</li>
+<li>次版本号：当你做了向下兼容的功能性新增，</li>
+<li>修订号：当你做了向下兼容的问题修正。</li>
+</ol>
+<p>使用<code>use_version</code>完成</p>
+<pre><code>&gt; use_version()
+✔ Setting active project to &#39;D:/work/add2md&#39;
+Error: Uncommited changes. Please commit to git before continuing.</code></pre>
+<p>Commit 完修改后，下面的code会自动commit</p>
+<pre><code>&gt; use_version()
+Current version is 0.2.7.
+Which part to increment? 
+
+1: major --&gt; 1.0.0
+2: minor --&gt; 0.3.0
+3: patch --&gt; 0.2.8
+4: dev --&gt; 0.2.7.9000
+
+Selection: 3
+✔ Setting Version field in DESCRIPTION to &#39;0.2.8&#39;
+✔ Checking into git [Increment version number]</code></pre>
+<p><code>use_version</code>参考，自动commit的函数。</p>
+</div>
+<div id="importfrom" class="section level1">
+<h1><span class="header-section-number">33</span> importFrom</h1>
+<p>不要写成</p>
+<p><code>#' @importfrom stringr str_c str_replace_all str_remove</code></p>
+<p>否则会在<code>NAMESPACE</code>中加入包<code>str_c str_replace_all str_remove</code>，这是错误导入，因而导致不能build包。</p>
+<p>完成<a href="https://github.com/JiaxiangBU/add2md/issues/36">Github Issue</a></p>
+</div>
+<div id="warning" class="section level1">
+<h1><span class="header-section-number">34</span> 加入warning</h1>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="kw">warning</span>(<span class="st">&quot;The request failed&quot;</span>)</a></code></pre></div>
+<p>参考<a href="https://campus.datacamp.com/courses/working-with-web-data-in-r/using-httr-to-interact-with-apis-directly?ex=7">DataCamp</a></p>
+</div>
+<div id="stop" class="section level1">
+<h1><span class="header-section-number">35</span> 加入stop</h1>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw">stop</span>(<span class="st">&quot;This is an error&quot;</span>)</a></code></pre></div>
+</div>
+<div id="e99984e5bd95" class="section level1 unnumbered">
+<h1>附录</h1>
+<div id="section-35.1" class="section level2">
+<h2><span class="header-section-number">35.1</span> 更新</h2>
+<div id="section" class="section level3">
+<h3><span class="header-section-number">35.1.1</span> 2018-12-27 09:25:42</h3>
+<ol style="list-style-type: decimal">
+<li>加入warning 和 加入stop</li>
+</ol>
+</div>
+<div id="section-1" class="section level3">
+<h3><span class="header-section-number">35.1.2</span> 2018-12-18 20:34:50</h3>
+<ol style="list-style-type: decimal">
+<li>增加 Github Repo</li>
+</ol>
+</div>
+<div id="section-2" class="section level3">
+<h3><span class="header-section-number">35.1.3</span> 2018-12-18 20:13:36</h3>
+<ol style="list-style-type: decimal">
+<li>增加 版本控制</li>
+</ol>
+</div>
+<div id="section-3" class="section level3">
+<h3><span class="header-section-number">35.1.4</span> 2018-12-18 13:59:21</h3>
+<ol style="list-style-type: decimal">
+<li>上传 R CRAN 官方</li>
+</ol>
+</div>
+<div id="section-4" class="section level3">
+<h3><span class="header-section-number">35.1.5</span> 2018-12-18 13:14:22</h3>
+<ol style="list-style-type: decimal">
+<li>更新功能能够在其他 Rproj 使用</li>
+</ol>
+</div>
+<div id="section-5" class="section level3">
+<h3><span class="header-section-number">35.1.6</span> 2018-11-23 09:21:15</h3>
+<ol style="list-style-type: decimal">
+<li>更新大文件的处理方式和注意事项
+# 参考文献 {-}</li>
+</ol>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+</body>
+
+</html>

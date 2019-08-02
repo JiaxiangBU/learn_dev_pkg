@@ -21,8 +21,7 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 本文主要介绍了R开发包的内容，主要需要了解几个相关内容
 
 1. Git 和 Github相关
-1. `devtools`包的相关函数
-参考 @Wickhamusethis 。
+1. `devtools`包[@Wickhamusethis]的相关函数
 
 建议在一个已经完成的包上进行学习，copy 函数、vignette等。
 
