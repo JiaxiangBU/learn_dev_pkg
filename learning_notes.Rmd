@@ -1,0 +1,740 @@
+---
+title: R 开发包学习笔记
+author: 李家翔
+date: "`r Sys.Date()`"
+output: 
+    bookdown::gitbook:
+        split_by: none
+        split_bib: TRUE
+        df_print: paged
+bibliography: refs/add.bib
+---
+
+```{r setup,echo = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+```
+
+1. 使用 RMarkdown 的 `child` 参数，进行文档拼接。
+1. 这样拼接以后的笔记方便复习。
+1. 相关问题提交到 [GitHub](https://github.com/JiaxiangBU/tutoring/issues/new)
+
+本文主要介绍了R开发包的内容，主要需要了解几个相关内容
+
+1. Git 和 Github相关
+1. `devtools`包的相关函数
+参考 @Wickhamusethis 。
+
+建议在一个已经完成的包上进行学习，copy 函数、vignette等。
+
+```{r}
+knitr::opts_chunk$set(eval=F)
+```
+
+# 首次准备工作
+
+
+1. 下载Git
+1. 打开Git Bash
+1. 输入`pwd`，查看当前路径
+1. 更改路径，`cd d:/lijiaxiang`，就是更改到D盘lijiaxiang这个文件夹
+1. `git clone https://github.com/JiaxiangBU/add2md`，会在当前文件夹内产生一个add2md文件夹，这就是我们现在一起开发的包
+1. 点击`.Rproj`文件
+1. `command + .` 打开文件`DESCRIPTION`，修改`author`，加上自己。
+    1. 这里建议在[Github](https://github.com/JiaxiangBU/add2md)修改，比较友好，少代码。
+    1. 在Git Bash ，
+        1. `cd add2md`
+        1. `git status`
+        1. `git add -A`
+        1. `git commit -m 'add author name'`
+        1. `git push`，第一次记得输入账号和密码
+            1. 免密码的方式，参考博客
+1. `git config` 设置下自己的邮箱和名字
+    
+```{r eval=F}
+devtools::install_github('JiaxiangBU/add2md')
+devtools::install_github('JiaxiangBU/add2md@m-func')
+```
+    
+`@m-func`是我们使用Git开发包，master是branch的主线，`m-func`是另外一个branch，主要做预发布。
+
+
+# 快速创建包
+
+`devtools::create`函数可以直接完成，`path`为包的名称。[@Gott2018]
+
+一个包的建立最少分为五个步骤。[@Gott2018]
+
+1. `create()`
+1. `document()` - help 文档
+1. `test()`
+1. `build()`
+1. `check()`
+
+# 使用`dump`录入函数
+
+    # What is in the R directory before adding a function?
+    dir("datasummary/R")
+    
+    # Use the dump() function to write the numeric_summary function
+    dump("numeric_summary", file = "datasummary/R/numeric_summary.R")
+    
+    # Verify that the file is in the correct directory
+    dir("datasummary/R")
+
+我们也可以新建`.R`，把函数复制粘贴，但是这样的话，比较费时费力。
+可以尝试使用`dump`函数完成，在测试函数成功后，进行。
+[@Gott2018]
+
+# 测试函数
+
+写完函数后，需要去测试，这时候不需要git push后去下载，而是
+`devtools::load_all()`就好，并且load的函数，不是在global中，放心使用。
+[STAT545](http://stat545.com/packages04_foofactors-package-01.html)
+
+使用快捷键
+
+shift + alt + L
+
+# `use_testthat()`
+
+>
+This will create a tests directory that contains:
+>
+1. A script testthat.R.
+1. A directory testthat.
+You save your tests in the tests/testthat/ directory in files with filenames beginning with test-. So, for example, the simutils package has tests named:
+>
+1. `test-na_counter.R`
+1. `test-sample_from_data.R`
+[@Gott2018,
+* [Setting up the test structure | R](https://campus.datacamp.com/courses/developing-r-packages/adding-unit-tests-to-r-packages?ex=2)
+]
+
+# help 文档模版
+    
+[STAT545](http://stat545.com/packages05_foofactors-package-02.html)
+
+    #' Get a badge for the download count of your package
+    #'
+    #' Input your github name and repo name,
+    #' this function will feedback the download count of your package.
+    #'
+    #' @param your_github_name character
+    #' @param your_github_repo character
+    #' @param type character
+    #'
+    #' @return character
+    #' @export
+    #' @examples
+    #' add2blog::badge_download(
+    #' your_github_name = 'JiaxiangBU'
+    #' ,your_github_repo = 'add2prep'
+    #' ,type = 'total')
+    
+    badge_download <- function(
+        your_github_name = 'JiaxiangBU'
+        ,your_github_repo = 'add2prep'
+        ,type = c('total')
+    ){
+        glue('  [![GitHub All Releases](https://img.shields.io/github/downloads/{your_github_name}/{your_github_repo}/{type}.svg)](https://github.com/JiaxiangBU/add2prep)') %>%
+            print
+        glue('<<<Copy it above nto your README.md>>>>')
+    }
+    
+## 解读模版
+
+    #' Title goes here
+    #'
+    #' Description goes here
+    #'
+    #' Details go here
+
+[@Gott2018,
+* [A simple function header | R](https://campus.datacamp.com/courses/developing-r-packages/documenting-packages?ex=2)
+]
+
+如果没有`@export`，那么这个函数是不会打首字母被联想输入的，因为直观上表示包的作者不想使用者使用这个函数。
+这种函数的调用不能通过`library`包或者`package::`的方式调用，而是`package:::`来调用。
+
+1. `\dontrun{}`让例子不跑
+1. `\code`实现latex
+1. `\link[packageName]{functionName}` 链接其他函数，包的名字需要主要是如果这个函数不是此包的时候。
+1. `@seealso` 列出一些其他函数，读者会感兴趣。
+1. `@notes` 加一些备注。
+1. `@author Jiaxiang Li \email{alex.lijiaxiang@foxmail.com}` 加入作者
+1. `@importFrom tidyr gather` 只引入函数
+[@Gott2018,
+* [Additional documentation | R](https://campus.datacamp.com/courses/developing-r-packages/documenting-packages?ex=11)
+]
+1. `@param`的`arg`后面不要加`.`因为document后`.`会作为变量名称的一部分。
+
+
+## List
+
+    #' \itemize{
+    #'  \item ID
+    #'  \item min
+    #'  \item median
+    #'  \item sd
+    #'  \item max
+    #' }
+
+
+
+## 包的help文档
+
+`?package`
+    
+    #' add2blog: help your blog site
+    #'
+    #' The goal of add2blog is to help you build some materials like wall paper for your blog website !
+    #'
+    #' @docType package
+    #' @name add2blog
+    #' @keywords internal
+    "_PACKAGE"
+
+[@Gott2018,
+* [Adding package documentation | R](https://campus.datacamp.com/courses/developing-r-packages/documenting-packages?ex=14)
+]
+
+
+## 给data加help文档
+
+    #' blogdown_meta_data blodgown meta data
+    #'
+    #' A dataset containing the real blodgown meta data
+    #'
+    #' @format A data frame of 287 rows and 6 columns
+    #' \describe{
+    #'  \item{dir}{Character}
+    #'  \item{author}{Character}
+    #'  \item{categories}{Character}
+    #'  \item{categories}{Character}
+    #'  \item{date}{Character}
+    #'  \item{tags}{Character}
+    #'  \item{title}{Character}
+    #' }
+    #' @source https://jiaxiangli.netlify.com
+    "blogdown_meta_data"
+
+不要忘记最后一个。
+
+
+# 加入数据
+
+R package 为了举例，需要加入举例的数据集，使用
+`devtools::use_data(x, mtcars)`完成，
+具体见
+[Data · R packages](http://r-pkgs.had.co.nz/data.html)
+
+# 加入 Vignettes
+
+`build_articles`会读取文件夹`vignettes`内的所有`.Rmd`文档，建立一个新文件夹`articles`，内含`.html`，用于展示
+具体见[pkgdown](https://pkgdown.r-lib.org/reference/build_articles.html)
+
+# 加入 link
+
+```
+> use_github_links()
+✔ Setting active project to '/Users/vija/Downloads/180805_folder_01/tmp_jli/trans/projIN/add2evaluation'
+✔ Setting URL field in DESCRIPTION to 'https://github.com/JiaxiangBU/add2evaluation'
+✔ Setting BugReports field in DESCRIPTION to 'https://github.com/JiaxiangBU/add2evaluation/issues'
+```
+
+![](https://raw.githubusercontent.com/JiaxiangBU/picbackup/master/addlink.png)
+
+# 加入 MIT
+
+```{r}
+use_mit_license("Jiaxiang Li")
+```
+
+# 加入需要使用的包
+
+
+注意一次加一个包
+([Misha Balyasin](https://community.rstudio.com/t/error-happens-when-use-use-package/17837))
+
+```{r eval=F}
+library(usethis)
+use_package("dplyr", "data.table")
+use_package("dplyr", "data.table",type = "Suggests")
+```
+
+## Depends 和 Imports 的区别
+
+>
+In the majority of cases, you should only list the version of R required in the Depends field and the package in the Imports field.
+[@Gott2018,
+* [Depends or imports? | R](https://campus.datacamp.com/courses/developing-r-packages/checking-and-building-r-packages?ex=8)
+]
+
+# 加入 badge
+
+```{r}
+use_lifecycle_badge('experimental')
+```
+
+参考 @Wickhamusethisbadges 可以按照不同阶段给包安装不同的徽章。
+具体可以参考
+[Lifecycle badges - Tidyverse](https://www.tidyverse.org/lifecycle/#experimental)
+
+
+    > use_travis()
+    ✔ Writing '.travis.yml'
+    ✔ Adding '^\\.travis\\.yml$' to '.Rbuildignore'
+    ● Turn on travis for your repo at https://travis-ci.org/profile/JiaxiangBU
+    ● Add a Travis build status badge by adding the following line to your README:
+    Copying code to clipboard:
+      [![Travis build status](https://travis-ci.org/JiaxiangBU/add2blog.svg?branch=master)](https://travis-ci.org/JiaxiangBU/add2blog)
+      
+  
+参考
+[Carl Boettiger](https://github.com/cboettig/template)
+
+```{r}
+add2blog::badge_download()
+```
+  
+
+# 加入 Travis CI
+
+>
+Travis CI (continuous integration) is 
+A way of running checks every time you update your code.
+[@Gott2018,
+* [Setting a package up for using Travis | R](https://campus.datacamp.com/courses/developing-r-packages/checking-and-building-r-packages?ex=13)
+]
+
+
+# 加入 vignette
+
+`use_vignette("intro")`
+
+1. `"intro"`是名字，可以自定义。
+参考
+[Carl Boettiger](https://github.com/cboettig/template)
+
+# 修改 Description
+
+```{r eval=F}
+options(
+  usethis.name = "Jiaxiang Li",
+  usethis.description = list(
+    `Authors@R` = 'person("Jiaxiang", "Li", email = "alex.lijiaxiang@foxmail.com", role = c("aut", "cre"))',
+    License = "MIT + file LICENSE",
+    Version = "0.1.0"
+  )
+)
+```
+
+# namespace
+
+这是R自动生成的文件，建议不要乱修改。
+
+```{r}
+getwd()
+list.files('../picbackup')
+```
+
+# 使用 `.Rmd` Readme
+
+`use_readme_rmd()`
+参考
+[Carl Boettiger](https://github.com/cboettig/template)
+
+# NEWS.md 作用
+      
+    $ git status
+    On branch master
+    Your branch is up to date with 'origin/master'.
+    
+    Changes not staged for commit:
+      (use "git add <file>..." to update what will be committed)
+      (use "git checkout -- <file>..." to discard changes in working directory)
+    
+            modified:   .RData
+            modified:   .Rhistory
+    
+    no changes added to commit (use "git add" and/or "git commit -a")
+    $ git checkout .RData
+    $ git checkout .Rhistory
+
+
+@Wickhamnewsmd 建议每一次改动、新增函数、新增vignette，都标注。
+并且，版本更新按照从高到低排序，这样方便使用者阅读。
+
+# Git 使用注意事项
+
+数据量太大，`git push`会失败，并反馈，主要重新进行Git 命令即可进行。
+
+## Can't do a git pull
+
+```
+error: The following untracked working tree files would be overwritten by merge:
+<myFileName>
+Please move or remove them before you can merge.
+```
+
+```
+git clean -dn
+git clean -df
+```
+
+参考
+[Stack Overflow](https://stackoverflow.com/a/30042665/8625228)
+
+## 超过1000个文件
+
+    Sorry, we had to truncate this directory to 1,000 files. 6 entries were omitted from the list.
+    
+只是展示列表中不会显示超过1000的多余文件，但是文件不会被删除。
+([Github](https://github.com/JuliaLang/METADATA.jl/issues/5113))
+
+
+## 撤销修改
+
+      
+    $ git status
+    On branch master
+    Your branch is up to date with 'origin/master'.
+    
+    Changes not staged for commit:
+      (use "git add <file>..." to update what will be committed)
+      (use "git checkout -- <file>..." to discard changes in working directory)
+    
+            modified:   .RData
+            modified:   .Rhistory
+    
+    no changes added to commit (use "git add" and/or "git commit -a")
+    $ git checkout .RData
+    $ git checkout .Rhistory
+    
+    
+## 跳过检验
+
+    $ git commit -m 'knit readme rmd'
+    README.Rmd and README.md should be both staged
+    use 'git commit --no-verify' to override this check
+
+报错如上。
+`git commit --no-verify -m "commit"` 就可以跳过代码检查。
+参考 [博客园](http://www.cnblogs.com/AnnieShen/p/8029089.html)
+
+
+
+
+
+## 上传 100 MB 文件
+
+1. 需要 git lfs
+1. 测试 push 单位上传速度明显下降
+1. 超过1GB的大文件总储存量，需要收费
+因此长期方案是拆分数据集在50MB以下。
+
+代码执行参考
+  
+    git lfs track "your_file"
+    git add
+    git commit -m 
+    git push
+
+主要参考
+[CSDN社区](https://blog.csdn.net/miniykyk/article/details/54578839)
+的文章。
+
+因此如果大文件如果是`.csv`文档，建议进行一定程度的压缩。
+这里使用[Hadley Wickham](https://github.com/wesm/feather/tree/master/R) 开发的`feather`包，可以将数据压缩到一半以上，参考的代码如下。
+
+```{r eval=F}
+creditcard <- fread(here::here('data','creditcard.csv'))
+creditcard %>% 
+    feather::write_feather(here::here('data','creditcard.feather'))
+creditcard2 <- feather::read_feather(here::here('data','creditcard.feather'))
+setequal(creditcard,creditcard2)
+# [1] TRUE
+```
+
+然后将之前错误的100MB 记录删除
+参考
+[Stack Overflow](https://stackoverflow.com/questions/8083282/how-do-i-remove-a-big-file-wrongly-committed-in-git)
+
+    git filter-branch --tree-filter 'rm -rf path/to/your/file' HEAD
+
+    git filter-branch --tree-filter 'rm -rf data/creditcard.csv' HEAD
+
+这一步耗时也非常长，因此不建议经常上传大文件。
+
+```
+$ git filter-branch --tree-filter 'rm -rf data/creditcard.csv' HEAD
+Rewrite cc99ca814f02eaef4d05a419c5fbd179b22b5316 (1/12) (1 seconds passed, remaiRewrite 04aecba01e088bd3f6018111476684f39f65c17c (1/12) (1 seconds passed, remaiRewrite ada96dff71f7f63b14fca5fd83aeb4176ac00ace (3/12) (22 seconds passed, remaRewrite c3ba0ab0615483a0d8cedf53fb8aab61535533e6 (4/12) (34 seconds passed, remaRewrite 234f341434c177b8a6fb04162ed15ed859dbc3ff (5/12) (46 seconds passed, remaRewrite dad387eda4ac1c2681d7d3710a049b43ea099a32 (6/12) (59 seconds passed, remaRewrite de483472bce9e9b6c18c84ce46aa33cee17a1e32 (7/12) (70 seconds passed, remaRewrite 229764d3b115d3adfe9a98a61a45fa99c3eb5537 (8/12) (82 seconds passed, remaRewrite 88ae0043da98ce78dce3a4f93dc684dab0e7eb6d (9/12) (96 seconds passed, remaRewrite 17810ac414a4bdb32723a2d36252bff8bcf7a132 (10/12) (106 seconds passed, reRewrite 1ae5fb3512033e877e179a8b403861572c1e9635 (11/12) (120 seconds passed, reRewrite 49ca72801f3f4d288c93cfa51000ae427a7aba4f (12/12) (136 seconds passed, remaining 0 predicted)
+Ref 'refs/heads/master' was rewritten
+```
+
+然后需要 git pull
+
+```
+$ git pull
+fatal: refusing to merge unrelated histories
+```
+
+这个时候需要对 unrelated histories 进行处理
+参考
+[CSDN社区](https://blog.csdn.net/fengyulinde/article/details/79175970)
+
+
+```
+git pull origin master --allow-unrelated-histories
+```
+
+## 上传 50 MB 文件
+
+安装 [git lfs](https://git-lfs.github.com/) 即可
+但是传的很慢
+参考
+[Github]](https://help.github.com/articles/working-with-large-files/)、
+[CSDN博客](https://blog.csdn.net/zyc121561/article/details/81161664)
+
+    git lfs track "data/creditcard.feather"
+
+如果是小鱼50MB的文件，传输非常快的。
+
+# 版本设置
+
+这是手动设置的
+[@Gott2018,
+* [Description and Namespace files | R](https://campus.datacamp.com/courses/developing-r-packages/the-r-package-structure?ex=6)
+]
+
+
+# 拼写检查
+
+`devtools::check()`
+函数跑的比较慢。
+[@usethis]
+
+# 快捷键
+
+1. console
+: `ctrl` + `2`
+1. terminal
+: `shift` + `alt` + `T`
+
+{{< hl-text [info] >}}
+测试
+{{< /hl-text >}}
+
+
+# 使用if 判断写函数
+
+    # Create numeric_summary() function
+    numeric_summary <- function(x, na.rm) {
+    
+        # Include an error if x is not numeric
+        if(!is.numeric(x)){
+            stop("Data must be numeric")
+        }
+        
+        # Create data frame
+        data.frame( min = min(x, na.rm = na.rm),
+                    median = median(x, na.rm = na.rm),
+                    sd = sd(x, na.rm = na.rm),
+                    max = max(x, na.rm = na.rm))
+    }
+    
+    # Test numeric_summary() function
+    numeric_summary(airquality$Ozone,T)
+
+先判断是否字段一致等的使用。
+[@Gott2018]
+
+# pkgdown
+
+`options(pkgdown.internet = FALSE)` 不联网。
+
+## fail to `build_site`
+
+在Github上这个`Issue`给了临时答案，下一次PR会更新。
+
+    remotes::install_github("r-lib/pkgdown#877",force=T)
+    pkgdown::build_site(new_process = FALSE)
+
+
+
+
+# `check`
+
+>
+An R package check includes:
+[@Gott2018,
+* [Why check an R package? | R](https://campus.datacamp.com/courses/developing-r-packages/checking-and-building-r-packages?ex=1)
+]
+>
+1. If the package can be installed
+1. Description information is correct
+1. Dependencies
+1. Code syntax errors
+1. Documentation is complete
+1. Tests run
+1. Vignettes build
+
+
+# addins
+
+>
+it’s just allowing you to execute that function through some UI rather than manually writing and executing the function yourself.
+
+参考
+[RStudio Addins](https://rstudio.github.io/rstudioaddins/)
+创建`inst/rstudio/addins.dcf`文件，
+可以参考RStudio的
+[例子](https://github.com/rstudio/addinexamples/blob/master/inst/rstudio/addins.dcf)
+
+
+
+# Github 加入 collaborators
+
+* [Inviting collaborators to a personal repository - User Documentation](https://help.github.com/articles/inviting-collaborators-to-a-personal-repository/)
+
+
+# 安装特定版本的github包
+
+`remotes::install_github("ThinkR-open/remedy@e278fc6")`
+参考[github](https://github.com/ThinkR-open/remedy/issues/44#issuecomment-438227070)
+
+# 更新功能能够在其他 Rproj 使用
+
+如`load_all('../add2md')`
+那么在当前路径下可以使用更新的功能和函数
+但是快捷方式在Win7没有更新。
+
+# 上传 R CRAN 官方
+
+参考 @徐静2018R开发
+
+点击
+[官方上传页面](https://cran.r-project.org/submit.html)，填写相关信息。
+
+这是所有R包的更新列表[The Comprehensive R Archive Network](https://cran.r-project.org/)
+只更新到前一天的数据。
+因此一般需要等一天。
+
+```{r fig.cap='上传成功的证明'}
+knitr::include_graphics('/pic/add2md_upload_proof.png')
+```
+
+
+一般开发会出现报错。
+
+注意需要将原来的文件删除，否则报错不回消除。
+参考
+[Stack Overflow](https://stackoverflow.com/questions/53254282/namespace-dependencies-not-required-error-although-ive-used-imports-in-descript?noredirect=1&lq=1)
+
+其中
+WARINGS也是需要修改的
+
+# import pipeline
+
+`importFrom(magrittr,"%>%")`
+参考
+[Stack Overflow](https://stackoverflow.com/a/27979637/8625228)
+
+
+# 版本控制
+
+版本控制编码参考
+[Semantic Versioning 2.0.0](https://semver.org/)
+
+Given a version number MAJOR.MINOR.PATCH, increment the:
+
+1. MAJOR version when you make incompatible API changes,
+1. MINOR version when you add functionality in a backwards-compatible manner, and
+1. PATCH version when you make backwards-compatible bug fixes.
+
+Additional labels for pre-release and build metadata are available as extensions to the MAJOR.MINOR.PATCH format.
+
+1. 主版本号：当你做了不兼容的 API 修改，
+1. 次版本号：当你做了向下兼容的功能性新增，
+1. 修订号：当你做了向下兼容的问题修正。
+
+使用`use_version`完成
+
+```
+> use_version()
+✔ Setting active project to 'D:/work/add2md'
+Error: Uncommited changes. Please commit to git before continuing.
+```
+
+Commit 完修改后，下面的code会自动commit
+
+```
+> use_version()
+Current version is 0.2.7.
+Which part to increment? 
+
+1: major --> 1.0.0
+2: minor --> 0.3.0
+3: patch --> 0.2.8
+4: dev --> 0.2.7.9000
+
+Selection: 3
+✔ Setting Version field in DESCRIPTION to '0.2.8'
+✔ Checking into git [Increment version number]
+```
+
+`use_version`参考，自动commit的函数。
+
+# importFrom
+
+不要写成
+
+`#' @importfrom stringr str_c str_replace_all str_remove`
+
+否则会在`NAMESPACE`中加入包`str_c str_replace_all str_remove`，这是错误导入，因而导致不能build包。
+
+完成[Github Issue](https://github.com/JiaxiangBU/add2md/issues/36)
+
+# 加入warning
+
+```{r}
+warning("The request failed")
+```
+
+参考[DataCamp](https://campus.datacamp.com/courses/working-with-web-data-in-r/using-httr-to-interact-with-apis-directly?ex=7)
+
+# 加入stop
+
+```{r}
+stop("This is an error")
+```
+
+
+# 附录 {-}
+
+## 更新
+
+### 2018-12-27 09:25:42
+
+1. 加入warning 和 加入stop
+
+### 2018-12-18 20:34:50	
+ 
+1. 增加 Github Repo
+
+### 2018-12-18 20:13:36
+
+1. 增加 版本控制
+
+### 2018-12-18 13:59:21
+
+1. 上传 R CRAN 官方
+
+### 2018-12-18 13:14:22
+
+1. 更新功能能够在其他 Rproj 使用
+
+### 2018-11-23 09:21:15
+
+1. 更新大文件的处理方式和注意事项
+# 参考文献 {-}
