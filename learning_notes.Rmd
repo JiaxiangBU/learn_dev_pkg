@@ -709,6 +709,14 @@ stop("This is an error")
 ```
 
 
+
+# 加入 Bibtex
+
+参考 `tidyverse/lubridate`放到`paper/lubridate.bib`
+
+直接放到 vignettes 路径
+https://github.com/tidyverse/tidyverse/tree/584f43d88d9e62cf53919666638518f3531fc10a/vignettes
+
 # 附录 {-}
 
 ## 更新
