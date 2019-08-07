@@ -155,7 +155,7 @@ You save your tests in the tests/testthat/ directory in files with filenames beg
 如果没有`@export`，那么这个函数是不会打首字母被联想输入的，因为直观上表示包的作者不想使用者使用这个函数。
 这种函数的调用不能通过`library`包或者`package::`的方式调用，而是`package:::`来调用。
 
-1. `\dontrun{}`让例子不跑
+1. `\dontrun{}`让例子不跑 \@ref(dontrun)
 1. `\code`实现latex
 1. `\link[packageName]{functionName}` 链接其他函数，包的名字需要主要是如果这个函数不是此包的时候。
 1. `@seealso` 列出一些其他函数，读者会感兴趣。
@@ -716,6 +716,17 @@ stop("This is an error")
 
 直接放到 vignettes 路径
 https://github.com/tidyverse/tidyverse/tree/584f43d88d9e62cf53919666638518f3531fc10a/vignettes
+
+# dontrun {#dontrun}
+
+`\dontrun{}` 还是不run的，但是表现是这样的，好奇怪。
+http://r-pkgs.had.co.nz/man.html
+
+![image](https://user-images.githubusercontent.com/15884785/62604069-d895bb80-b929-11e9-96a7-8086984f4abb.png)
+
+正常应该这样
+
+![image](https://user-images.githubusercontent.com/15884785/62604083-df243300-b929-11e9-955d-417b46b14077.png)
 
 # 附录 {-}
 
