@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>R 开发包 Cookbook</title>
+  <meta name="description" content="R 开发包 Cookbook" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="R 开发包 Cookbook" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="R 开发包 Cookbook" />
+  
+  
+  
+
+<meta name="author" content="李家翔" />
+
+
+<meta name="date" content="2019-12-26" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path=""><a href="#完成状态"><i class="fa fa-check"></i><b>1</b> 完成状态</a></li>
+<li class="chapter" data-level="2" data-path=""><a href="#函数缺少引用"><i class="fa fa-check"></i><b>2</b> 函数缺少引用</a></li>
+<li class="chapter" data-level="3" data-path=""><a href="#ignore-额外文件夹"><i class="fa fa-check"></i><b>3</b> ignore 额外文件夹</a></li>
+<li class="chapter" data-level="4" data-path=""><a href="#使用-unicode"><i class="fa fa-check"></i><b>4</b> 使用 Unicode</a></li>
+<li class="chapter" data-level="5" data-path=""><a href="#vignette-报错"><i class="fa fa-check"></i><b>5</b> vignette 报错</a></li>
+<li class="chapter" data-level="6" data-path=""><a href="#更新-desc-imports"><i class="fa fa-check"></i><b>6</b> 更新 DESC Imports</a></li>
+<li class="chapter" data-level="7" data-path=""><a href="#函数缺少描述"><i class="fa fa-check"></i><b>7</b> 函数缺少描述</a></li>
+<li class="chapter" data-level="8" data-path=""><a href="#函数参数缺少描述"><i class="fa fa-check"></i><b>8</b> 函数参数缺少描述</a></li>
+<li class="chapter" data-level="9" data-path=""><a href="#packrat-删除"><i class="fa fa-check"></i><b>9</b> packrat 删除</a></li>
+<li class="chapter" data-level="10" data-path=""><a href="#添加-global-变量"><i class="fa fa-check"></i><b>10</b> 添加 global 变量</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#附录"><i class="fa fa-check"></i>附录</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#参考文献"><i class="fa fa-check"></i>参考文献</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R 开发包 Cookbook</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">R 开发包 Cookbook</h1>
+<p class="author"><em>李家翔</em></p>
+<p class="date"><em>2019-12-26</em></p>
+</div>
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<ol style="list-style-type: decimal">
+<li>使用 RMarkdown 的 <code>child</code> 参数，进行文档拼接。</li>
+<li>这样拼接以后的笔记方便复习。</li>
+<li>相关问题提交到
+<a class="github-button" href="https://github.com/JiaxiangBU/tutoring2/issues" data-show-count="true" aria-label="Issue JiaxiangBU/tutoring on GitHub">Issue</a></li>
+</ol>
+<div id="完成状态" class="section level1">
+<h1><span class="header-section-number">1</span> 完成状态</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="op">--</span><span class="st"> </span>R CMD check results <span class="op">---------------------------------------</span><span class="st"> </span>add2md <span class="dv">1</span>.<span class="fl">1.0</span> <span class="op">----</span></a>
+<a class="sourceLine" id="cb1-2" title="2">Duration<span class="op">:</span><span class="st"> </span><span class="fl">51.8</span>s</a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="dv">0</span> errors �� <span class="op">|</span><span class="st"> </span><span class="dv">0</span> warnings �� <span class="op">|</span><span class="st"> </span><span class="dv">0</span> notes ��</a>
+<a class="sourceLine" id="cb1-5" title="5">Warning <span class="cf">in</span> <span class="kw">readChar</span>(path, <span class="dt">nchars =</span> <span class="kw">file.info</span>(path)<span class="op">$</span>size, ...) <span class="op">:</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="st">  </span>��non<span class="op">-</span>UTF<span class="dv">-8</span> MBCS���Ի�����ֻ�ܶ�ȡ�ֽ�</a>
+<a class="sourceLine" id="cb1-7" title="7"></a>
+<a class="sourceLine" id="cb1-8" title="8">R CMD check succeeded</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="dv">0</span> errors �� <span class="op">|</span><span class="st"> </span><span class="dv">0</span> warnings �� <span class="op">|</span><span class="st"> </span><span class="dv">0</span> notes ��</a></code></pre></div>
+<p>体现了包可以上传了。</p>
+</div>
+<div id="函数缺少引用" class="section level1">
+<h1><span class="header-section-number">2</span> 函数缺少引用</h1>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="op">&gt;</span><span class="st"> </span>checking R code <span class="cf">for</span> possible problems ... NOTE</a>
+<a class="sourceLine" id="cb3-2" title="2">  get_output<span class="op">:</span><span class="st"> </span>no visible global <span class="cf">function</span> definition <span class="cf">for</span> <span class="st">&#39;mutate&#39;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  get_url<span class="op">:</span><span class="st"> </span>no visible global <span class="cf">function</span> definition <span class="cf">for</span> <span class="st">&#39;map_chr&#39;</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  Undefined global functions or variables<span class="op">:</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="st">    </span>map_chr mutate</a>
+<a class="sourceLine" id="cb3-6" title="6"></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="dv">0</span> errors �� <span class="op">|</span><span class="st"> </span><span class="dv">2</span> warnings x <span class="op">|</span><span class="st"> </span><span class="dv">2</span> notes x</a>
+<a class="sourceLine" id="cb3-8" title="8">Warning <span class="cf">in</span> <span class="kw">readChar</span>(path, <span class="dt">nchars =</span> <span class="kw">file.info</span>(path)<span class="op">$</span>size, ...) <span class="op">:</span></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="st">  </span>��non<span class="op">-</span>UTF<span class="dv">-8</span> MBCS���Ի�����ֻ�ܶ�ȡ�ֽ�</a>
+<a class="sourceLine" id="cb3-10" title="10">����<span class="op">:</span><span class="st"> </span>R CMD check found WARNINGs</a>
+<a class="sourceLine" id="cb3-11" title="11">ִֹͣ��</a>
+<a class="sourceLine" id="cb3-12" title="12"></a>
+<a class="sourceLine" id="cb3-13" title="13">Exited with status <span class="fl">1.</span></a></code></pre></div>
+<p>加上 rer 的包名称。如 <code>mutate</code> 加上 <code>dplyr::</code></p>
+</div>
+<div id="ignore-额外文件夹" class="section level1">
+<h1><span class="header-section-number">3</span> ignore 额外文件夹</h1>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="op">&gt;</span><span class="st"> </span>checking top<span class="op">-</span>level files ... NOTE</a>
+<a class="sourceLine" id="cb4-2" title="2">  Non<span class="op">-</span>standard file<span class="op">/</span>directory found at top level<span class="op">:</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="st">    &#39;depreciated&#39;</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">use_build_ignore</span>(<span class="st">&quot;depreciated&quot;</span>)</a></code></pre></div>
+</div>
+<div id="使用-unicode" class="section level1">
+<h1><span class="header-section-number">4</span> 使用 Unicode</h1>
+<p>参考 <a href="https://stackoverflow.com/a/22224027/8625228" class="uri">https://stackoverflow.com/a/22224027/8625228</a></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="op">--</span><span class="st"> </span>R CMD check results <span class="op">---------------------------------------</span><span class="st"> </span>add2md <span class="dv">1</span>.<span class="fl">1.0</span> <span class="op">----</span></a>
+<a class="sourceLine" id="cb6-2" title="2">Duration<span class="op">:</span><span class="st"> </span><span class="fl">56.7</span>s</a>
+<a class="sourceLine" id="cb6-3" title="3"></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="op">&gt;</span><span class="st"> </span>checking R files <span class="cf">for</span> non<span class="op">-</span>ASCII characters ... WARNING</a>
+<a class="sourceLine" id="cb6-5" title="5">  Found the following file with non<span class="op">-</span>ASCII characters<span class="op">:</span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="st">    </span>paste_kindle.R</a>
+<a class="sourceLine" id="cb6-7" title="7">  Portable packages must use only ASCII characters <span class="cf">in</span> their R code,</a>
+<a class="sourceLine" id="cb6-8" title="8">  except perhaps <span class="cf">in</span> comments.</a>
+<a class="sourceLine" id="cb6-9" title="9">  Use \uxxxx escapes <span class="cf">for</span> other characters.</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">clipr<span class="op">::</span><span class="kw">read_clip</span>() <span class="op">%&gt;%</span><span class="st"> </span>stringi<span class="op">::</span><span class="kw">stri_escape_unicode</span>() <span class="op">%&gt;%</span><span class="st"> </span>clipr<span class="op">::</span><span class="kw">write_clip</span>()</a></code></pre></div>
+</div>
+<div id="vignette-报错" class="section level1">
+<h1><span class="header-section-number">5</span> vignette 报错</h1>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">E  creating <span class="kw">vignettes</span> (<span class="fl">13.4</span>s)</a>
+<a class="sourceLine" id="cb8-2" title="2">   <span class="op">---</span><span class="st"> </span>re<span class="op">-</span>building <span class="st">&#39;introduction.Rmd&#39;</span> using rmarkdown</a>
+<a class="sourceLine" id="cb8-3" title="3">   Quitting from lines <span class="dv">228-229</span> (introduction.Rmd) </a>
+<a class="sourceLine" id="cb8-4" title="4">   Error<span class="op">:</span><span class="st"> </span>processing vignette <span class="st">&#39;introduction.Rmd&#39;</span> failed with diagnostics<span class="op">:</span></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="st">   </span>û��<span class="st">&quot;relative_path&quot;</span>�������</a>
+<a class="sourceLine" id="cb8-6" title="6">   <span class="op">---</span><span class="st"> </span>failed re<span class="op">-</span>building <span class="st">&#39;introduction.Rmd&#39;</span></a>
+<a class="sourceLine" id="cb8-7" title="7">   </a>
+<a class="sourceLine" id="cb8-8" title="8">   <span class="op">---</span><span class="st"> </span>re<span class="op">-</span>building <span class="st">&#39;url.Rmd&#39;</span> using rmarkdown</a>
+<a class="sourceLine" id="cb8-9" title="9">   <span class="op">---</span><span class="st"> </span>finished re<span class="op">-</span>building <span class="st">&#39;url.Rmd&#39;</span></a>
+<a class="sourceLine" id="cb8-10" title="10">   </a>
+<a class="sourceLine" id="cb8-11" title="11">   SUMMARY<span class="op">:</span><span class="st"> </span>processing the following file failed<span class="op">:</span></a>
+<a class="sourceLine" id="cb8-12" title="12"><span class="st">     &#39;introduction.Rmd&#39;</span></a>
+<a class="sourceLine" id="cb8-13" title="13">   </a>
+<a class="sourceLine" id="cb8-14" title="14">   ����<span class="op">:</span><span class="st"> </span>Vignette re<span class="op">-</span>building failed.</a>
+<a class="sourceLine" id="cb8-15" title="15">   ִֹͣ��</a>
+<a class="sourceLine" id="cb8-16" title="16">Error <span class="cf">in</span> (<span class="cf">function</span> (<span class="dt">command =</span> <span class="ot">NULL</span>, <span class="dt">args =</span> <span class="kw">character</span>(), <span class="dt">error_on_status =</span> <span class="ot">TRUE</span>,  <span class="op">:</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-17" title="17"><span class="st">  </span>System command error</a>
+<a class="sourceLine" id="cb8-18" title="18">Calls<span class="op">:</span><span class="st"> </span><span class="er">&lt;</span>Anonymous<span class="op">&gt;</span><span class="st"> </span>... eval -&gt;<span class="st"> </span>with_envvar -&gt;<span class="st"> </span>force -&gt;<span class="st"> </span>do.call -&gt;<span class="st"> </span><span class="er">&lt;</span>Anonymous<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb8-19" title="19">ִֹͣ��</a>
+<a class="sourceLine" id="cb8-20" title="20"></a>
+<a class="sourceLine" id="cb8-21" title="21">Exited with status <span class="fl">1.</span></a></code></pre></div>
+<p>删除 depreciated 的函数</p>
+</div>
+<div id="更新-desc-imports" class="section level1">
+<h1><span class="header-section-number">6</span> 更新 DESC Imports</h1>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="op">&gt;</span><span class="st"> </span>checking package dependencies ... ERROR</a>
+<a class="sourceLine" id="cb9-2" title="2">  Namespace dependencies not required<span class="op">:</span><span class="st"> &#39;add2pkg&#39;</span>, <span class="st">&#39;readr&#39;</span>, <span class="st">&#39;rvest&#39;</span>, <span class="st">&#39;xml2&#39;</span></a>
+<a class="sourceLine" id="cb9-3" title="3">  </a>
+<a class="sourceLine" id="cb9-4" title="4">  See section <span class="st">&#39;The DESCRIPTION file&#39;</span> <span class="cf">in</span> the <span class="st">&#39;Writing R Extensions&#39;</span></a>
+<a class="sourceLine" id="cb9-5" title="5">  manual.</a>
+<a class="sourceLine" id="cb9-6" title="6"></a>
+<a class="sourceLine" id="cb9-7" title="7"><span class="dv">1</span> error x <span class="op">|</span><span class="st"> </span><span class="dv">0</span> warnings �� <span class="op">|</span><span class="st"> </span><span class="dv">0</span> notes ��</a>
+<a class="sourceLine" id="cb9-8" title="8">����<span class="op">:</span><span class="st"> </span>R CMD check found ERRORs</a>
+<a class="sourceLine" id="cb9-9" title="9">ִֹͣ��</a>
+<a class="sourceLine" id="cb9-10" title="10"></a>
+<a class="sourceLine" id="cb9-11" title="11">Exited with status <span class="fl">1.</span></a></code></pre></div>
+</div>
+<div id="函数缺少描述" class="section level1">
+<h1><span class="header-section-number">7</span> 函数缺少描述</h1>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="op">&gt;</span><span class="st"> </span>checking <span class="cf">for</span> missing documentation entries ... WARNING</a>
+<a class="sourceLine" id="cb10-3" title="3">  Undocumented code objects<span class="op">:</span></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="st">    &#39;m1_v2&#39;</span></a>
+<a class="sourceLine" id="cb10-5" title="5">  All user<span class="op">-</span>level objects <span class="cf">in</span> a package should have documentation entries.</a>
+<a class="sourceLine" id="cb10-6" title="6">  See chapter <span class="st">&#39;Writing R documentation files&#39;</span> <span class="cf">in</span> the <span class="st">&#39;Writing R</span></a>
+<a class="sourceLine" id="cb10-7" title="7"><span class="st">  Extensions&#39;</span> manual.</a></code></pre></div>
+<p>add</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co">#&#39; Build a url in markdown</span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="co">#&#39;</span></a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="co">#&#39; This function helps users to paste url in markdown</span></a>
+<a class="sourceLine" id="cb11-4" title="4"><span class="co">#&#39;</span></a>
+<a class="sourceLine" id="cb11-5" title="5"><span class="co">#&#39; @param size the figure size, by default, 100 x 100</span></a>
+<a class="sourceLine" id="cb11-6" title="6"><span class="co">#&#39; @return Character.</span></a>
+<a class="sourceLine" id="cb11-7" title="7"><span class="co">#&#39; @author Jiaxiang Li</span></a>
+<a class="sourceLine" id="cb11-8" title="8"><span class="co">#&#39;</span></a>
+<a class="sourceLine" id="cb11-9" title="9"><span class="co">#&#39; @import rstudioapi</span></a>
+<a class="sourceLine" id="cb11-10" title="10"><span class="co">#&#39; @importFrom stringr str_split str_match str_detect</span></a>
+<a class="sourceLine" id="cb11-11" title="11"><span class="co">#&#39; @importFrom glue glue</span></a>
+<a class="sourceLine" id="cb11-12" title="12"><span class="co">#&#39; @importFrom rebus %R% or DOT one_or_more LOWER optional capture </span><span class="re">END</span></a>
+<a class="sourceLine" id="cb11-13" title="13"><span class="co">#&#39; @export</span></a></code></pre></div>
+</div>
+<div id="函数参数缺少描述" class="section level1">
+<h1><span class="header-section-number">8</span> 函数参数缺少描述</h1>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="op">&gt;</span><span class="st"> </span>checking Rd \usage sections ... WARNING</a>
+<a class="sourceLine" id="cb12-2" title="2">  Undocumented arguments <span class="cf">in</span> documentation object <span class="st">&#39;build_iframe&#39;</span></a>
+<a class="sourceLine" id="cb12-3" title="3">    <span class="st">&#39;input&#39;</span> <span class="st">&#39;is_nbviewer&#39;</span></a>
+<a class="sourceLine" id="cb12-4" title="4">  Documented arguments not <span class="cf">in</span> \usage <span class="cf">in</span> documentation object <span class="st">&#39;build_iframe&#39;</span><span class="op">:</span></a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="st">    &#39;url&#39;</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co">#&#39; @param input character. URL.</span></a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="co">#&#39; @param is_nbviewer logical. Whether the url is Jupyter notebook.</span></a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">  Undocumented arguments <span class="cf">in</span> documentation object <span class="st">&#39;button&#39;</span></a>
+<a class="sourceLine" id="cb14-2" title="2">    <span class="st">&#39;...&#39;</span></a>
+<a class="sourceLine" id="cb14-3" title="3">  </a>
+<a class="sourceLine" id="cb14-4" title="4">  Undocumented arguments <span class="cf">in</span> documentation object <span class="st">&#39;center&#39;</span></a>
+<a class="sourceLine" id="cb14-5" title="5">    <span class="st">&#39;input&#39;</span> <span class="st">&#39;size&#39;</span></a>
+<a class="sourceLine" id="cb14-6" title="6">  </a>
+<a class="sourceLine" id="cb14-7" title="7">  Undocumented arguments <span class="cf">in</span> documentation object <span class="st">&#39;change_to_upper&#39;</span></a>
+<a class="sourceLine" id="cb14-8" title="8">    <span class="st">&#39;input&#39;</span></a>
+<a class="sourceLine" id="cb14-9" title="9">  </a>
+<a class="sourceLine" id="cb14-10" title="10">  Undocumented arguments <span class="cf">in</span> documentation object <span class="st">&#39;checkbox&#39;</span></a>
+<a class="sourceLine" id="cb14-11" title="11">    <span class="st">&#39;input&#39;</span></a>
+<a class="sourceLine" id="cb14-12" title="12">  </a>
+<a class="sourceLine" id="cb14-13" title="13">  Undocumented arguments <span class="cf">in</span> documentation object <span class="st">&#39;extract_firstline&#39;</span></a>
+<a class="sourceLine" id="cb14-14" title="14">    <span class="st">&#39;url&#39;</span> <span class="st">&#39;content_path&#39;</span> <span class="st">&#39;pattern&#39;</span> <span class="st">&#39;para_length&#39;</span></a>
+<a class="sourceLine" id="cb14-15" title="15">  </a>
+<a class="sourceLine" id="cb14-16" title="16">  Undocumented arguments <span class="cf">in</span> documentation object <span class="st">&#39;extract_highlight&#39;</span></a>
+<a class="sourceLine" id="cb14-17" title="17">    <span class="st">&#39;url&#39;</span> <span class="st">&#39;pattern&#39;</span></a>
+<a class="sourceLine" id="cb14-18" title="18">  </a>
+<a class="sourceLine" id="cb14-19" title="19">  Undocumented arguments <span class="cf">in</span> documentation object <span class="st">&#39;get_input&#39;</span></a>
+<a class="sourceLine" id="cb14-20" title="20">    <span class="st">&#39;input&#39;</span> <span class="st">&#39;clip&#39;</span> <span class="st">&#39;collapse&#39;</span></a>
+<a class="sourceLine" id="cb14-21" title="21">  </a>
+<a class="sourceLine" id="cb14-22" title="22">  Undocumented arguments <span class="cf">in</span> documentation object <span class="st">&#39;get_quote&#39;</span></a>
+<a class="sourceLine" id="cb14-23" title="23">    <span class="st">&#39;input&#39;</span></a>
+<a class="sourceLine" id="cb14-24" title="24">  </a>
+<a class="sourceLine" id="cb14-25" title="25">  Undocumented arguments <span class="cf">in</span> documentation object <span class="st">&#39;get_url&#39;</span></a>
+<a class="sourceLine" id="cb14-26" title="26">    <span class="st">&#39;input&#39;</span> <span class="st">&#39;name&#39;</span></a>
+<a class="sourceLine" id="cb14-27" title="27">  </a>
+<a class="sourceLine" id="cb14-28" title="28">  Undocumented arguments <span class="cf">in</span> documentation object <span class="st">&#39;get_url_title&#39;</span></a>
+<a class="sourceLine" id="cb14-29" title="29">    <span class="st">&#39;url&#39;</span></a>
+<a class="sourceLine" id="cb14-30" title="30">  </a>
+<a class="sourceLine" id="cb14-31" title="31">  Undocumented arguments <span class="cf">in</span> documentation object <span class="st">&#39;get_word_style&#39;</span></a>
+<a class="sourceLine" id="cb14-32" title="32">    <span class="st">&#39;style&#39;</span></a>
+<a class="sourceLine" id="cb14-33" title="33">  </a>
+<a class="sourceLine" id="cb14-34" title="34">  Undocumented arguments <span class="cf">in</span> documentation object <span class="st">&#39;kbd&#39;</span></a>
+<a class="sourceLine" id="cb14-35" title="35">    <span class="st">&#39;...&#39;</span></a>
+<a class="sourceLine" id="cb14-36" title="36">  </a>
+<a class="sourceLine" id="cb14-37" title="37">  Undocumented arguments <span class="cf">in</span> documentation object <span class="st">&#39;list_in_order&#39;</span></a>
+<a class="sourceLine" id="cb14-38" title="38">    <span class="st">&#39;input&#39;</span></a>
+<a class="sourceLine" id="cb14-39" title="39">  </a>
+<a class="sourceLine" id="cb14-40" title="40">  Undocumented arguments <span class="cf">in</span> documentation object <span class="st">&#39;mark&#39;</span></a>
+<a class="sourceLine" id="cb14-41" title="41">    <span class="st">&#39;...&#39;</span></a>
+<a class="sourceLine" id="cb14-42" title="42">  </a>
+<a class="sourceLine" id="cb14-43" title="43">  Undocumented arguments <span class="cf">in</span> documentation object <span class="st">&#39;naming_dir&#39;</span></a>
+<a class="sourceLine" id="cb14-44" title="44">    <span class="st">&#39;input&#39;</span> <span class="st">&#39;sep&#39;</span></a>
+<a class="sourceLine" id="cb14-45" title="45">  </a>
+<a class="sourceLine" id="cb14-46" title="46">  Undocumented arguments <span class="cf">in</span> documentation object <span class="st">&#39;transfer2df&#39;</span></a>
+<a class="sourceLine" id="cb14-47" title="47">    <span class="st">&#39;raw_text&#39;</span></a>
+<a class="sourceLine" id="cb14-48" title="48">  Documented arguments not <span class="cf">in</span> \usage <span class="cf">in</span> documentation object <span class="st">&#39;transfer2df&#39;</span><span class="op">:</span></a>
+<a class="sourceLine" id="cb14-49" title="49"><span class="st">    &#39;size&#39;</span></a>
+<a class="sourceLine" id="cb14-50" title="50">  </a>
+<a class="sourceLine" id="cb14-51" title="51">  Functions with \usage entries need to have the appropriate \alias</a>
+<a class="sourceLine" id="cb14-52" title="52">  entries, and all their arguments documented.</a>
+<a class="sourceLine" id="cb14-53" title="53">  The \usage entries must correspond to syntactically valid R code.</a>
+<a class="sourceLine" id="cb14-54" title="54">  See chapter <span class="st">&#39;Writing R documentation files&#39;</span> <span class="cf">in</span> the <span class="st">&#39;Writing R</span></a>
+<a class="sourceLine" id="cb14-55" title="55"><span class="st">  Extensions&#39;</span> manual.</a></code></pre></div>
+<p>一个个添加好</p>
+<p>没有 <code>@export</code> 函数，如果增加了多余的参数，也会报错。</p>
+</div>
+<div id="packrat-删除" class="section level1">
+<h1><span class="header-section-number">9</span> packrat 删除</h1>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"></a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="op">&gt;</span><span class="st"> </span>checking <span class="cf">if</span> this is a source package ... NOTE</a>
+<a class="sourceLine" id="cb15-3" title="3">  Subdirectory <span class="st">&#39;packrat/lib/x86_64-apple-darwin15.6.0/3.5.1/packrat&#39;</span> seems to contain an installed version of the package.</a></code></pre></div>
+<p>直接删除。</p>
+</div>
+<div id="添加-global-变量" class="section level1">
+<h1><span class="header-section-number">10</span> 添加 global 变量</h1>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"></a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="op">&gt;</span><span class="st"> </span>checking R code <span class="cf">for</span> possible problems ... NOTE</a>
+<a class="sourceLine" id="cb16-3" title="3">  append_archive<span class="op">:</span><span class="st"> </span>no visible binding <span class="cf">for</span> global variable <span class="st">&#39;text&#39;</span></a>
+<a class="sourceLine" id="cb16-4" title="4">  extract_firstline<span class="op">:</span><span class="st"> </span>no visible binding <span class="cf">for</span> global variable <span class="st">&#39;.&#39;</span></a>
+<a class="sourceLine" id="cb16-5" title="5">  extract_highlight<span class="op">:</span><span class="st"> </span>no visible binding <span class="cf">for</span> global variable <span class="st">&#39;.&#39;</span></a>
+<a class="sourceLine" id="cb16-6" title="6">  extract_html_text<span class="op">:</span><span class="st"> </span>no visible binding <span class="cf">for</span> global variable <span class="st">&#39;.&#39;</span></a>
+<a class="sourceLine" id="cb16-7" title="7">  file_name_raw<span class="op">:</span><span class="st"> </span>no visible binding <span class="cf">for</span> global variable <span class="st">&#39;.&#39;</span></a>
+<a class="sourceLine" id="cb16-8" title="8">  get_output<span class="op">:</span><span class="st"> </span>no visible global <span class="cf">function</span> definition <span class="cf">for</span> <span class="st">&#39;mutate&#39;</span></a>
+<a class="sourceLine" id="cb16-9" title="9">  get_output<span class="op">:</span><span class="st"> </span>no visible binding <span class="cf">for</span> global variable <span class="st">&#39;X1&#39;</span></a>
+<a class="sourceLine" id="cb16-10" title="10">  get_output<span class="op">:</span><span class="st"> </span>no visible binding <span class="cf">for</span> global variable <span class="st">&#39;X2&#39;</span></a>
+<a class="sourceLine" id="cb16-11" title="11">  get_output<span class="op">:</span><span class="st"> </span>no visible binding <span class="cf">for</span> global variable <span class="st">&#39;get_title&#39;</span></a>
+<a class="sourceLine" id="cb16-12" title="12">  get_output<span class="op">:</span><span class="st"> </span>no visible binding <span class="cf">for</span> global variable <span class="st">&#39;text&#39;</span></a>
+<a class="sourceLine" id="cb16-13" title="13">  get_selection<span class="op">:</span><span class="st"> </span>no visible binding <span class="cf">for</span> global variable <span class="st">&#39;.&#39;</span></a>
+<a class="sourceLine" id="cb16-14" title="14">  get_url<span class="op">:</span><span class="st"> </span>no visible global <span class="cf">function</span> definition <span class="cf">for</span> <span class="st">&#39;map_chr&#39;</span></a>
+<a class="sourceLine" id="cb16-15" title="15">  m1<span class="op">:</span><span class="st"> </span>no visible binding <span class="cf">for</span> global variable <span class="st">&#39;.&#39;</span></a>
+<a class="sourceLine" id="cb16-16" title="16">  m2<span class="op">:</span><span class="st"> </span>no visible binding <span class="cf">for</span> global variable <span class="st">&#39;.&#39;</span></a>
+<a class="sourceLine" id="cb16-17" title="17">  m3<span class="op">:</span><span class="st"> </span>no visible binding <span class="cf">for</span> global variable <span class="st">&#39;.&#39;</span></a>
+<a class="sourceLine" id="cb16-18" title="18">  m_detail<span class="op">:</span><span class="st"> </span>no visible binding <span class="cf">for</span> global variable <span class="st">&#39;.&#39;</span></a>
+<a class="sourceLine" id="cb16-19" title="19">  paste_kindle<span class="op">:</span><span class="st"> </span>no visible binding <span class="cf">for</span> global variable <span class="st">&#39;.&#39;</span></a>
+<a class="sourceLine" id="cb16-20" title="20">  select_lines<span class="op">:</span><span class="st"> </span>no visible binding <span class="cf">for</span> global variable <span class="st">&#39;.&#39;</span>Warning <span class="cf">in</span> <span class="kw">readChar</span>(path, <span class="dt">nchars =</span> <span class="kw">file.info</span>(path)<span class="op">$</span>size, ...) <span class="op">:</span></a>
+<a class="sourceLine" id="cb16-21" title="21"><span class="st">  </span>��non<span class="op">-</span>UTF<span class="dv">-8</span> MBCS���Ի�����ֻ�ܶ�ȡ�ֽ�</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="st">&quot;append_archive: no visible binding for global variable &#39;text&#39;</span></a>
+<a class="sourceLine" id="cb17-2" title="2"><span class="st">  extract_firstline: no visible binding for global variable &#39;.&#39;</span></a>
+<a class="sourceLine" id="cb17-3" title="3"><span class="st">  extract_highlight: no visible binding for global variable &#39;.&#39;</span></a>
+<a class="sourceLine" id="cb17-4" title="4"><span class="st">  extract_html_text: no visible binding for global variable &#39;.&#39;</span></a>
+<a class="sourceLine" id="cb17-5" title="5"><span class="st">  file_name_raw: no visible binding for global variable &#39;.&#39;</span></a>
+<a class="sourceLine" id="cb17-6" title="6"><span class="st">  get_output: no visible global function definition for &#39;mutate&#39;</span></a>
+<a class="sourceLine" id="cb17-7" title="7"><span class="st">  get_output: no visible binding for global variable &#39;X1&#39;</span></a>
+<a class="sourceLine" id="cb17-8" title="8"><span class="st">  get_output: no visible binding for global variable &#39;X2&#39;</span></a>
+<a class="sourceLine" id="cb17-9" title="9"><span class="st">  get_output: no visible binding for global variable &#39;get_title&#39;</span></a>
+<a class="sourceLine" id="cb17-10" title="10"><span class="st">  get_output: no visible binding for global variable &#39;text&#39;</span></a>
+<a class="sourceLine" id="cb17-11" title="11"><span class="st">  get_selection: no visible binding for global variable &#39;.&#39;</span></a>
+<a class="sourceLine" id="cb17-12" title="12"><span class="st">  get_url: no visible global function definition for &#39;map_chr&#39;</span></a>
+<a class="sourceLine" id="cb17-13" title="13"><span class="st">  m1: no visible binding for global variable &#39;.&#39;</span></a>
+<a class="sourceLine" id="cb17-14" title="14"><span class="st">  m2: no visible binding for global variable &#39;.&#39;</span></a>
+<a class="sourceLine" id="cb17-15" title="15"><span class="st">  m3: no visible binding for global variable &#39;.&#39;</span></a>
+<a class="sourceLine" id="cb17-16" title="16"><span class="st">  m_detail: no visible binding for global variable &#39;.&#39;</span></a>
+<a class="sourceLine" id="cb17-17" title="17"><span class="st">  paste_kindle: no visible binding for global variable &#39;.&#39;</span></a>
+<a class="sourceLine" id="cb17-18" title="18"><span class="st">  select_lines: no visible binding for global variable &#39;.&#39;&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb17-19" title="19"><span class="st">    </span><span class="kw">read_lines</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb17-20" title="20"><span class="st">    </span><span class="kw">str_remove_all</span>(<span class="st">&quot;^</span><span class="ch">\\</span><span class="st">s+&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb17-21" title="21"><span class="st">    </span><span class="kw">str_extract</span>(<span class="st">&quot;global variable .+&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb17-22" title="22"><span class="st">    </span><span class="kw">str_remove</span>(<span class="st">&quot;global variable &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb17-23" title="23"><span class="st">    </span><span class="kw">unique</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb17-24" title="24"><span class="st">    </span><span class="kw">na.omit</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb17-25" title="25"><span class="st">    </span><span class="kw">str_flatten</span>(<span class="st">&quot;, &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb17-26" title="26"><span class="st">    </span>clipr<span class="op">::</span><span class="kw">write_clip</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">globalVariables</span>(<span class="kw">c</span>(<span class="st">&#39;text&#39;</span>, <span class="st">&#39;.&#39;</span>, <span class="st">&#39;X1&#39;</span>, <span class="st">&#39;X2&#39;</span>, <span class="st">&#39;get_title&#39;</span>))</a></code></pre></div>
+</div>
+<div id="附录" class="section level1 unnumbered">
+<h1>附录</h1>
+</div>
+<div id="参考文献" class="section level1 unnumbered">
+<h1>参考文献</h1>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,320 @@
+---
+title:  R 开发包 Cookbook
+author: 李家翔
+date: "`r Sys.Date()`"
+output: 
+    bookdown::gitbook:
+        split_by: none
+        split_bib: TRUE
+        df_print: paged
+bibliography: refs/add.bib
+---
+
+```{r setup,echo = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+```
+
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+1. 使用 RMarkdown 的 `child` 参数，进行文档拼接。
+1. 这样拼接以后的笔记方便复习。
+1. 相关问题提交到
+    <a class="github-button" href="https://github.com/JiaxiangBU/tutoring2/issues" data-show-count="true" aria-label="Issue JiaxiangBU/tutoring on GitHub">Issue</a>
+
+# 完成状态
+
+```r
+-- R CMD check results --------------------------------------- add2md 1.1.0 ----
+Duration: 51.8s
+
+0 errors �� | 0 warnings �� | 0 notes ��
+Warning in readChar(path, nchars = file.info(path)$size, ...) :
+  ��non-UTF-8 MBCS���Ի�����ֻ�ܶ�ȡ�ֽ�
+
+R CMD check succeeded
+```
+
+```r
+0 errors �� | 0 warnings �� | 0 notes ��
+```
+
+体现了包可以上传了。
+
+# 函数缺少引用
+
+```r
+> checking R code for possible problems ... NOTE
+  get_output: no visible global function definition for 'mutate'
+  get_url: no visible global function definition for 'map_chr'
+  Undefined global functions or variables:
+    map_chr mutate
+
+0 errors �� | 2 warnings x | 2 notes x
+Warning in readChar(path, nchars = file.info(path)$size, ...) :
+  ��non-UTF-8 MBCS���Ի�����ֻ�ܶ�ȡ�ֽ�
+����: R CMD check found WARNINGs
+ִֹͣ��
+
+Exited with status 1.
+```
+
+加上 rer 的包名称。如 `mutate` 加上 `dplyr::`
+
+# ignore 额外文件夹
+
+```r
+> checking top-level files ... NOTE
+  Non-standard file/directory found at top level:
+    'depreciated'
+```
+
+```r
+use_build_ignore("depreciated")
+```
+
+# 使用 Unicode
+
+参考 https://stackoverflow.com/a/22224027/8625228
+
+```r
+-- R CMD check results --------------------------------------- add2md 1.1.0 ----
+Duration: 56.7s
+
+> checking R files for non-ASCII characters ... WARNING
+  Found the following file with non-ASCII characters:
+    paste_kindle.R
+  Portable packages must use only ASCII characters in their R code,
+  except perhaps in comments.
+  Use \uxxxx escapes for other characters.
+```
+
+```r
+clipr::read_clip() %>% stringi::stri_escape_unicode() %>% clipr::write_clip()
+```
+
+# vignette 报错
+
+```r
+E  creating vignettes (13.4s)
+   --- re-building 'introduction.Rmd' using rmarkdown
+   Quitting from lines 228-229 (introduction.Rmd) 
+   Error: processing vignette 'introduction.Rmd' failed with diagnostics:
+   û��"relative_path"�������
+   --- failed re-building 'introduction.Rmd'
+   
+   --- re-building 'url.Rmd' using rmarkdown
+   --- finished re-building 'url.Rmd'
+   
+   SUMMARY: processing the following file failed:
+     'introduction.Rmd'
+   
+   ����: Vignette re-building failed.
+   ִֹͣ��
+Error in (function (command = NULL, args = character(), error_on_status = TRUE,  : 
+  System command error
+Calls: <Anonymous> ... eval -> with_envvar -> force -> do.call -> <Anonymous>
+ִֹͣ��
+
+Exited with status 1.
+```
+
+删除 depreciated 的函数
+
+# 更新 DESC Imports
+
+```r
+> checking package dependencies ... ERROR
+  Namespace dependencies not required: 'add2pkg', 'readr', 'rvest', 'xml2'
+  
+  See section 'The DESCRIPTION file' in the 'Writing R Extensions'
+  manual.
+
+1 error x | 0 warnings �� | 0 notes ��
+����: R CMD check found ERRORs
+ִֹͣ��
+
+Exited with status 1.
+```
+
+# 函数缺少描述
+
+```r
+
+> checking for missing documentation entries ... WARNING
+  Undocumented code objects:
+    'm1_v2'
+  All user-level objects in a package should have documentation entries.
+  See chapter 'Writing R documentation files' in the 'Writing R
+  Extensions' manual.
+```
+
+add
+
+```r
+#' Build a url in markdown
+#'
+#' This function helps users to paste url in markdown
+#'
+#' @param size the figure size, by default, 100 x 100
+#' @return Character.
+#' @author Jiaxiang Li
+#'
+#' @import rstudioapi
+#' @importFrom stringr str_split str_match str_detect
+#' @importFrom glue glue
+#' @importFrom rebus %R% or DOT one_or_more LOWER optional capture END
+#' @export
+```
+
+# 函数参数缺少描述
+
+```r
+> checking Rd \usage sections ... WARNING
+  Undocumented arguments in documentation object 'build_iframe'
+    'input' 'is_nbviewer'
+  Documented arguments not in \usage in documentation object 'build_iframe':
+    'url'
+
+```
+
+```r
+#' @param input character. URL.
+#' @param is_nbviewer logical. Whether the url is Jupyter notebook.
+```
+
+```r
+  Undocumented arguments in documentation object 'button'
+    '...'
+  
+  Undocumented arguments in documentation object 'center'
+    'input' 'size'
+  
+  Undocumented arguments in documentation object 'change_to_upper'
+    'input'
+  
+  Undocumented arguments in documentation object 'checkbox'
+    'input'
+  
+  Undocumented arguments in documentation object 'extract_firstline'
+    'url' 'content_path' 'pattern' 'para_length'
+  
+  Undocumented arguments in documentation object 'extract_highlight'
+    'url' 'pattern'
+  
+  Undocumented arguments in documentation object 'get_input'
+    'input' 'clip' 'collapse'
+  
+  Undocumented arguments in documentation object 'get_quote'
+    'input'
+  
+  Undocumented arguments in documentation object 'get_url'
+    'input' 'name'
+  
+  Undocumented arguments in documentation object 'get_url_title'
+    'url'
+  
+  Undocumented arguments in documentation object 'get_word_style'
+    'style'
+  
+  Undocumented arguments in documentation object 'kbd'
+    '...'
+  
+  Undocumented arguments in documentation object 'list_in_order'
+    'input'
+  
+  Undocumented arguments in documentation object 'mark'
+    '...'
+  
+  Undocumented arguments in documentation object 'naming_dir'
+    'input' 'sep'
+  
+  Undocumented arguments in documentation object 'transfer2df'
+    'raw_text'
+  Documented arguments not in \usage in documentation object 'transfer2df':
+    'size'
+  
+  Functions with \usage entries need to have the appropriate \alias
+  entries, and all their arguments documented.
+  The \usage entries must correspond to syntactically valid R code.
+  See chapter 'Writing R documentation files' in the 'Writing R
+  Extensions' manual.
+```
+
+一个个添加好
+
+没有 `@export` 函数，如果增加了多余的参数，也会报错。
+
+# packrat 删除
+
+```r
+
+> checking if this is a source package ... NOTE
+  Subdirectory 'packrat/lib/x86_64-apple-darwin15.6.0/3.5.1/packrat' seems to contain an installed version of the package.
+```
+
+直接删除。
+
+# 添加 global 变量
+
+```r
+
+> checking R code for possible problems ... NOTE
+  append_archive: no visible binding for global variable 'text'
+  extract_firstline: no visible binding for global variable '.'
+  extract_highlight: no visible binding for global variable '.'
+  extract_html_text: no visible binding for global variable '.'
+  file_name_raw: no visible binding for global variable '.'
+  get_output: no visible global function definition for 'mutate'
+  get_output: no visible binding for global variable 'X1'
+  get_output: no visible binding for global variable 'X2'
+  get_output: no visible binding for global variable 'get_title'
+  get_output: no visible binding for global variable 'text'
+  get_selection: no visible binding for global variable '.'
+  get_url: no visible global function definition for 'map_chr'
+  m1: no visible binding for global variable '.'
+  m2: no visible binding for global variable '.'
+  m3: no visible binding for global variable '.'
+  m_detail: no visible binding for global variable '.'
+  paste_kindle: no visible binding for global variable '.'
+  select_lines: no visible binding for global variable '.'Warning in readChar(path, nchars = file.info(path)$size, ...) :
+  ��non-UTF-8 MBCS���Ի�����ֻ�ܶ�ȡ�ֽ�
+
+```
+
+```r
+"append_archive: no visible binding for global variable 'text'
+  extract_firstline: no visible binding for global variable '.'
+  extract_highlight: no visible binding for global variable '.'
+  extract_html_text: no visible binding for global variable '.'
+  file_name_raw: no visible binding for global variable '.'
+  get_output: no visible global function definition for 'mutate'
+  get_output: no visible binding for global variable 'X1'
+  get_output: no visible binding for global variable 'X2'
+  get_output: no visible binding for global variable 'get_title'
+  get_output: no visible binding for global variable 'text'
+  get_selection: no visible binding for global variable '.'
+  get_url: no visible global function definition for 'map_chr'
+  m1: no visible binding for global variable '.'
+  m2: no visible binding for global variable '.'
+  m3: no visible binding for global variable '.'
+  m_detail: no visible binding for global variable '.'
+  paste_kindle: no visible binding for global variable '.'
+  select_lines: no visible binding for global variable '.'" %>% 
+    read_lines() %>% 
+    str_remove_all("^\\s+") %>% 
+    str_extract("global variable .+") %>% 
+    str_remove("global variable ") %>% 
+    unique() %>% 
+    na.omit() %>% 
+    str_flatten(", ") %>% 
+    clipr::write_clip()
+```
+
+```r
+globalVariables(c('text', '.', 'X1', 'X2', 'get_title'))
+```
+
+# 附录 {-}
+
+# 参考文献 {-}
