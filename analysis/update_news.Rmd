@@ -1,0 +1,29 @@
+以包 add2md 为例。
+
+```r
+library(git2r)
+repo <- repository("../add2md")
+commits(repo) %>% 
+    map_chr(`[[`, "message") %>% 
+    .[1:22] %>% 
+    paste("*", .) %>% 
+    clipr::write_clip()
+# 选择多少到对少的 commits 来更新 NEWS.md
+```
+
+1. updated the function of `checkbox` with the feature checked -> unchecked.
+1. updated the function `checkbox` with the feature `checked`.
+1. reformatted code.
+1. depreciated the function `append_archive`.
+1. fixed bugs and typos and encoding problems.
+1. translated non-ASCII characters into unicode, add `@params` args, delete packrat, ignore docs-building, add global variables.
+1. updated imported packages, and remove depreciated functions in vignettes document.
+1. added the function `add_wechat_portfolio`.
+1. updated the function `diagrammer_shortcut`.
+1. made the function `get_input` exported.
+1. made functions output visible.
+1. added arg `para_length` for the function `extract_firstline`.
+1. updated license.
+
+把所有 commit 拿出来然后进行整合。
+这就是为什么要认真写 commit。
