@@ -148,6 +148,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17" data-path=""><a href="#add-test-and-vignettes"><i class="fa fa-check"></i><b>17</b> Add test and vignettes</a></li>
 <li class="chapter" data-level="18" data-path=""><a href="#release-函数的流程"><i class="fa fa-check"></i><b>18</b> release 函数的流程</a></li>
 <li class="chapter" data-level="19" data-path=""><a href="#r-hub-通过示例"><i class="fa fa-check"></i><b>19</b> r-hub 通过示例</a></li>
+<li class="chapter" data-level="20" data-path=""><a href="#上传成功后的邮件"><i class="fa fa-check"></i><b>20</b> 上传成功后的邮件</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#附录"><i class="fa fa-check"></i>附录</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#参考文献"><i class="fa fa-check"></i>参考文献</a></li>
 </ul>
@@ -622,6 +623,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p class="caption">image</p>
 </div>
 <p>地址 <a href="https://builder.r-hub.io/status/original/add2pkg_0.2.1.tar.gz-76c7b9d1252c2906bea2aeb92441ec27" class="uri">https://builder.r-hub.io/status/original/add2pkg_0.2.1.tar.gz-76c7b9d1252c2906bea2aeb92441ec27</a></p>
+</div>
+<div id="上传成功后的邮件" class="section level1">
+<h1><span class="header-section-number">20</span> 上传成功后的邮件</h1>
+<pre><code>Dear maintainer,
+ 
+package add2pkg_0.2.1.tar.gz has been auto-processed and is pending a manual inspection of this new CRAN submission. A CRAN team member will typically respond to you within the next 10 working days. For technical reasons you may receive a second copy of this message when a team member triggers a new check.
+ 
+Log dir: &lt;https://win-builder.r-project.org/incoming_pretest/add2pkg_0.2.1_20200113_095008/&gt;;
+The files will be removed after roughly 7 days.
+Installation time in seconds: 25
+Check time in seconds: 144
+R Under development (unstable) (2020-01-07 r77633)
+ 
+Pretests results:
+Windows: &lt;https://win-builder.r-project.org/incoming_pretest/add2pkg_0.2.1_20200113_095008/Windows/00check.log&gt;;
+Status: 1 NOTE
+Debian: &lt;https://win-builder.r-project.org/incoming_pretest/add2pkg_0.2.1_20200113_095008/Debian/00check.log&gt;;
+Status: 1 NOTE
+ 
+
+ 
+No strong reverse dependencies to be checked.
+ 
+Best regards,
+CRAN teams&#39; auto-check service
+
+Flavor: r-devel-linux-x86_64-debian-gcc, r-devel-windows-ix86+x86_64
+Check: CRAN incoming feasibility, Result: NOTE
+  Maintainer: &#39;Jiaxiang Li &lt;alex.lijiaxiang@foxmail.com&gt;&#39;
+ 
+  New submission
+ 
+  Found the following (possibly) invalid file URI:
+    URI: CODE_OF_CONDUCT.md
+      From: README.md</code></pre>
 </div>
 <div id="附录" class="section level1 unnumbered">
 <h1>附录</h1>

@@ -539,6 +539,43 @@ Error in if (new_url$query$submit == "1") { : argument is of length zero
 
 地址 https://builder.r-hub.io/status/original/add2pkg_0.2.1.tar.gz-76c7b9d1252c2906bea2aeb92441ec27
 
+# 上传成功后的邮件
+
+```
+Dear maintainer,
+ 
+package add2pkg_0.2.1.tar.gz has been auto-processed and is pending a manual inspection of this new CRAN submission. A CRAN team member will typically respond to you within the next 10 working days. For technical reasons you may receive a second copy of this message when a team member triggers a new check.
+ 
+Log dir: <https://win-builder.r-project.org/incoming_pretest/add2pkg_0.2.1_20200113_095008/>;
+The files will be removed after roughly 7 days.
+Installation time in seconds: 25
+Check time in seconds: 144
+R Under development (unstable) (2020-01-07 r77633)
+ 
+Pretests results:
+Windows: <https://win-builder.r-project.org/incoming_pretest/add2pkg_0.2.1_20200113_095008/Windows/00check.log>;
+Status: 1 NOTE
+Debian: <https://win-builder.r-project.org/incoming_pretest/add2pkg_0.2.1_20200113_095008/Debian/00check.log>;
+Status: 1 NOTE
+ 
+
+ 
+No strong reverse dependencies to be checked.
+ 
+Best regards,
+CRAN teams' auto-check service
+
+Flavor: r-devel-linux-x86_64-debian-gcc, r-devel-windows-ix86+x86_64
+Check: CRAN incoming feasibility, Result: NOTE
+  Maintainer: 'Jiaxiang Li <alex.lijiaxiang@foxmail.com>'
+ 
+  New submission
+ 
+  Found the following (possibly) invalid file URI:
+    URI: CODE_OF_CONDUCT.md
+      From: README.md
+```
+
 # 附录 {-}
 
 # 参考文献 {-}
