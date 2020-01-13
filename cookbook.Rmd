@@ -352,6 +352,193 @@ Description: Some helper functions for R package development,
     including create disclaimer, author information and so on.
 ```
 
+# 保证 README.Rmd 链接都是有效的
+
+```r
+New submission
+ 
+  Found the following (possibly) invalid file URIs:
+    URI: .github/CODE_OF_CONDUCT.md
+      From: README.md
+    URI: LICENSE.md
+      From: README.md
+```
+
+# Add test and vignettes
+
+```r
+Flavor: r-devel-linux-x86_64-debian-gcc, r-devel-windows-ix86+x86_64
+Check: for code which exercises the package, Result: WARNING
+  No examples, no tests, no vignettes
+```
+
+```r
+> usethis::use_test("add_me")
+✔ Setting active project to 'D:/work/add2pkg'
+✔ Adding 'testthat' to Suggests field in DESCRIPTION
+✔ Creating 'tests/testthat/'
+✔ Writing 'tests/testthat.R'
+● Call `use_test()` to initialize a basic test file and open it for editing.
+✔ Increasing 'testthat' version to '>= 2.1.0' in DESCRIPTION
+✔ Writing 'tests/testthat/test-add_me.R'
+● Modify 'tests/testthat/test-add_me.R'
+```
+
+加上 test
+
+```r
+test_that("Plain Text", {
+  expect_equal(add_me(), 'Authors@R:
+    person(given = "Jiaxiang",
+           family = "Li",
+           role = c("aut", "cre"),
+           email = "alex.lijiaxiang@foxmail.com",
+           comment = c(ORCID = "https://orcid.org/0000-0003-3196-6492"))')
+})
+```
+
+加上 vignette
+
+```r
+> use_vignette("intro")
+✔ Adding 'knitr' to Suggests field in DESCRIPTION
+✔ Setting VignetteBuilder field in DESCRIPTION to 'knitr'
+✔ Adding 'inst/doc' to '.gitignore'
+✔ Creating 'vignettes/'
+✔ Adding '*.html', '*.R' to 'vignettes/.gitignore'
+✔ Adding 'rmarkdown' to Suggests field in DESCRIPTION
+✔ Writing 'vignettes/intro.Rmd'
+● Modify 'vignettes/intro.Rmd'
+```
+
+
+```r
+add_me()
+```
+
+```r
+add_disclaimer()
+```
+
+# release 函数的流程
+
+```r
+> devtools::release()
+Warning: DR_DEVTOOLS FOUND PROBLEMS
+* R is out of date (3.6.0 vs 3.6.2)
+* Devtools or dependencies out of date: devtools, callr, cli, covr, digest, DT, httr,
+  pkgbuild, rlang, roxygen2, testthat, curl, whisker, R6, Rcpp, backports, mime,
+  openssl, sys, processx, fansi, rex, htmlwidgets, ggplot2, scales, BH, plyr, pillar,
+  pkgconfig, vctrs, stringi, prettyunits, xml2
+* RStudio is out of date (1.2.5001 vs 1.2.5033.1)
+Proceed anyway?
+1: I forget
+2: Not yet
+3: Yup
+
+Selection: 3
+Have you checked for spelling errors (with `spell_check()`)?
+1: I forget
+2: For sure
+3: No way
+
+Selection: 2
+Have you run `R CMD check` locally?
+1: Yup
+2: Not yet
+3: No way
+
+Selection: 1
+── Running additional devtools checks for add2pkg ──────────────────────────────
+Checking version number has three components... OK
+Checking dependencies don't rely on dev versions... OK
+Checking vignette titles are not placeholders... OK
+Checking NEWS.md is not ignored... OK
+Checking NEWS.Rd does not exist... OK
+Checking DESCRIPTION doesn't have Remotes field... OK
+────────────────────────────────────────────────────────────────────────────────
+Were devtool's checks successful?
+1: Not yet
+2: Definitely
+3: No
+
+Selection: 2
+Have you checked on R-hub (with `check_rhub()`)?
+1: No way
+2: I forget
+3: Definitely
+
+Selection: 3
+Have you checked on win-builder (with `check_win_devel()`)?
+1: No way
+2: Definitely
+3: No
+
+Selection: 2
+Have you updated `NEWS.md` file?
+1: Yeah
+2: Nope
+3: Uhhhh... Maybe?
+
+Selection: 1
+Have you updated `DESCRIPTION`?
+1: No way
+2: For sure
+3: Nope
+
+Selection: 2
+Have you updated `cran-comments.md?`
+1: Of course
+2: Uhhhh... Maybe?
+3: Not yet
+
+Selection: 1
+── Running Git checks for add2pkg ──────────────────────────────────────────────
+Checking uncommitted files... OK
+Checking synchronisation with remote branch... OK
+────────────────────────────────────────────────────────────────────────────────
+Were Git checks successful?
+1: Not yet
+2: Yup
+3: Uhhhh... Maybe?
+
+Selection: 2
+Is your email address alex.lijiaxiang@foxmail.com?
+1: No
+2: Absolutely
+3: Uhhhh... Maybe?
+
+Selection: 2
+Building
+pdflatex not found! Not building PDF manual.
+✓  checking for file 'D:\work\add2pkg/DESCRIPTION' (499ms)
+─  preparing 'add2pkg': (1.1s)
+✓  checking DESCRIPTION meta-information ... OK
+─  installing the package to build vignettes
+✓  creating vignettes (7s)
+─  checking for LF line-endings in source and make files and shell scripts (352ms)
+─  checking for empty or unneeded directories
+─  building 'add2pkg_0.2.1.tar.gz'
+   
+Submitting file: C:\Users\LIJIAX~1\AppData\Local\Temp\RtmpEdl715/add2pkg_0.2.1.tar.gz
+File size: 7.9 Kb
+Ready to submit add2pkg (0.2.1) to CRAN?
+1: Yes
+2: No way
+3: Uhhhh... Maybe?
+
+Selection: 1
+Uploading package & comments
+Confirming submission
+Error in if (new_url$query$submit == "1") { : argument is of length zero
+```
+
+# r-hub 通过示例
+
+![image](https://user-images.githubusercontent.com/15884785/72242811-435bc900-3625-11ea-8ef2-521cf436792b.png)
+
+地址 https://builder.r-hub.io/status/original/add2pkg_0.2.1.tar.gz-76c7b9d1252c2906bea2aeb92441ec27
+
 # 附录 {-}
 
 # 参考文献 {-}
