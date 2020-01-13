@@ -121,20 +121,52 @@ Exited with status 1.
 
 删除 depreciated 的函数
 
-# 更新 DESC Imports
+# use_package
 
 ```r
 > checking package dependencies ... ERROR
-  Namespace dependencies not required: 'add2pkg', 'readr', 'rvest', 'xml2'
+  Namespace dependencies not required:
+    'clipr', 'glue', 'rstudioapi', 'rvest', 'usethis', 'xml2'
   
   See section 'The DESCRIPTION file' in the 'Writing R Extensions'
   manual.
 
-1 error x | 0 warnings �� | 0 notes ��
-����: R CMD check found ERRORs
-ִֹͣ��
+1 error x | 0 warnings <U+2713> | 0 notes <U+2713>
+```
 
-Exited with status 1.
+复制 `'clipr', 'glue', 'rstudioapi', 'rvest', 'usethis', 'xml2'`
+
+```r
+c('clipr', 'glue', 'rstudioapi', 'rvest', 'usethis', 'xml2') %>% 
+    purrr::walk(usethis::use_package)
+```
+
+# 去除 library
+
+```r
+> checking dependencies in R code ... WARNING
+  '::' or ':::' imports not declared from:
+    'here' 'readr' 'stringr' 'yaml'
+```
+
+直接在 utils 加入
+复制 `'here' 'readr' 'stringr' 'yaml'`
+
+```r
+"'here' 'readr' 'stringr' 'yaml'" %>% 
+    str_split(" ") %>% 
+    .[[1]] %>% 
+    str_remove_all("'") %>% 
+    paste("#' @import", .) %>% 
+    str_flatten("\n") %>% 
+    clipr::write_clip()
+```
+
+然后增加
+
+```r
+c('here', 'readr', 'stringr', 'yaml') %>% 
+    purrr::walk(usethis::use_package)
 ```
 
 # 函数缺少描述
@@ -258,62 +290,15 @@ add
 # 添加 global 变量
 
 ```r
-
 > checking R code for possible problems ... NOTE
-  append_archive: no visible binding for global variable 'text'
-  extract_firstline: no visible binding for global variable '.'
-  extract_highlight: no visible binding for global variable '.'
-  extract_html_text: no visible binding for global variable '.'
-  file_name_raw: no visible binding for global variable '.'
-  get_output: no visible global function definition for 'mutate'
-  get_output: no visible binding for global variable 'X1'
-  get_output: no visible binding for global variable 'X2'
-  get_output: no visible binding for global variable 'get_title'
-  get_output: no visible binding for global variable 'text'
-  get_selection: no visible binding for global variable '.'
-  get_url: no visible global function definition for 'map_chr'
-  m1: no visible binding for global variable '.'
-  m2: no visible binding for global variable '.'
-  m3: no visible binding for global variable '.'
-  m_detail: no visible binding for global variable '.'
-  paste_kindle: no visible binding for global variable '.'
-  select_lines: no visible binding for global variable '.'Warning in readChar(path, nchars = file.info(path)$size, ...) :
-  ��non-UTF-8 MBCS���Ի�����ֻ�ܶ�ȡ�ֽ�
+  add_zenodo_citation: no visible binding for global variable '.'
+  Undefined global functions or variables:
+    .
 
+0 errors <U+2713> | 1 warning x | 2 notes x
 ```
 
-```r
-"append_archive: no visible binding for global variable 'text'
-  extract_firstline: no visible binding for global variable '.'
-  extract_highlight: no visible binding for global variable '.'
-  extract_html_text: no visible binding for global variable '.'
-  file_name_raw: no visible binding for global variable '.'
-  get_output: no visible global function definition for 'mutate'
-  get_output: no visible binding for global variable 'X1'
-  get_output: no visible binding for global variable 'X2'
-  get_output: no visible binding for global variable 'get_title'
-  get_output: no visible binding for global variable 'text'
-  get_selection: no visible binding for global variable '.'
-  get_url: no visible global function definition for 'map_chr'
-  m1: no visible binding for global variable '.'
-  m2: no visible binding for global variable '.'
-  m3: no visible binding for global variable '.'
-  m_detail: no visible binding for global variable '.'
-  paste_kindle: no visible binding for global variable '.'
-  select_lines: no visible binding for global variable '.'" %>% 
-    read_lines() %>% 
-    str_remove_all("^\\s+") %>% 
-    str_extract("global variable .+") %>% 
-    str_remove("global variable ") %>% 
-    unique() %>% 
-    na.omit() %>% 
-    str_flatten(", ") %>% 
-    clipr::write_clip()
-```
-
-```r
-globalVariables(c('text', '.', 'X1', 'X2', 'get_title'))
-```
+`globalVariables('.')`
 
 # 更新 NEWS.md
 
@@ -340,6 +325,31 @@ globalVariables(c('text', '.', 'X1', 'X2', 'get_title'))
 0 errors | 0 warnings | 1 note
 
 * This is a new release.
+```
+
+
+# Ignore README.Rmd
+
+参考 https://stackoverflow.com/a/48956446/8625228
+
+```r
+> checking top-level files ... NOTE
+  Non-standard file/directory found at top level:
+    'README.Rmd'
+```
+
+`usethis::use_build_ignore("README.Rmd")` 
+
+# Update DESC
+
+```r
+> checking DESCRIPTION meta-information ... NOTE
+  Malformed Description field: should contain one or more complete sentences.
+```
+
+```r
+Description: Some helper functions for R package development,
+    including create disclaimer, author information and so on.
 ```
 
 # 附录 {-}
