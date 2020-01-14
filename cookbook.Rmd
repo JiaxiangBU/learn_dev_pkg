@@ -576,6 +576,82 @@ Check: CRAN incoming feasibility, Result: NOTE
       From: README.md
 ```
 
+
+# 包含其他文件在包中
+
+```
+Thanks, we see:
+
+   Found the following (possibly) invalid file URI:
+     URI: CODE_OF_CONDUCT.md
+       From: README.md
+
+Please include the file or link to it via a fully specified URL.
+
+```
+
+果然 build 里面是没有 COC 和 LICENSE.md
+
+```r
+> dir_tree("../add2pkg_0.2.1/add2pkg", recurse = F)
+../add2pkg_0.2.1/add2pkg
++-- build
++-- DESCRIPTION
++-- inst
++-- LICENSE
++-- man
++-- NAMESPACE
++-- NEWS.md
++-- R
++-- README.md
++-- tests
+\-- vignettes
+```
+
+r package build include file
+
+`.Rbuildignore`删除
+
+```r
+^LICENSE\.md$
+^CODE_OF_CONDUCT\.md$
+```
+
+
+```r
+> checking top-level files ... NOTE
+  Non-standard files/directories found at top level:
+    'CODE_OF_CONDUCT.md' 'LICENSE.md'
+
+0 errors <U+2713> | Warning in readChar(path, nchars = file.info(path)$size, ...) :
+  ��non-UTF-8 MBCS���Ի�����ֻ�ܶ�ȡ�ֽ�
+0 warnings <U+2713> | 1 note x
+
+R CMD check succeeded
+```
+
+所以最好的策略是用绝对的 GitHub 链接，不要把这种文件链接用相对路径加入到包中，所以修改函数。
+
+# 好好写 Description
+
+```
+Perhaps elaborate in the Description field what the package is capable of.
+
+Please fix and resubmit.
+
+Best,
+Uwe Ligges
+```
+
+Description 写的太简单了。
+
+# 这个 warning 没有看懂
+
+```r
+Warning: add_me.R:7: @example D:\work\add2pkg/add_me() doesn't exist
+```
+
+
 # 附录 {-}
 
 # 参考文献 {-}
