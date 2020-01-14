@@ -651,6 +651,38 @@ Description 写的太简单了。
 Warning: add_me.R:7: @example D:\work\add2pkg/add_me() doesn't exist
 ```
 
+# fix mis-spelling
+
+```r
+  New submission
+ 
+  Possibly mis-spelled words in DESCRIPTION:
+    zenodo (11:47)
+```
+
+```r
+> update_wordlist()
+DESCRIPTION does not contain 'Language' field. Defaulting to 'en-US'.
+The following words will be added to the wordlist:
+ - asis
+ - BibTex
+ - coc
+ - descripton
+ - dev
+ - DOI
+ - Infomation
+ - params
+ - README
+ - zenodo
+ - Zenodo
+Are you sure you want to update the wordlist?
+1: Yes
+2: No
+```
+
+所以完全弄干净后，再更新 wordlist
+配合`document();spell_check()`完成。
+
 
 # 附录 {-}
 

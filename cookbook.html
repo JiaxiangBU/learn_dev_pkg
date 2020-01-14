@@ -152,6 +152,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="21" data-path=""><a href="#包含其他文件在包中"><i class="fa fa-check"></i><b>21</b> 包含其他文件在包中</a></li>
 <li class="chapter" data-level="22" data-path=""><a href="#好好写-description"><i class="fa fa-check"></i><b>22</b> 好好写 Description</a></li>
 <li class="chapter" data-level="23" data-path=""><a href="#这个-warning-没有看懂"><i class="fa fa-check"></i><b>23</b> 这个 warning 没有看懂</a></li>
+<li class="chapter" data-level="24" data-path=""><a href="#fix-mis-spelling"><i class="fa fa-check"></i><b>24</b> fix mis-spelling</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#附录"><i class="fa fa-check"></i>附录</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#参考文献"><i class="fa fa-check"></i>参考文献</a></li>
 </ul>
@@ -714,6 +715,32 @@ Uwe Ligges</code></pre>
 <div id="这个-warning-没有看懂" class="section level1">
 <h1><span class="header-section-number">23</span> 这个 warning 没有看懂</h1>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1">Warning<span class="op">:</span><span class="st"> </span>add_me.R<span class="op">:</span><span class="dv">7</span><span class="op">:</span><span class="st"> </span><span class="er">@</span>example D<span class="op">:</span>\work\add2pkg<span class="op">/</span><span class="kw">add_me</span>() doesn<span class="st">&#39;t exist</span></a></code></pre></div>
+</div>
+<div id="fix-mis-spelling" class="section level1">
+<h1><span class="header-section-number">24</span> fix mis-spelling</h1>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1">  New submission</a>
+<a class="sourceLine" id="cb41-2" title="2"> </a>
+<a class="sourceLine" id="cb41-3" title="3">  Possibly mis<span class="op">-</span>spelled words <span class="cf">in</span> DESCRIPTION<span class="op">:</span></a>
+<a class="sourceLine" id="cb41-4" title="4"><span class="st">    </span><span class="kw">zenodo</span> (<span class="dv">11</span><span class="op">:</span><span class="dv">47</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">update_wordlist</span>()</a>
+<a class="sourceLine" id="cb42-2" title="2">DESCRIPTION does not contain <span class="st">&#39;Language&#39;</span> field. Defaulting to <span class="st">&#39;en-US&#39;</span>.</a>
+<a class="sourceLine" id="cb42-3" title="3">The following words will be added to the wordlist<span class="op">:</span></a>
+<a class="sourceLine" id="cb42-4" title="4"><span class="st"> </span><span class="op">-</span><span class="st"> </span>asis</a>
+<a class="sourceLine" id="cb42-5" title="5"> <span class="op">-</span><span class="st"> </span>BibTex</a>
+<a class="sourceLine" id="cb42-6" title="6"> <span class="op">-</span><span class="st"> </span>coc</a>
+<a class="sourceLine" id="cb42-7" title="7"> <span class="op">-</span><span class="st"> </span>descripton</a>
+<a class="sourceLine" id="cb42-8" title="8"> <span class="op">-</span><span class="st"> </span>dev</a>
+<a class="sourceLine" id="cb42-9" title="9"> <span class="op">-</span><span class="st"> </span>DOI</a>
+<a class="sourceLine" id="cb42-10" title="10"> <span class="op">-</span><span class="st"> </span>Infomation</a>
+<a class="sourceLine" id="cb42-11" title="11"> <span class="op">-</span><span class="st"> </span>params</a>
+<a class="sourceLine" id="cb42-12" title="12"> <span class="op">-</span><span class="st"> </span>README</a>
+<a class="sourceLine" id="cb42-13" title="13"> <span class="op">-</span><span class="st"> </span>zenodo</a>
+<a class="sourceLine" id="cb42-14" title="14"> <span class="op">-</span><span class="st"> </span>Zenodo</a>
+<a class="sourceLine" id="cb42-15" title="15">Are you sure you want to update the wordlist?</a>
+<a class="sourceLine" id="cb42-16" title="16"><span class="dv">1</span><span class="op">:</span><span class="st"> </span>Yes</a>
+<a class="sourceLine" id="cb42-17" title="17"><span class="dv">2</span><span class="op">:</span><span class="st"> </span>No</a></code></pre></div>
+<p>所以完全弄干净后，再更新 wordlist
+配合<code>document();spell_check()</code>完成。</p>
 </div>
 <div id="附录" class="section level1 unnumbered">
 <h1>附录</h1>
