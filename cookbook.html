@@ -24,7 +24,7 @@
 <meta name="author" content="李家翔" />
 
 
-<meta name="date" content="2020-01-14" />
+<meta name="date" content="2020-01-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -153,6 +153,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="22" data-path=""><a href="#好好写-description"><i class="fa fa-check"></i><b>22</b> 好好写 Description</a></li>
 <li class="chapter" data-level="23" data-path=""><a href="#这个-warning-没有看懂"><i class="fa fa-check"></i><b>23</b> 这个 warning 没有看懂</a></li>
 <li class="chapter" data-level="24" data-path=""><a href="#fix-mis-spelling"><i class="fa fa-check"></i><b>24</b> fix mis-spelling</a></li>
+<li class="chapter" data-level="25" data-path=""><a href="#增加数据"><i class="fa fa-check"></i><b>25</b> 增加数据</a></li>
+<li class="chapter" data-level="26" data-path=""><a href="#增加-examples"><i class="fa fa-check"></i><b>26</b> 增加 examples</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#附录"><i class="fa fa-check"></i>附录</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#参考文献"><i class="fa fa-check"></i>参考文献</a></li>
 </ul>
@@ -175,7 +177,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">R 开发包 Cookbook</h1>
 <p class="author"><em>李家翔</em></p>
-<p class="date"><em>2020-01-14</em></p>
+<p class="date"><em>2020-01-15</em></p>
 </div>
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -741,6 +743,48 @@ Uwe Ligges</code></pre>
 <a class="sourceLine" id="cb42-17" title="17"><span class="dv">2</span><span class="op">:</span><span class="st"> </span>No</a></code></pre></div>
 <p>所以完全弄干净后，再更新 wordlist
 配合<code>document();spell_check()</code>完成。</p>
+</div>
+<div id="增加数据" class="section level1">
+<h1><span class="header-section-number">25</span> 增加数据</h1>
+<blockquote>
+<p>I highly recommend taking the time to include the code used to do this in the source version of your package. This will make it easy for you to update or reproduce your version of the data.
+I suggest that you put this code in <code>data-raw/</code>
+<a href="http://r-pkgs.had.co.nz/data.html" class="uri">http://r-pkgs.had.co.nz/data.html</a></p>
+</blockquote>
+<p>这里需要保留数据的复现方式和数据。</p>
+<p>参考 <a href="https://github.com/hadley/babynames/blob/master/data-raw/applicants.R" class="uri">https://github.com/hadley/babynames/blob/master/data-raw/applicants.R</a></p>
+<p>我这里使用
+<code>usethis::use_data_raw("文件名")</code></p>
+<p>然后给复现例子。</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="co">## code to prepare `two_class_example` dataset goes here</span></a>
+<a class="sourceLine" id="cb43-2" title="2"></a>
+<a class="sourceLine" id="cb43-3" title="3"><span class="kw">library</span>(yardstick)</a>
+<a class="sourceLine" id="cb43-4" title="4"><span class="kw">data</span>(<span class="st">&quot;two_class_example&quot;</span>)</a>
+<a class="sourceLine" id="cb43-5" title="5"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb43-6" title="6">two_class_example_edited &lt;-</a>
+<a class="sourceLine" id="cb43-7" title="7"><span class="st">    </span>two_class_example <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb43-8" title="8"><span class="st">    </span><span class="kw">transmute</span>(</a>
+<a class="sourceLine" id="cb43-9" title="9">        <span class="dt">y =</span> <span class="kw">ifelse</span>(truth <span class="op">==</span><span class="st"> &quot;Class1&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb43-10" title="10">        ,<span class="dt">yhat =</span> Class1</a>
+<a class="sourceLine" id="cb43-11" title="11">    )</a>
+<a class="sourceLine" id="cb43-12" title="12">two_class_example_edited <span class="op">%&gt;%</span><span class="st"> </span>head</a>
+<a class="sourceLine" id="cb43-13" title="13">two_class_example_edited <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb43-14" title="14"><span class="st">    </span><span class="kw">write_excel_csv</span>(<span class="st">&quot;data-raw/two_class_example.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb43-15" title="15"></a>
+<a class="sourceLine" id="cb43-16" title="16">usethis<span class="op">::</span><span class="kw">use_data</span>(two_class_example_edited, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p>然后增加例子。</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="co">#&#39; @examples</span></a>
+<a class="sourceLine" id="cb44-2" title="2"><span class="co">#&#39; data(&quot;two_class_example_edited&quot;)</span></a>
+<a class="sourceLine" id="cb44-3" title="3"><span class="co">#&#39; max(ks_table(two_class_example_edited$yhat, two_class_example_edited$y)$ks)</span></a></code></pre></div>
+</div>
+<div id="增加-examples" class="section level1">
+<h1><span class="header-section-number">26</span> 增加 examples</h1>
+<p>参考 <a href="http://r-pkgs.had.co.nz/man.html" class="uri">http://r-pkgs.had.co.nz/man.html</a></p>
+<p><code>@examples</code> 只要是多行都可以吧？</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="co">#&#39; @examples</span></a>
+<a class="sourceLine" id="cb45-2" title="2"><span class="co">#&#39; sum(1:10)</span></a>
+<a class="sourceLine" id="cb45-3" title="3"><span class="co">#&#39; sum(1:5, 6:10)</span></a>
+<a class="sourceLine" id="cb45-4" title="4"><span class="co">#&#39; sum(F, F, F, T, T)</span></a></code></pre></div>
 </div>
 <div id="附录" class="section level1 unnumbered">
 <h1>附录</h1>

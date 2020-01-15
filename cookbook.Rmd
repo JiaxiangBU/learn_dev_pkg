@@ -683,6 +683,63 @@ Are you sure you want to update the wordlist?
 所以完全弄干净后，再更新 wordlist
 配合`document();spell_check()`完成。
 
+# 增加数据
+
+> I highly recommend taking the time to include the code used to do this in the source version of your package. This will make it easy for you to update or reproduce your version of the data.
+> I suggest that you put this code in `data-raw/`
+http://r-pkgs.had.co.nz/data.html
+
+这里需要保留数据的复现方式和数据。
+
+参考 https://github.com/hadley/babynames/blob/master/data-raw/applicants.R
+
+我这里使用
+`usethis::use_data_raw("文件名")`
+
+然后给复现例子。
+
+```r
+## code to prepare `two_class_example` dataset goes here
+
+library(yardstick)
+data("two_class_example")
+library(tidyverse)
+two_class_example_edited <-
+    two_class_example %>%
+    transmute(
+        y = ifelse(truth == "Class1",1,0)
+        ,yhat = Class1
+    )
+two_class_example_edited %>% head
+two_class_example_edited %>%
+    write_excel_csv("data-raw/two_class_example.csv")
+
+usethis::use_data(two_class_example_edited, overwrite = TRUE)
+```
+
+然后增加例子。
+
+```r
+#' @examples
+#' data("two_class_example_edited")
+#' max(ks_table(two_class_example_edited$yhat, two_class_example_edited$y)$ks)
+```
+
+# 增加 examples
+
+参考 http://r-pkgs.had.co.nz/man.html
+
+`@examples` 只要是多行都可以吧？
+
+```r
+#' @examples
+#' sum(1:10)
+#' sum(1:5, 6:10)
+#' sum(F, F, F, T, T)
+```
+
+
+
 
 # 附录 {-}
 
