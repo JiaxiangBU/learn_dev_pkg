@@ -24,7 +24,7 @@
 <meta name="author" content="李家翔" />
 
 
-<meta name="date" content="2020-01-15" />
+<meta name="date" content="2020-01-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -155,6 +155,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="24" data-path=""><a href="#fix-mis-spelling"><i class="fa fa-check"></i><b>24</b> fix mis-spelling</a></li>
 <li class="chapter" data-level="25" data-path=""><a href="#增加数据"><i class="fa fa-check"></i><b>25</b> 增加数据</a></li>
 <li class="chapter" data-level="26" data-path=""><a href="#增加-examples"><i class="fa fa-check"></i><b>26</b> 增加 examples</a></li>
+<li class="chapter" data-level="27" data-path=""><a href="#增加数据文档"><i class="fa fa-check"></i><b>27</b> 增加数据文档</a></li>
+<li class="chapter" data-level="28" data-path=""><a href="#加入-r-版本"><i class="fa fa-check"></i><b>28</b> 加入 R 版本</a></li>
+<li class="chapter" data-level="29" data-path=""><a href="#r-版本限制"><i class="fa fa-check"></i><b>29</b> R 版本限制</a></li>
+<li class="chapter" data-level="30" data-path=""><a href="#查看-non-ascii-文本"><i class="fa fa-check"></i><b>30</b> 查看 non-ASCII 文本</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#附录"><i class="fa fa-check"></i>附录</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#参考文献"><i class="fa fa-check"></i>参考文献</a></li>
 </ul>
@@ -177,7 +181,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">R 开发包 Cookbook</h1>
 <p class="author"><em>李家翔</em></p>
-<p class="date"><em>2020-01-15</em></p>
+<p class="date"><em>2020-01-16</em></p>
 </div>
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -395,25 +399,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="添加-global-变量" class="section level1">
 <h1><span class="header-section-number">11</span> 添加 global 变量</h1>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="op">&gt;</span><span class="st"> </span>checking R code <span class="cf">for</span> possible problems ... NOTE</a>
-<a class="sourceLine" id="cb20-2" title="2">  add_zenodo_citation<span class="op">:</span><span class="st"> </span>no visible binding <span class="cf">for</span> global variable <span class="st">&#39;.&#39;</span></a>
-<a class="sourceLine" id="cb20-3" title="3">  Undefined global functions or variables<span class="op">:</span></a>
-<a class="sourceLine" id="cb20-4" title="4"><span class="st">    </span>.</a>
-<a class="sourceLine" id="cb20-5" title="5"></a>
-<a class="sourceLine" id="cb20-6" title="6"><span class="dv">0</span> errors <span class="op">&lt;</span>U<span class="op">+</span><span class="dv">2713</span><span class="op">&gt;</span><span class="st"> </span><span class="er">|</span><span class="st"> </span><span class="dv">1</span> warning x <span class="op">|</span><span class="st"> </span><span class="dv">2</span> notes x</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">Undefined global functions or variables<span class="op">:</span></a>
+<a class="sourceLine" id="cb20-2" title="2"><span class="st">    </span>. cutoff fpr key ks tpr value</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">var_list &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb21-2" title="2"><span class="st">&quot;. cutoff fpr key ks tpr value&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb21-3" title="3"><span class="st">  </span><span class="kw">strsplit</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">s&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb21-4" title="4"><span class="st">  </span>.[[<span class="dv">1</span>]] <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb21-5" title="5"><span class="st">  </span><span class="kw">paste0</span>(<span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">&quot;</span>, ., <span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb21-6" title="6"><span class="st">  </span><span class="kw">str_flatten</span>(<span class="st">&quot;, &quot;</span>)</a>
+<a class="sourceLine" id="cb21-7" title="7">glue<span class="op">::</span><span class="kw">glue</span>(<span class="st">&quot;globalVariables(c({var_list}))&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb21-8" title="8"><span class="st">  </span>clipr<span class="op">::</span><span class="kw">write_clip</span>()</a></code></pre></div>
 <p><code>globalVariables('.')</code></p>
 </div>
 <div id="更新-news.md" class="section level1">
 <h1><span class="header-section-number">12</span> 更新 NEWS.md</h1>
 <p>以包 add2md 为例。</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="kw">library</span>(git2r)</a>
-<a class="sourceLine" id="cb21-2" title="2">repo &lt;-<span class="st"> </span><span class="kw">repository</span>(<span class="st">&quot;../add2md&quot;</span>)</a>
-<a class="sourceLine" id="cb21-3" title="3"><span class="kw">commits</span>(repo) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb21-4" title="4"><span class="st">    </span><span class="kw">map_chr</span>(<span class="st">`</span><span class="dt">[[</span><span class="st">`</span>, <span class="st">&quot;message&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb21-5" title="5"><span class="st">    </span>.[<span class="dv">1</span><span class="op">:</span><span class="dv">22</span>] <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb21-6" title="6"><span class="st">    </span><span class="kw">paste</span>(<span class="st">&quot;*&quot;</span>, .) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb21-7" title="7"><span class="st">    </span>clipr<span class="op">::</span><span class="kw">write_clip</span>()</a>
-<a class="sourceLine" id="cb21-8" title="8"><span class="co"># 选择多少到对少的 commits 来更新 NEWS.md</span></a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">library</span>(git2r)</a>
+<a class="sourceLine" id="cb22-2" title="2">repo &lt;-<span class="st"> </span><span class="kw">repository</span>(<span class="st">&quot;../add2md&quot;</span>)</a>
+<a class="sourceLine" id="cb22-3" title="3"><span class="kw">commits</span>(repo) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb22-4" title="4"><span class="st">    </span><span class="kw">map_chr</span>(<span class="st">`</span><span class="dt">[[</span><span class="st">`</span>, <span class="st">&quot;message&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb22-5" title="5"><span class="st">    </span>.[<span class="dv">1</span><span class="op">:</span><span class="dv">22</span>] <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb22-6" title="6"><span class="st">    </span><span class="kw">paste</span>(<span class="st">&quot;*&quot;</span>, .) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb22-7" title="7"><span class="st">    </span>clipr<span class="op">::</span><span class="kw">write_clip</span>()</a>
+<a class="sourceLine" id="cb22-8" title="8"><span class="co"># 选择多少到对少的 commits 来更新 NEWS.md</span></a></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>updated the function of <code>checkbox</code> with the feature checked -&gt; unchecked.</li>
 <li>updated the function <code>checkbox</code> with the feature <code>checked</code>.</li>
@@ -439,191 +447,192 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>use_build_ignore("cran-comments.md")</code></li>
 </ol>
 <p>创建如下</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="co">## Test environments</span></a>
-<a class="sourceLine" id="cb22-2" title="2"><span class="op">*</span><span class="st"> </span>local OS X install, R <span class="dv">3</span>.<span class="fl">6.0</span></a>
-<a class="sourceLine" id="cb22-3" title="3"><span class="op">*</span><span class="st"> </span>ubuntu <span class="fl">14.04</span> (on travis<span class="op">-</span>ci), R <span class="dv">3</span>.<span class="fl">6.0</span></a>
-<a class="sourceLine" id="cb22-4" title="4"><span class="op">*</span><span class="st"> </span>win<span class="op">-</span><span class="kw">builder</span> (devel and release)</a>
-<a class="sourceLine" id="cb22-5" title="5"></a>
-<a class="sourceLine" id="cb22-6" title="6"><span class="co">## R CMD check results</span></a>
-<a class="sourceLine" id="cb22-7" title="7"></a>
-<a class="sourceLine" id="cb22-8" title="8"><span class="dv">0</span> errors <span class="op">|</span><span class="st"> </span><span class="dv">0</span> warnings <span class="op">|</span><span class="st"> </span><span class="dv">1</span> note</a>
-<a class="sourceLine" id="cb22-9" title="9"></a>
-<a class="sourceLine" id="cb22-10" title="10"><span class="op">*</span><span class="st"> </span>This is a new release.</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="co">## Test environments</span></a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="op">*</span><span class="st"> </span>local OS X install, R <span class="dv">3</span>.<span class="fl">6.0</span></a>
+<a class="sourceLine" id="cb23-3" title="3"><span class="op">*</span><span class="st"> </span>ubuntu <span class="fl">14.04</span> (on travis<span class="op">-</span>ci), R <span class="dv">3</span>.<span class="fl">6.0</span></a>
+<a class="sourceLine" id="cb23-4" title="4"><span class="op">*</span><span class="st"> </span>win<span class="op">-</span><span class="kw">builder</span> (devel and release)</a>
+<a class="sourceLine" id="cb23-5" title="5"></a>
+<a class="sourceLine" id="cb23-6" title="6"><span class="co">## R CMD check results</span></a>
+<a class="sourceLine" id="cb23-7" title="7"></a>
+<a class="sourceLine" id="cb23-8" title="8"><span class="dv">0</span> errors <span class="op">|</span><span class="st"> </span><span class="dv">0</span> warnings <span class="op">|</span><span class="st"> </span><span class="dv">1</span> note</a>
+<a class="sourceLine" id="cb23-9" title="9"></a>
+<a class="sourceLine" id="cb23-10" title="10"><span class="op">*</span><span class="st"> </span>This is a new release.</a></code></pre></div>
 </div>
 <div id="ignore-readme.rmd" class="section level1">
 <h1><span class="header-section-number">14</span> Ignore README.Rmd</h1>
 <p>参考 <a href="https://stackoverflow.com/a/48956446/8625228" class="uri">https://stackoverflow.com/a/48956446/8625228</a></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="op">&gt;</span><span class="st"> </span>checking top<span class="op">-</span>level files ... NOTE</a>
-<a class="sourceLine" id="cb23-2" title="2">  Non<span class="op">-</span>standard file<span class="op">/</span>directory found at top level<span class="op">:</span></a>
-<a class="sourceLine" id="cb23-3" title="3"><span class="st">    &#39;README.Rmd&#39;</span></a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="op">&gt;</span><span class="st"> </span>checking top<span class="op">-</span>level files ... NOTE</a>
+<a class="sourceLine" id="cb24-2" title="2">  Non<span class="op">-</span>standard file<span class="op">/</span>directory found at top level<span class="op">:</span></a>
+<a class="sourceLine" id="cb24-3" title="3"><span class="st">    &#39;README.Rmd&#39;</span></a></code></pre></div>
 <p><code>usethis::use_build_ignore("README.Rmd")</code></p>
 </div>
 <div id="update-desc" class="section level1">
 <h1><span class="header-section-number">15</span> Update DESC</h1>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="op">&gt;</span><span class="st"> </span>checking DESCRIPTION meta<span class="op">-</span>information ... NOTE</a>
-<a class="sourceLine" id="cb24-2" title="2">  Malformed Description field<span class="op">:</span><span class="st"> </span>should contain one or more complete sentences.</a></code></pre></div>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1">Description<span class="op">:</span><span class="st"> </span>Some helper functions <span class="cf">for</span> R package development,</a>
-<a class="sourceLine" id="cb25-2" title="2">    including create disclaimer, author information and so on.</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="op">&gt;</span><span class="st"> </span>checking DESCRIPTION meta<span class="op">-</span>information ... NOTE</a>
+<a class="sourceLine" id="cb25-2" title="2">  Malformed Description field<span class="op">:</span><span class="st"> </span>should contain one or more complete sentences.</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">Description<span class="op">:</span><span class="st"> </span>Some helper functions <span class="cf">for</span> R package development,</a>
+<a class="sourceLine" id="cb26-2" title="2">    including create disclaimer, author information and so on.</a></code></pre></div>
 </div>
 <div id="保证-readme.rmd-链接都是有效的" class="section level1">
 <h1><span class="header-section-number">16</span> 保证 README.Rmd 链接都是有效的</h1>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">New submission</a>
-<a class="sourceLine" id="cb26-2" title="2"> </a>
-<a class="sourceLine" id="cb26-3" title="3">  Found the <span class="kw">following</span> (possibly) invalid file URIs<span class="op">:</span></a>
-<a class="sourceLine" id="cb26-4" title="4"><span class="st">    </span>URI<span class="op">:</span><span class="st"> </span>.github<span class="op">/</span>CODE_OF_CONDUCT.md</a>
-<a class="sourceLine" id="cb26-5" title="5">      From<span class="op">:</span><span class="st"> </span>README.md</a>
-<a class="sourceLine" id="cb26-6" title="6">    URI<span class="op">:</span><span class="st"> </span>LICENSE.md</a>
-<a class="sourceLine" id="cb26-7" title="7">      From<span class="op">:</span><span class="st"> </span>README.md</a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">New submission</a>
+<a class="sourceLine" id="cb27-2" title="2"> </a>
+<a class="sourceLine" id="cb27-3" title="3">  Found the <span class="kw">following</span> (possibly) invalid file URIs<span class="op">:</span></a>
+<a class="sourceLine" id="cb27-4" title="4"><span class="st">    </span>URI<span class="op">:</span><span class="st"> </span>.github<span class="op">/</span>CODE_OF_CONDUCT.md</a>
+<a class="sourceLine" id="cb27-5" title="5">      From<span class="op">:</span><span class="st"> </span>README.md</a>
+<a class="sourceLine" id="cb27-6" title="6">    URI<span class="op">:</span><span class="st"> </span>LICENSE.md</a>
+<a class="sourceLine" id="cb27-7" title="7">      From<span class="op">:</span><span class="st"> </span>README.md</a></code></pre></div>
 </div>
 <div id="add-test-and-vignettes" class="section level1">
 <h1><span class="header-section-number">17</span> Add test and vignettes</h1>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">Flavor<span class="op">:</span><span class="st"> </span>r<span class="op">-</span>devel<span class="op">-</span>linux<span class="op">-</span>x86_<span class="dv">64</span><span class="op">-</span>debian<span class="op">-</span>gcc, r<span class="op">-</span>devel<span class="op">-</span>windows<span class="op">-</span>ix86<span class="op">+</span>x86_<span class="dv">64</span></a>
-<a class="sourceLine" id="cb27-2" title="2">Check<span class="op">:</span><span class="st"> </span><span class="cf">for</span> code which exercises the package, Result<span class="op">:</span><span class="st"> </span>WARNING</a>
-<a class="sourceLine" id="cb27-3" title="3">  No examples, no tests, no vignettes</a></code></pre></div>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="op">&gt;</span><span class="st"> </span>usethis<span class="op">::</span><span class="kw">use_test</span>(<span class="st">&quot;add_me&quot;</span>)</a>
-<a class="sourceLine" id="cb28-2" title="2">✔ Setting active project to <span class="st">&#39;D:/work/add2pkg&#39;</span></a>
-<a class="sourceLine" id="cb28-3" title="3">✔ Adding <span class="st">&#39;testthat&#39;</span> to Suggests field <span class="cf">in</span> DESCRIPTION</a>
-<a class="sourceLine" id="cb28-4" title="4">✔ Creating <span class="st">&#39;tests/testthat/&#39;</span></a>
-<a class="sourceLine" id="cb28-5" title="5">✔ Writing <span class="st">&#39;tests/testthat.R&#39;</span></a>
-<a class="sourceLine" id="cb28-6" title="6">● Call <span class="st">`</span><span class="dt">use_test()</span><span class="st">`</span> to initialize a basic test file and open it <span class="cf">for</span> editing.</a>
-<a class="sourceLine" id="cb28-7" title="7">✔ Increasing <span class="st">&#39;testthat&#39;</span> version to <span class="st">&#39;&gt;= 2.1.0&#39;</span> <span class="cf">in</span> DESCRIPTION</a>
-<a class="sourceLine" id="cb28-8" title="8">✔ Writing <span class="st">&#39;tests/testthat/test-add_me.R&#39;</span></a>
-<a class="sourceLine" id="cb28-9" title="9">● Modify <span class="st">&#39;tests/testthat/test-add_me.R&#39;</span></a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">Flavor<span class="op">:</span><span class="st"> </span>r<span class="op">-</span>devel<span class="op">-</span>linux<span class="op">-</span>x86_<span class="dv">64</span><span class="op">-</span>debian<span class="op">-</span>gcc, r<span class="op">-</span>devel<span class="op">-</span>windows<span class="op">-</span>ix86<span class="op">+</span>x86_<span class="dv">64</span></a>
+<a class="sourceLine" id="cb28-2" title="2">Check<span class="op">:</span><span class="st"> </span><span class="cf">for</span> code which exercises the package, Result<span class="op">:</span><span class="st"> </span>WARNING</a>
+<a class="sourceLine" id="cb28-3" title="3">  No examples, no tests, no vignettes</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="op">&gt;</span><span class="st"> </span>usethis<span class="op">::</span><span class="kw">use_test</span>(<span class="st">&quot;add_me&quot;</span>)</a>
+<a class="sourceLine" id="cb29-2" title="2">✔ Setting active project to <span class="st">&#39;D:/work/add2pkg&#39;</span></a>
+<a class="sourceLine" id="cb29-3" title="3">✔ Adding <span class="st">&#39;testthat&#39;</span> to Suggests field <span class="cf">in</span> DESCRIPTION</a>
+<a class="sourceLine" id="cb29-4" title="4">✔ Creating <span class="st">&#39;tests/testthat/&#39;</span></a>
+<a class="sourceLine" id="cb29-5" title="5">✔ Writing <span class="st">&#39;tests/testthat.R&#39;</span></a>
+<a class="sourceLine" id="cb29-6" title="6">● Call <span class="st">`</span><span class="dt">use_test()</span><span class="st">`</span> to initialize a basic test file and open it <span class="cf">for</span> editing.</a>
+<a class="sourceLine" id="cb29-7" title="7">✔ Increasing <span class="st">&#39;testthat&#39;</span> version to <span class="st">&#39;&gt;= 2.1.0&#39;</span> <span class="cf">in</span> DESCRIPTION</a>
+<a class="sourceLine" id="cb29-8" title="8">✔ Writing <span class="st">&#39;tests/testthat/test-add_me.R&#39;</span></a>
+<a class="sourceLine" id="cb29-9" title="9">● Modify <span class="st">&#39;tests/testthat/test-add_me.R&#39;</span></a></code></pre></div>
 <p>加上 test</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">test_that</span>(<span class="st">&quot;Plain Text&quot;</span>, {</a>
-<a class="sourceLine" id="cb29-2" title="2">  <span class="kw">expect_equal</span>(<span class="kw">add_me</span>(), <span class="st">&#39;Authors@R:</span></a>
-<a class="sourceLine" id="cb29-3" title="3"><span class="st">    person(given = &quot;Jiaxiang&quot;,</span></a>
-<a class="sourceLine" id="cb29-4" title="4"><span class="st">           family = &quot;Li&quot;,</span></a>
-<a class="sourceLine" id="cb29-5" title="5"><span class="st">           role = c(&quot;aut&quot;, &quot;cre&quot;),</span></a>
-<a class="sourceLine" id="cb29-6" title="6"><span class="st">           email = &quot;alex.lijiaxiang@foxmail.com&quot;,</span></a>
-<a class="sourceLine" id="cb29-7" title="7"><span class="st">           comment = c(ORCID = &quot;https://orcid.org/0000-0003-3196-6492&quot;))&#39;</span>)</a>
-<a class="sourceLine" id="cb29-8" title="8">})</a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="kw">test_that</span>(<span class="st">&quot;Plain Text&quot;</span>, {</a>
+<a class="sourceLine" id="cb30-2" title="2">  <span class="kw">expect_equal</span>(<span class="kw">add_me</span>(), <span class="st">&#39;Authors@R:</span></a>
+<a class="sourceLine" id="cb30-3" title="3"><span class="st">    person(given = &quot;Jiaxiang&quot;,</span></a>
+<a class="sourceLine" id="cb30-4" title="4"><span class="st">           family = &quot;Li&quot;,</span></a>
+<a class="sourceLine" id="cb30-5" title="5"><span class="st">           role = c(&quot;aut&quot;, &quot;cre&quot;),</span></a>
+<a class="sourceLine" id="cb30-6" title="6"><span class="st">           email = &quot;alex.lijiaxiang@foxmail.com&quot;,</span></a>
+<a class="sourceLine" id="cb30-7" title="7"><span class="st">           comment = c(ORCID = &quot;https://orcid.org/0000-0003-3196-6492&quot;))&#39;</span>)</a>
+<a class="sourceLine" id="cb30-8" title="8">})</a></code></pre></div>
 <p>加上 vignette</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">use_vignette</span>(<span class="st">&quot;intro&quot;</span>)</a>
-<a class="sourceLine" id="cb30-2" title="2">✔ Adding <span class="st">&#39;knitr&#39;</span> to Suggests field <span class="cf">in</span> DESCRIPTION</a>
-<a class="sourceLine" id="cb30-3" title="3">✔ Setting VignetteBuilder field <span class="cf">in</span> DESCRIPTION to <span class="st">&#39;knitr&#39;</span></a>
-<a class="sourceLine" id="cb30-4" title="4">✔ Adding <span class="st">&#39;inst/doc&#39;</span> to <span class="st">&#39;.gitignore&#39;</span></a>
-<a class="sourceLine" id="cb30-5" title="5">✔ Creating <span class="st">&#39;vignettes/&#39;</span></a>
-<a class="sourceLine" id="cb30-6" title="6">✔ Adding <span class="st">&#39;*.html&#39;</span>, <span class="st">&#39;*.R&#39;</span> to <span class="st">&#39;vignettes/.gitignore&#39;</span></a>
-<a class="sourceLine" id="cb30-7" title="7">✔ Adding <span class="st">&#39;rmarkdown&#39;</span> to Suggests field <span class="cf">in</span> DESCRIPTION</a>
-<a class="sourceLine" id="cb30-8" title="8">✔ Writing <span class="st">&#39;vignettes/intro.Rmd&#39;</span></a>
-<a class="sourceLine" id="cb30-9" title="9">● Modify <span class="st">&#39;vignettes/intro.Rmd&#39;</span></a></code></pre></div>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="kw">add_me</span>()</a></code></pre></div>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="kw">add_disclaimer</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">use_vignette</span>(<span class="st">&quot;intro&quot;</span>)</a>
+<a class="sourceLine" id="cb31-2" title="2">✔ Adding <span class="st">&#39;knitr&#39;</span> to Suggests field <span class="cf">in</span> DESCRIPTION</a>
+<a class="sourceLine" id="cb31-3" title="3">✔ Setting VignetteBuilder field <span class="cf">in</span> DESCRIPTION to <span class="st">&#39;knitr&#39;</span></a>
+<a class="sourceLine" id="cb31-4" title="4">✔ Adding <span class="st">&#39;inst/doc&#39;</span> to <span class="st">&#39;.gitignore&#39;</span></a>
+<a class="sourceLine" id="cb31-5" title="5">✔ Creating <span class="st">&#39;vignettes/&#39;</span></a>
+<a class="sourceLine" id="cb31-6" title="6">✔ Adding <span class="st">&#39;*.html&#39;</span>, <span class="st">&#39;*.R&#39;</span> to <span class="st">&#39;vignettes/.gitignore&#39;</span></a>
+<a class="sourceLine" id="cb31-7" title="7">✔ Adding <span class="st">&#39;rmarkdown&#39;</span> to Suggests field <span class="cf">in</span> DESCRIPTION</a>
+<a class="sourceLine" id="cb31-8" title="8">✔ Writing <span class="st">&#39;vignettes/intro.Rmd&#39;</span></a>
+<a class="sourceLine" id="cb31-9" title="9">● Modify <span class="st">&#39;vignettes/intro.Rmd&#39;</span></a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="kw">add_me</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">add_disclaimer</span>()</a></code></pre></div>
 </div>
 <div id="release-函数的流程" class="section level1">
 <h1><span class="header-section-number">18</span> release 函数的流程</h1>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="op">&gt;</span><span class="st"> </span>devtools<span class="op">::</span><span class="kw">release</span>()</a>
-<a class="sourceLine" id="cb33-2" title="2">Warning<span class="op">:</span><span class="st"> </span>DR_DEVTOOLS FOUND PROBLEMS</a>
-<a class="sourceLine" id="cb33-3" title="3"><span class="op">*</span><span class="st"> </span>R is out of <span class="kw">date</span> (<span class="dv">3</span>.<span class="fl">6.0</span> vs <span class="dv">3</span>.<span class="fl">6.2</span>)</a>
-<a class="sourceLine" id="cb33-4" title="4"><span class="op">*</span><span class="st"> </span>Devtools or dependencies out of date<span class="op">:</span><span class="st"> </span>devtools, callr, cli, covr, digest, DT, httr,</a>
-<a class="sourceLine" id="cb33-5" title="5">  pkgbuild, rlang, roxygen2, testthat, curl, whisker, R6, Rcpp, backports, mime,</a>
-<a class="sourceLine" id="cb33-6" title="6">  openssl, sys, processx, fansi, rex, htmlwidgets, ggplot2, scales, BH, plyr, pillar,</a>
-<a class="sourceLine" id="cb33-7" title="7">  pkgconfig, vctrs, stringi, prettyunits, xml2</a>
-<a class="sourceLine" id="cb33-8" title="8"><span class="op">*</span><span class="st"> </span>RStudio is out of <span class="kw">date</span> (<span class="dv">1</span>.<span class="fl">2.5001</span> vs <span class="dv">1</span>.<span class="dv">2</span>.<span class="fl">5033.1</span>)</a>
-<a class="sourceLine" id="cb33-9" title="9">Proceed anyway?</a>
-<a class="sourceLine" id="cb33-10" title="10"><span class="dv">1</span><span class="op">:</span><span class="st"> </span>I forget</a>
-<a class="sourceLine" id="cb33-11" title="11"><span class="dv">2</span><span class="op">:</span><span class="st"> </span>Not yet</a>
-<a class="sourceLine" id="cb33-12" title="12"><span class="dv">3</span><span class="op">:</span><span class="st"> </span>Yup</a>
-<a class="sourceLine" id="cb33-13" title="13"></a>
-<a class="sourceLine" id="cb33-14" title="14">Selection<span class="op">:</span><span class="st"> </span><span class="dv">3</span></a>
-<a class="sourceLine" id="cb33-15" title="15">Have you checked <span class="cf">for</span> spelling <span class="kw">errors</span> (with <span class="st">`</span><span class="dt">spell_check()</span><span class="st">`</span>)?</a>
-<a class="sourceLine" id="cb33-16" title="16"><span class="dv">1</span><span class="op">:</span><span class="st"> </span>I forget</a>
-<a class="sourceLine" id="cb33-17" title="17"><span class="dv">2</span><span class="op">:</span><span class="st"> </span>For sure</a>
-<a class="sourceLine" id="cb33-18" title="18"><span class="dv">3</span><span class="op">:</span><span class="st"> </span>No way</a>
-<a class="sourceLine" id="cb33-19" title="19"></a>
-<a class="sourceLine" id="cb33-20" title="20">Selection<span class="op">:</span><span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb33-21" title="21">Have you run <span class="st">`</span><span class="dt">R CMD check</span><span class="st">`</span> locally?</a>
-<a class="sourceLine" id="cb33-22" title="22"><span class="dv">1</span><span class="op">:</span><span class="st"> </span>Yup</a>
-<a class="sourceLine" id="cb33-23" title="23"><span class="dv">2</span><span class="op">:</span><span class="st"> </span>Not yet</a>
-<a class="sourceLine" id="cb33-24" title="24"><span class="dv">3</span><span class="op">:</span><span class="st"> </span>No way</a>
-<a class="sourceLine" id="cb33-25" title="25"></a>
-<a class="sourceLine" id="cb33-26" title="26">Selection<span class="op">:</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb33-27" title="27">── Running additional devtools checks <span class="cf">for</span> add2pkg ──────────────────────────────</a>
-<a class="sourceLine" id="cb33-28" title="28">Checking version number has three components... OK</a>
-<a class="sourceLine" id="cb33-29" title="29">Checking dependencies don<span class="st">&#39;t rely on dev versions... OK</span></a>
-<a class="sourceLine" id="cb33-30" title="30"><span class="st">Checking vignette titles are not placeholders... OK</span></a>
-<a class="sourceLine" id="cb33-31" title="31"><span class="st">Checking NEWS.md is not ignored... OK</span></a>
-<a class="sourceLine" id="cb33-32" title="32"><span class="st">Checking NEWS.Rd does not exist... OK</span></a>
-<a class="sourceLine" id="cb33-33" title="33"><span class="st">Checking DESCRIPTION doesn&#39;</span>t have Remotes field... OK</a>
-<a class="sourceLine" id="cb33-34" title="34">────────────────────────────────────────────────────────────────────────────────</a>
-<a class="sourceLine" id="cb33-35" title="35">Were devtool<span class="st">&#39;s checks successful?</span></a>
-<a class="sourceLine" id="cb33-36" title="36"><span class="st">1: Not yet</span></a>
-<a class="sourceLine" id="cb33-37" title="37"><span class="st">2: Definitely</span></a>
-<a class="sourceLine" id="cb33-38" title="38"><span class="st">3: No</span></a>
-<a class="sourceLine" id="cb33-39" title="39"></a>
-<a class="sourceLine" id="cb33-40" title="40"><span class="st">Selection: 2</span></a>
-<a class="sourceLine" id="cb33-41" title="41"><span class="st">Have you checked on R-hub (with `check_rhub()`)?</span></a>
-<a class="sourceLine" id="cb33-42" title="42"><span class="st">1: No way</span></a>
-<a class="sourceLine" id="cb33-43" title="43"><span class="st">2: I forget</span></a>
-<a class="sourceLine" id="cb33-44" title="44"><span class="st">3: Definitely</span></a>
-<a class="sourceLine" id="cb33-45" title="45"></a>
-<a class="sourceLine" id="cb33-46" title="46"><span class="st">Selection: 3</span></a>
-<a class="sourceLine" id="cb33-47" title="47"><span class="st">Have you checked on win-builder (with `check_win_devel()`)?</span></a>
-<a class="sourceLine" id="cb33-48" title="48"><span class="st">1: No way</span></a>
-<a class="sourceLine" id="cb33-49" title="49"><span class="st">2: Definitely</span></a>
-<a class="sourceLine" id="cb33-50" title="50"><span class="st">3: No</span></a>
-<a class="sourceLine" id="cb33-51" title="51"></a>
-<a class="sourceLine" id="cb33-52" title="52"><span class="st">Selection: 2</span></a>
-<a class="sourceLine" id="cb33-53" title="53"><span class="st">Have you updated `NEWS.md` file?</span></a>
-<a class="sourceLine" id="cb33-54" title="54"><span class="st">1: Yeah</span></a>
-<a class="sourceLine" id="cb33-55" title="55"><span class="st">2: Nope</span></a>
-<a class="sourceLine" id="cb33-56" title="56"><span class="st">3: Uhhhh... Maybe?</span></a>
-<a class="sourceLine" id="cb33-57" title="57"></a>
-<a class="sourceLine" id="cb33-58" title="58"><span class="st">Selection: 1</span></a>
-<a class="sourceLine" id="cb33-59" title="59"><span class="st">Have you updated `DESCRIPTION`?</span></a>
-<a class="sourceLine" id="cb33-60" title="60"><span class="st">1: No way</span></a>
-<a class="sourceLine" id="cb33-61" title="61"><span class="st">2: For sure</span></a>
-<a class="sourceLine" id="cb33-62" title="62"><span class="st">3: Nope</span></a>
-<a class="sourceLine" id="cb33-63" title="63"></a>
-<a class="sourceLine" id="cb33-64" title="64"><span class="st">Selection: 2</span></a>
-<a class="sourceLine" id="cb33-65" title="65"><span class="st">Have you updated `cran-comments.md?`</span></a>
-<a class="sourceLine" id="cb33-66" title="66"><span class="st">1: Of course</span></a>
-<a class="sourceLine" id="cb33-67" title="67"><span class="st">2: Uhhhh... Maybe?</span></a>
-<a class="sourceLine" id="cb33-68" title="68"><span class="st">3: Not yet</span></a>
-<a class="sourceLine" id="cb33-69" title="69"></a>
-<a class="sourceLine" id="cb33-70" title="70"><span class="st">Selection: 1</span></a>
-<a class="sourceLine" id="cb33-71" title="71"><span class="st">── Running Git checks for add2pkg ──────────────────────────────────────────────</span></a>
-<a class="sourceLine" id="cb33-72" title="72"><span class="st">Checking uncommitted files... OK</span></a>
-<a class="sourceLine" id="cb33-73" title="73"><span class="st">Checking synchronisation with remote branch... OK</span></a>
-<a class="sourceLine" id="cb33-74" title="74"><span class="st">────────────────────────────────────────────────────────────────────────────────</span></a>
-<a class="sourceLine" id="cb33-75" title="75"><span class="st">Were Git checks successful?</span></a>
-<a class="sourceLine" id="cb33-76" title="76"><span class="st">1: Not yet</span></a>
-<a class="sourceLine" id="cb33-77" title="77"><span class="st">2: Yup</span></a>
-<a class="sourceLine" id="cb33-78" title="78"><span class="st">3: Uhhhh... Maybe?</span></a>
-<a class="sourceLine" id="cb33-79" title="79"></a>
-<a class="sourceLine" id="cb33-80" title="80"><span class="st">Selection: 2</span></a>
-<a class="sourceLine" id="cb33-81" title="81"><span class="st">Is your email address alex.lijiaxiang@foxmail.com?</span></a>
-<a class="sourceLine" id="cb33-82" title="82"><span class="st">1: No</span></a>
-<a class="sourceLine" id="cb33-83" title="83"><span class="st">2: Absolutely</span></a>
-<a class="sourceLine" id="cb33-84" title="84"><span class="st">3: Uhhhh... Maybe?</span></a>
-<a class="sourceLine" id="cb33-85" title="85"></a>
-<a class="sourceLine" id="cb33-86" title="86"><span class="st">Selection: 2</span></a>
-<a class="sourceLine" id="cb33-87" title="87"><span class="st">Building</span></a>
-<a class="sourceLine" id="cb33-88" title="88"><span class="st">pdflatex not found! Not building PDF manual.</span></a>
-<a class="sourceLine" id="cb33-89" title="89"><span class="st">✓  checking for file &#39;</span>D<span class="op">:</span>\work\add2pkg<span class="op">/</span>DESCRIPTION<span class="st">&#39; (499ms)</span></a>
-<a class="sourceLine" id="cb33-90" title="90"><span class="st">─  preparing &#39;</span>add2pkg<span class="st">&#39;: (1.1s)</span></a>
-<a class="sourceLine" id="cb33-91" title="91"><span class="st">✓  checking DESCRIPTION meta-information ... OK</span></a>
-<a class="sourceLine" id="cb33-92" title="92"><span class="st">─  installing the package to build vignettes</span></a>
-<a class="sourceLine" id="cb33-93" title="93"><span class="st">✓  creating vignettes (7s)</span></a>
-<a class="sourceLine" id="cb33-94" title="94"><span class="st">─  checking for LF line-endings in source and make files and shell scripts (352ms)</span></a>
-<a class="sourceLine" id="cb33-95" title="95"><span class="st">─  checking for empty or unneeded directories</span></a>
-<a class="sourceLine" id="cb33-96" title="96"><span class="st">─  building &#39;</span>add2pkg_<span class="dv">0</span>.<span class="dv">2</span>.<span class="fl">1.</span>tar.gz<span class="st">&#39;</span></a>
-<a class="sourceLine" id="cb33-97" title="97"><span class="st">   </span></a>
-<a class="sourceLine" id="cb33-98" title="98"><span class="st">Submitting file: C:\Users\LIJIAX~1\AppData\Local\Temp\RtmpEdl715/add2pkg_0.2.1.tar.gz</span></a>
-<a class="sourceLine" id="cb33-99" title="99"><span class="st">File size: 7.9 Kb</span></a>
-<a class="sourceLine" id="cb33-100" title="100"><span class="st">Ready to submit add2pkg (0.2.1) to CRAN?</span></a>
-<a class="sourceLine" id="cb33-101" title="101"><span class="st">1: Yes</span></a>
-<a class="sourceLine" id="cb33-102" title="102"><span class="st">2: No way</span></a>
-<a class="sourceLine" id="cb33-103" title="103"><span class="st">3: Uhhhh... Maybe?</span></a>
-<a class="sourceLine" id="cb33-104" title="104"></a>
-<a class="sourceLine" id="cb33-105" title="105"><span class="st">Selection: 1</span></a>
-<a class="sourceLine" id="cb33-106" title="106"><span class="st">Uploading package &amp; comments</span></a>
-<a class="sourceLine" id="cb33-107" title="107"><span class="st">Confirming submission</span></a>
-<a class="sourceLine" id="cb33-108" title="108"><span class="st">Error in if (new_url$query$submit == &quot;1&quot;) { : argument is of length zero</span></a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="op">&gt;</span><span class="st"> </span>devtools<span class="op">::</span><span class="kw">release</span>()</a>
+<a class="sourceLine" id="cb34-2" title="2">Warning<span class="op">:</span><span class="st"> </span>DR_DEVTOOLS FOUND PROBLEMS</a>
+<a class="sourceLine" id="cb34-3" title="3"><span class="op">*</span><span class="st"> </span>R is out of <span class="kw">date</span> (<span class="dv">3</span>.<span class="fl">6.0</span> vs <span class="dv">3</span>.<span class="fl">6.2</span>)</a>
+<a class="sourceLine" id="cb34-4" title="4"><span class="op">*</span><span class="st"> </span>Devtools or dependencies out of date<span class="op">:</span><span class="st"> </span>devtools, callr, cli, covr, digest, DT, httr,</a>
+<a class="sourceLine" id="cb34-5" title="5">  pkgbuild, rlang, roxygen2, testthat, curl, whisker, R6, Rcpp, backports, mime,</a>
+<a class="sourceLine" id="cb34-6" title="6">  openssl, sys, processx, fansi, rex, htmlwidgets, ggplot2, scales, BH, plyr, pillar,</a>
+<a class="sourceLine" id="cb34-7" title="7">  pkgconfig, vctrs, stringi, prettyunits, xml2</a>
+<a class="sourceLine" id="cb34-8" title="8"><span class="op">*</span><span class="st"> </span>RStudio is out of <span class="kw">date</span> (<span class="dv">1</span>.<span class="fl">2.5001</span> vs <span class="dv">1</span>.<span class="dv">2</span>.<span class="fl">5033.1</span>)</a>
+<a class="sourceLine" id="cb34-9" title="9">Proceed anyway?</a>
+<a class="sourceLine" id="cb34-10" title="10"><span class="dv">1</span><span class="op">:</span><span class="st"> </span>I forget</a>
+<a class="sourceLine" id="cb34-11" title="11"><span class="dv">2</span><span class="op">:</span><span class="st"> </span>Not yet</a>
+<a class="sourceLine" id="cb34-12" title="12"><span class="dv">3</span><span class="op">:</span><span class="st"> </span>Yup</a>
+<a class="sourceLine" id="cb34-13" title="13"></a>
+<a class="sourceLine" id="cb34-14" title="14">Selection<span class="op">:</span><span class="st"> </span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb34-15" title="15">Have you checked <span class="cf">for</span> spelling <span class="kw">errors</span> (with <span class="st">`</span><span class="dt">spell_check()</span><span class="st">`</span>)?</a>
+<a class="sourceLine" id="cb34-16" title="16"><span class="dv">1</span><span class="op">:</span><span class="st"> </span>I forget</a>
+<a class="sourceLine" id="cb34-17" title="17"><span class="dv">2</span><span class="op">:</span><span class="st"> </span>For sure</a>
+<a class="sourceLine" id="cb34-18" title="18"><span class="dv">3</span><span class="op">:</span><span class="st"> </span>No way</a>
+<a class="sourceLine" id="cb34-19" title="19"></a>
+<a class="sourceLine" id="cb34-20" title="20">Selection<span class="op">:</span><span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb34-21" title="21">Have you run <span class="st">`</span><span class="dt">R CMD check</span><span class="st">`</span> locally?</a>
+<a class="sourceLine" id="cb34-22" title="22"><span class="dv">1</span><span class="op">:</span><span class="st"> </span>Yup</a>
+<a class="sourceLine" id="cb34-23" title="23"><span class="dv">2</span><span class="op">:</span><span class="st"> </span>Not yet</a>
+<a class="sourceLine" id="cb34-24" title="24"><span class="dv">3</span><span class="op">:</span><span class="st"> </span>No way</a>
+<a class="sourceLine" id="cb34-25" title="25"></a>
+<a class="sourceLine" id="cb34-26" title="26">Selection<span class="op">:</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb34-27" title="27">── Running additional devtools checks <span class="cf">for</span> add2pkg ──────────────────────────────</a>
+<a class="sourceLine" id="cb34-28" title="28">Checking version number has three components... OK</a>
+<a class="sourceLine" id="cb34-29" title="29">Checking dependencies don<span class="st">&#39;t rely on dev versions... OK</span></a>
+<a class="sourceLine" id="cb34-30" title="30"><span class="st">Checking vignette titles are not placeholders... OK</span></a>
+<a class="sourceLine" id="cb34-31" title="31"><span class="st">Checking NEWS.md is not ignored... OK</span></a>
+<a class="sourceLine" id="cb34-32" title="32"><span class="st">Checking NEWS.Rd does not exist... OK</span></a>
+<a class="sourceLine" id="cb34-33" title="33"><span class="st">Checking DESCRIPTION doesn&#39;</span>t have Remotes field... OK</a>
+<a class="sourceLine" id="cb34-34" title="34">────────────────────────────────────────────────────────────────────────────────</a>
+<a class="sourceLine" id="cb34-35" title="35">Were devtool<span class="st">&#39;s checks successful?</span></a>
+<a class="sourceLine" id="cb34-36" title="36"><span class="st">1: Not yet</span></a>
+<a class="sourceLine" id="cb34-37" title="37"><span class="st">2: Definitely</span></a>
+<a class="sourceLine" id="cb34-38" title="38"><span class="st">3: No</span></a>
+<a class="sourceLine" id="cb34-39" title="39"></a>
+<a class="sourceLine" id="cb34-40" title="40"><span class="st">Selection: 2</span></a>
+<a class="sourceLine" id="cb34-41" title="41"><span class="st">Have you checked on R-hub (with `check_rhub()`)?</span></a>
+<a class="sourceLine" id="cb34-42" title="42"><span class="st">1: No way</span></a>
+<a class="sourceLine" id="cb34-43" title="43"><span class="st">2: I forget</span></a>
+<a class="sourceLine" id="cb34-44" title="44"><span class="st">3: Definitely</span></a>
+<a class="sourceLine" id="cb34-45" title="45"></a>
+<a class="sourceLine" id="cb34-46" title="46"><span class="st">Selection: 3</span></a>
+<a class="sourceLine" id="cb34-47" title="47"><span class="st">Have you checked on win-builder (with `check_win_devel()`)?</span></a>
+<a class="sourceLine" id="cb34-48" title="48"><span class="st">1: No way</span></a>
+<a class="sourceLine" id="cb34-49" title="49"><span class="st">2: Definitely</span></a>
+<a class="sourceLine" id="cb34-50" title="50"><span class="st">3: No</span></a>
+<a class="sourceLine" id="cb34-51" title="51"></a>
+<a class="sourceLine" id="cb34-52" title="52"><span class="st">Selection: 2</span></a>
+<a class="sourceLine" id="cb34-53" title="53"><span class="st">Have you updated `NEWS.md` file?</span></a>
+<a class="sourceLine" id="cb34-54" title="54"><span class="st">1: Yeah</span></a>
+<a class="sourceLine" id="cb34-55" title="55"><span class="st">2: Nope</span></a>
+<a class="sourceLine" id="cb34-56" title="56"><span class="st">3: Uhhhh... Maybe?</span></a>
+<a class="sourceLine" id="cb34-57" title="57"></a>
+<a class="sourceLine" id="cb34-58" title="58"><span class="st">Selection: 1</span></a>
+<a class="sourceLine" id="cb34-59" title="59"><span class="st">Have you updated `DESCRIPTION`?</span></a>
+<a class="sourceLine" id="cb34-60" title="60"><span class="st">1: No way</span></a>
+<a class="sourceLine" id="cb34-61" title="61"><span class="st">2: For sure</span></a>
+<a class="sourceLine" id="cb34-62" title="62"><span class="st">3: Nope</span></a>
+<a class="sourceLine" id="cb34-63" title="63"></a>
+<a class="sourceLine" id="cb34-64" title="64"><span class="st">Selection: 2</span></a>
+<a class="sourceLine" id="cb34-65" title="65"><span class="st">Have you updated `cran-comments.md?`</span></a>
+<a class="sourceLine" id="cb34-66" title="66"><span class="st">1: Of course</span></a>
+<a class="sourceLine" id="cb34-67" title="67"><span class="st">2: Uhhhh... Maybe?</span></a>
+<a class="sourceLine" id="cb34-68" title="68"><span class="st">3: Not yet</span></a>
+<a class="sourceLine" id="cb34-69" title="69"></a>
+<a class="sourceLine" id="cb34-70" title="70"><span class="st">Selection: 1</span></a>
+<a class="sourceLine" id="cb34-71" title="71"><span class="st">── Running Git checks for add2pkg ──────────────────────────────────────────────</span></a>
+<a class="sourceLine" id="cb34-72" title="72"><span class="st">Checking uncommitted files... OK</span></a>
+<a class="sourceLine" id="cb34-73" title="73"><span class="st">Checking synchronisation with remote branch... OK</span></a>
+<a class="sourceLine" id="cb34-74" title="74"><span class="st">────────────────────────────────────────────────────────────────────────────────</span></a>
+<a class="sourceLine" id="cb34-75" title="75"><span class="st">Were Git checks successful?</span></a>
+<a class="sourceLine" id="cb34-76" title="76"><span class="st">1: Not yet</span></a>
+<a class="sourceLine" id="cb34-77" title="77"><span class="st">2: Yup</span></a>
+<a class="sourceLine" id="cb34-78" title="78"><span class="st">3: Uhhhh... Maybe?</span></a>
+<a class="sourceLine" id="cb34-79" title="79"></a>
+<a class="sourceLine" id="cb34-80" title="80"><span class="st">Selection: 2</span></a>
+<a class="sourceLine" id="cb34-81" title="81"><span class="st">Is your email address alex.lijiaxiang@foxmail.com?</span></a>
+<a class="sourceLine" id="cb34-82" title="82"><span class="st">1: No</span></a>
+<a class="sourceLine" id="cb34-83" title="83"><span class="st">2: Absolutely</span></a>
+<a class="sourceLine" id="cb34-84" title="84"><span class="st">3: Uhhhh... Maybe?</span></a>
+<a class="sourceLine" id="cb34-85" title="85"></a>
+<a class="sourceLine" id="cb34-86" title="86"><span class="st">Selection: 2</span></a>
+<a class="sourceLine" id="cb34-87" title="87"><span class="st">Building</span></a>
+<a class="sourceLine" id="cb34-88" title="88"><span class="st">pdflatex not found! Not building PDF manual.</span></a>
+<a class="sourceLine" id="cb34-89" title="89"><span class="st">✓  checking for file &#39;</span>D<span class="op">:</span>\work\add2pkg<span class="op">/</span>DESCRIPTION<span class="st">&#39; (499ms)</span></a>
+<a class="sourceLine" id="cb34-90" title="90"><span class="st">─  preparing &#39;</span>add2pkg<span class="st">&#39;: (1.1s)</span></a>
+<a class="sourceLine" id="cb34-91" title="91"><span class="st">✓  checking DESCRIPTION meta-information ... OK</span></a>
+<a class="sourceLine" id="cb34-92" title="92"><span class="st">─  installing the package to build vignettes</span></a>
+<a class="sourceLine" id="cb34-93" title="93"><span class="st">✓  creating vignettes (7s)</span></a>
+<a class="sourceLine" id="cb34-94" title="94"><span class="st">─  checking for LF line-endings in source and make files and shell scripts (352ms)</span></a>
+<a class="sourceLine" id="cb34-95" title="95"><span class="st">─  checking for empty or unneeded directories</span></a>
+<a class="sourceLine" id="cb34-96" title="96"><span class="st">─  building &#39;</span>add2pkg_<span class="dv">0</span>.<span class="dv">2</span>.<span class="fl">1.</span>tar.gz<span class="st">&#39;</span></a>
+<a class="sourceLine" id="cb34-97" title="97"><span class="st">   </span></a>
+<a class="sourceLine" id="cb34-98" title="98"><span class="st">Submitting file: C:\Users\LIJIAX~1\AppData\Local\Temp\RtmpEdl715/add2pkg_0.2.1.tar.gz</span></a>
+<a class="sourceLine" id="cb34-99" title="99"><span class="st">File size: 7.9 Kb</span></a>
+<a class="sourceLine" id="cb34-100" title="100"><span class="st">Ready to submit add2pkg (0.2.1) to CRAN?</span></a>
+<a class="sourceLine" id="cb34-101" title="101"><span class="st">1: Yes</span></a>
+<a class="sourceLine" id="cb34-102" title="102"><span class="st">2: No way</span></a>
+<a class="sourceLine" id="cb34-103" title="103"><span class="st">3: Uhhhh... Maybe?</span></a>
+<a class="sourceLine" id="cb34-104" title="104"></a>
+<a class="sourceLine" id="cb34-105" title="105"><span class="st">Selection: 1</span></a>
+<a class="sourceLine" id="cb34-106" title="106"><span class="st">Uploading package &amp; comments</span></a>
+<a class="sourceLine" id="cb34-107" title="107"><span class="st">Confirming submission</span></a>
+<a class="sourceLine" id="cb34-108" title="108"><span class="st">Error in if (new_url$query$submit == &quot;1&quot;) { : argument is of length zero</span></a></code></pre></div>
 </div>
 <div id="r-hub-通过示例" class="section level1">
 <h1><span class="header-section-number">19</span> r-hub 通过示例</h1>
+<p>自己上传 <a href="https://builder.r-hub.io/" class="uri">https://builder.r-hub.io/</a></p>
 <div class="figure">
 <img src="https://user-images.githubusercontent.com/15884785/72242811-435bc900-3625-11ea-8ef2-521cf436792b.png" alt="image" />
 <p class="caption">image</p>
@@ -676,32 +685,32 @@ Check: CRAN incoming feasibility, Result: NOTE
 Please include the file or link to it via a fully specified URL.
 </code></pre>
 <p>果然 build 里面是没有 COC 和 LICENSE.md</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">dir_tree</span>(<span class="st">&quot;../add2pkg_0.2.1/add2pkg&quot;</span>, <span class="dt">recurse =</span> F)</a>
-<a class="sourceLine" id="cb36-2" title="2">..<span class="op">/</span>add2pkg_<span class="dv">0</span>.<span class="fl">2.1</span><span class="op">/</span>add2pkg</a>
-<a class="sourceLine" id="cb36-3" title="3"><span class="op">+--</span><span class="st"> </span>build</a>
-<a class="sourceLine" id="cb36-4" title="4"><span class="op">+--</span><span class="st"> </span>DESCRIPTION</a>
-<a class="sourceLine" id="cb36-5" title="5"><span class="op">+--</span><span class="st"> </span>inst</a>
-<a class="sourceLine" id="cb36-6" title="6"><span class="op">+--</span><span class="st"> </span>LICENSE</a>
-<a class="sourceLine" id="cb36-7" title="7"><span class="op">+--</span><span class="st"> </span>man</a>
-<a class="sourceLine" id="cb36-8" title="8"><span class="op">+--</span><span class="st"> </span>NAMESPACE</a>
-<a class="sourceLine" id="cb36-9" title="9"><span class="op">+--</span><span class="st"> </span>NEWS.md</a>
-<a class="sourceLine" id="cb36-10" title="10"><span class="op">+--</span><span class="st"> </span>R</a>
-<a class="sourceLine" id="cb36-11" title="11"><span class="op">+--</span><span class="st"> </span>README.md</a>
-<a class="sourceLine" id="cb36-12" title="12"><span class="op">+--</span><span class="st"> </span>tests</a>
-<a class="sourceLine" id="cb36-13" title="13">\<span class="op">--</span><span class="st"> </span>vignettes</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">dir_tree</span>(<span class="st">&quot;../add2pkg_0.2.1/add2pkg&quot;</span>, <span class="dt">recurse =</span> F)</a>
+<a class="sourceLine" id="cb37-2" title="2">..<span class="op">/</span>add2pkg_<span class="dv">0</span>.<span class="fl">2.1</span><span class="op">/</span>add2pkg</a>
+<a class="sourceLine" id="cb37-3" title="3"><span class="op">+--</span><span class="st"> </span>build</a>
+<a class="sourceLine" id="cb37-4" title="4"><span class="op">+--</span><span class="st"> </span>DESCRIPTION</a>
+<a class="sourceLine" id="cb37-5" title="5"><span class="op">+--</span><span class="st"> </span>inst</a>
+<a class="sourceLine" id="cb37-6" title="6"><span class="op">+--</span><span class="st"> </span>LICENSE</a>
+<a class="sourceLine" id="cb37-7" title="7"><span class="op">+--</span><span class="st"> </span>man</a>
+<a class="sourceLine" id="cb37-8" title="8"><span class="op">+--</span><span class="st"> </span>NAMESPACE</a>
+<a class="sourceLine" id="cb37-9" title="9"><span class="op">+--</span><span class="st"> </span>NEWS.md</a>
+<a class="sourceLine" id="cb37-10" title="10"><span class="op">+--</span><span class="st"> </span>R</a>
+<a class="sourceLine" id="cb37-11" title="11"><span class="op">+--</span><span class="st"> </span>README.md</a>
+<a class="sourceLine" id="cb37-12" title="12"><span class="op">+--</span><span class="st"> </span>tests</a>
+<a class="sourceLine" id="cb37-13" title="13">\<span class="op">--</span><span class="st"> </span>vignettes</a></code></pre></div>
 <p>r package build include file</p>
 <p><code>.Rbuildignore</code>删除</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="op">^</span>LICENSE\.md<span class="op">$</span></a>
-<a class="sourceLine" id="cb37-2" title="2"><span class="er">^</span>CODE_OF_CONDUCT\.md<span class="op">$</span></a></code></pre></div>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="op">&gt;</span><span class="st"> </span>checking top<span class="op">-</span>level files ... NOTE</a>
-<a class="sourceLine" id="cb38-2" title="2">  Non<span class="op">-</span>standard files<span class="op">/</span>directories found at top level<span class="op">:</span></a>
-<a class="sourceLine" id="cb38-3" title="3"><span class="st">    &#39;CODE_OF_CONDUCT.md&#39;</span> <span class="st">&#39;LICENSE.md&#39;</span></a>
-<a class="sourceLine" id="cb38-4" title="4"></a>
-<a class="sourceLine" id="cb38-5" title="5"><span class="dv">0</span> errors <span class="op">&lt;</span>U<span class="op">+</span><span class="dv">2713</span><span class="op">&gt;</span><span class="st"> </span><span class="er">|</span><span class="st"> </span>Warning <span class="cf">in</span> <span class="kw">readChar</span>(path, <span class="dt">nchars =</span> <span class="kw">file.info</span>(path)<span class="op">$</span>size, ...) <span class="op">:</span></a>
-<a class="sourceLine" id="cb38-6" title="6"><span class="st">  </span>��non<span class="op">-</span>UTF<span class="dv">-8</span> MBCS���Ի�����ֻ�ܶ�ȡ�ֽ�</a>
-<a class="sourceLine" id="cb38-7" title="7"><span class="dv">0</span> warnings <span class="op">&lt;</span>U<span class="op">+</span><span class="dv">2713</span><span class="op">&gt;</span><span class="st"> </span><span class="er">|</span><span class="st"> </span><span class="dv">1</span> note x</a>
-<a class="sourceLine" id="cb38-8" title="8"></a>
-<a class="sourceLine" id="cb38-9" title="9">R CMD check succeeded</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="op">^</span>LICENSE\.md<span class="op">$</span></a>
+<a class="sourceLine" id="cb38-2" title="2"><span class="er">^</span>CODE_OF_CONDUCT\.md<span class="op">$</span></a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="op">&gt;</span><span class="st"> </span>checking top<span class="op">-</span>level files ... NOTE</a>
+<a class="sourceLine" id="cb39-2" title="2">  Non<span class="op">-</span>standard files<span class="op">/</span>directories found at top level<span class="op">:</span></a>
+<a class="sourceLine" id="cb39-3" title="3"><span class="st">    &#39;CODE_OF_CONDUCT.md&#39;</span> <span class="st">&#39;LICENSE.md&#39;</span></a>
+<a class="sourceLine" id="cb39-4" title="4"></a>
+<a class="sourceLine" id="cb39-5" title="5"><span class="dv">0</span> errors <span class="op">&lt;</span>U<span class="op">+</span><span class="dv">2713</span><span class="op">&gt;</span><span class="st"> </span><span class="er">|</span><span class="st"> </span>Warning <span class="cf">in</span> <span class="kw">readChar</span>(path, <span class="dt">nchars =</span> <span class="kw">file.info</span>(path)<span class="op">$</span>size, ...) <span class="op">:</span></a>
+<a class="sourceLine" id="cb39-6" title="6"><span class="st">  </span>��non<span class="op">-</span>UTF<span class="dv">-8</span> MBCS���Ի�����ֻ�ܶ�ȡ�ֽ�</a>
+<a class="sourceLine" id="cb39-7" title="7"><span class="dv">0</span> warnings <span class="op">&lt;</span>U<span class="op">+</span><span class="dv">2713</span><span class="op">&gt;</span><span class="st"> </span><span class="er">|</span><span class="st"> </span><span class="dv">1</span> note x</a>
+<a class="sourceLine" id="cb39-8" title="8"></a>
+<a class="sourceLine" id="cb39-9" title="9">R CMD check succeeded</a></code></pre></div>
 <p>所以最好的策略是用绝对的 GitHub 链接，不要把这种文件链接用相对路径加入到包中，所以修改函数。</p>
 </div>
 <div id="好好写-description" class="section level1">
@@ -716,31 +725,31 @@ Uwe Ligges</code></pre>
 </div>
 <div id="这个-warning-没有看懂" class="section level1">
 <h1><span class="header-section-number">23</span> 这个 warning 没有看懂</h1>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1">Warning<span class="op">:</span><span class="st"> </span>add_me.R<span class="op">:</span><span class="dv">7</span><span class="op">:</span><span class="st"> </span><span class="er">@</span>example D<span class="op">:</span>\work\add2pkg<span class="op">/</span><span class="kw">add_me</span>() doesn<span class="st">&#39;t exist</span></a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1">Warning<span class="op">:</span><span class="st"> </span>add_me.R<span class="op">:</span><span class="dv">7</span><span class="op">:</span><span class="st"> </span><span class="er">@</span>example D<span class="op">:</span>\work\add2pkg<span class="op">/</span><span class="kw">add_me</span>() doesn<span class="st">&#39;t exist</span></a></code></pre></div>
 </div>
 <div id="fix-mis-spelling" class="section level1">
 <h1><span class="header-section-number">24</span> fix mis-spelling</h1>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1">  New submission</a>
-<a class="sourceLine" id="cb41-2" title="2"> </a>
-<a class="sourceLine" id="cb41-3" title="3">  Possibly mis<span class="op">-</span>spelled words <span class="cf">in</span> DESCRIPTION<span class="op">:</span></a>
-<a class="sourceLine" id="cb41-4" title="4"><span class="st">    </span><span class="kw">zenodo</span> (<span class="dv">11</span><span class="op">:</span><span class="dv">47</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">update_wordlist</span>()</a>
-<a class="sourceLine" id="cb42-2" title="2">DESCRIPTION does not contain <span class="st">&#39;Language&#39;</span> field. Defaulting to <span class="st">&#39;en-US&#39;</span>.</a>
-<a class="sourceLine" id="cb42-3" title="3">The following words will be added to the wordlist<span class="op">:</span></a>
-<a class="sourceLine" id="cb42-4" title="4"><span class="st"> </span><span class="op">-</span><span class="st"> </span>asis</a>
-<a class="sourceLine" id="cb42-5" title="5"> <span class="op">-</span><span class="st"> </span>BibTex</a>
-<a class="sourceLine" id="cb42-6" title="6"> <span class="op">-</span><span class="st"> </span>coc</a>
-<a class="sourceLine" id="cb42-7" title="7"> <span class="op">-</span><span class="st"> </span>descripton</a>
-<a class="sourceLine" id="cb42-8" title="8"> <span class="op">-</span><span class="st"> </span>dev</a>
-<a class="sourceLine" id="cb42-9" title="9"> <span class="op">-</span><span class="st"> </span>DOI</a>
-<a class="sourceLine" id="cb42-10" title="10"> <span class="op">-</span><span class="st"> </span>Infomation</a>
-<a class="sourceLine" id="cb42-11" title="11"> <span class="op">-</span><span class="st"> </span>params</a>
-<a class="sourceLine" id="cb42-12" title="12"> <span class="op">-</span><span class="st"> </span>README</a>
-<a class="sourceLine" id="cb42-13" title="13"> <span class="op">-</span><span class="st"> </span>zenodo</a>
-<a class="sourceLine" id="cb42-14" title="14"> <span class="op">-</span><span class="st"> </span>Zenodo</a>
-<a class="sourceLine" id="cb42-15" title="15">Are you sure you want to update the wordlist?</a>
-<a class="sourceLine" id="cb42-16" title="16"><span class="dv">1</span><span class="op">:</span><span class="st"> </span>Yes</a>
-<a class="sourceLine" id="cb42-17" title="17"><span class="dv">2</span><span class="op">:</span><span class="st"> </span>No</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1">  New submission</a>
+<a class="sourceLine" id="cb42-2" title="2"> </a>
+<a class="sourceLine" id="cb42-3" title="3">  Possibly mis<span class="op">-</span>spelled words <span class="cf">in</span> DESCRIPTION<span class="op">:</span></a>
+<a class="sourceLine" id="cb42-4" title="4"><span class="st">    </span><span class="kw">zenodo</span> (<span class="dv">11</span><span class="op">:</span><span class="dv">47</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">update_wordlist</span>()</a>
+<a class="sourceLine" id="cb43-2" title="2">DESCRIPTION does not contain <span class="st">&#39;Language&#39;</span> field. Defaulting to <span class="st">&#39;en-US&#39;</span>.</a>
+<a class="sourceLine" id="cb43-3" title="3">The following words will be added to the wordlist<span class="op">:</span></a>
+<a class="sourceLine" id="cb43-4" title="4"><span class="st"> </span><span class="op">-</span><span class="st"> </span>asis</a>
+<a class="sourceLine" id="cb43-5" title="5"> <span class="op">-</span><span class="st"> </span>BibTex</a>
+<a class="sourceLine" id="cb43-6" title="6"> <span class="op">-</span><span class="st"> </span>coc</a>
+<a class="sourceLine" id="cb43-7" title="7"> <span class="op">-</span><span class="st"> </span>descripton</a>
+<a class="sourceLine" id="cb43-8" title="8"> <span class="op">-</span><span class="st"> </span>dev</a>
+<a class="sourceLine" id="cb43-9" title="9"> <span class="op">-</span><span class="st"> </span>DOI</a>
+<a class="sourceLine" id="cb43-10" title="10"> <span class="op">-</span><span class="st"> </span>Infomation</a>
+<a class="sourceLine" id="cb43-11" title="11"> <span class="op">-</span><span class="st"> </span>params</a>
+<a class="sourceLine" id="cb43-12" title="12"> <span class="op">-</span><span class="st"> </span>README</a>
+<a class="sourceLine" id="cb43-13" title="13"> <span class="op">-</span><span class="st"> </span>zenodo</a>
+<a class="sourceLine" id="cb43-14" title="14"> <span class="op">-</span><span class="st"> </span>Zenodo</a>
+<a class="sourceLine" id="cb43-15" title="15">Are you sure you want to update the wordlist?</a>
+<a class="sourceLine" id="cb43-16" title="16"><span class="dv">1</span><span class="op">:</span><span class="st"> </span>Yes</a>
+<a class="sourceLine" id="cb43-17" title="17"><span class="dv">2</span><span class="op">:</span><span class="st"> </span>No</a></code></pre></div>
 <p>所以完全弄干净后，再更新 wordlist
 配合<code>document();spell_check()</code>完成。</p>
 </div>
@@ -756,35 +765,132 @@ I suggest that you put this code in <code>data-raw/</code>
 <p>我这里使用
 <code>usethis::use_data_raw("文件名")</code></p>
 <p>然后给复现例子。</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="co">## code to prepare `two_class_example` dataset goes here</span></a>
-<a class="sourceLine" id="cb43-2" title="2"></a>
-<a class="sourceLine" id="cb43-3" title="3"><span class="kw">library</span>(yardstick)</a>
-<a class="sourceLine" id="cb43-4" title="4"><span class="kw">data</span>(<span class="st">&quot;two_class_example&quot;</span>)</a>
-<a class="sourceLine" id="cb43-5" title="5"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb43-6" title="6">two_class_example_edited &lt;-</a>
-<a class="sourceLine" id="cb43-7" title="7"><span class="st">    </span>two_class_example <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb43-8" title="8"><span class="st">    </span><span class="kw">transmute</span>(</a>
-<a class="sourceLine" id="cb43-9" title="9">        <span class="dt">y =</span> <span class="kw">ifelse</span>(truth <span class="op">==</span><span class="st"> &quot;Class1&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb43-10" title="10">        ,<span class="dt">yhat =</span> Class1</a>
-<a class="sourceLine" id="cb43-11" title="11">    )</a>
-<a class="sourceLine" id="cb43-12" title="12">two_class_example_edited <span class="op">%&gt;%</span><span class="st"> </span>head</a>
-<a class="sourceLine" id="cb43-13" title="13">two_class_example_edited <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb43-14" title="14"><span class="st">    </span><span class="kw">write_excel_csv</span>(<span class="st">&quot;data-raw/two_class_example.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb43-15" title="15"></a>
-<a class="sourceLine" id="cb43-16" title="16">usethis<span class="op">::</span><span class="kw">use_data</span>(two_class_example_edited, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="co">## code to prepare `two_class_example` dataset goes here</span></a>
+<a class="sourceLine" id="cb44-2" title="2"></a>
+<a class="sourceLine" id="cb44-3" title="3"><span class="kw">library</span>(yardstick)</a>
+<a class="sourceLine" id="cb44-4" title="4"><span class="kw">data</span>(<span class="st">&quot;two_class_example&quot;</span>)</a>
+<a class="sourceLine" id="cb44-5" title="5"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb44-6" title="6">two_class_example_edited &lt;-</a>
+<a class="sourceLine" id="cb44-7" title="7"><span class="st">    </span>two_class_example <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb44-8" title="8"><span class="st">    </span><span class="kw">transmute</span>(</a>
+<a class="sourceLine" id="cb44-9" title="9">        <span class="dt">y =</span> <span class="kw">ifelse</span>(truth <span class="op">==</span><span class="st"> &quot;Class1&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb44-10" title="10">        ,<span class="dt">yhat =</span> Class1</a>
+<a class="sourceLine" id="cb44-11" title="11">    )</a>
+<a class="sourceLine" id="cb44-12" title="12">two_class_example_edited <span class="op">%&gt;%</span><span class="st"> </span>head</a>
+<a class="sourceLine" id="cb44-13" title="13">two_class_example_edited <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb44-14" title="14"><span class="st">    </span><span class="kw">write_excel_csv</span>(<span class="st">&quot;data-raw/two_class_example.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb44-15" title="15"></a>
+<a class="sourceLine" id="cb44-16" title="16">usethis<span class="op">::</span><span class="kw">use_data</span>(two_class_example_edited, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>然后增加例子。</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="co">#&#39; @examples</span></a>
-<a class="sourceLine" id="cb44-2" title="2"><span class="co">#&#39; data(&quot;two_class_example_edited&quot;)</span></a>
-<a class="sourceLine" id="cb44-3" title="3"><span class="co">#&#39; max(ks_table(two_class_example_edited$yhat, two_class_example_edited$y)$ks)</span></a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="co">#&#39; @examples</span></a>
+<a class="sourceLine" id="cb45-2" title="2"><span class="co">#&#39; data(&quot;two_class_example_edited&quot;)</span></a>
+<a class="sourceLine" id="cb45-3" title="3"><span class="co">#&#39; max(ks_table(two_class_example_edited$yhat, two_class_example_edited$y)$ks)</span></a></code></pre></div>
 </div>
 <div id="增加-examples" class="section level1">
 <h1><span class="header-section-number">26</span> 增加 examples</h1>
 <p>参考 <a href="http://r-pkgs.had.co.nz/man.html" class="uri">http://r-pkgs.had.co.nz/man.html</a></p>
 <p><code>@examples</code> 只要是多行都可以吧？</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="co">#&#39; @examples</span></a>
-<a class="sourceLine" id="cb45-2" title="2"><span class="co">#&#39; sum(1:10)</span></a>
-<a class="sourceLine" id="cb45-3" title="3"><span class="co">#&#39; sum(1:5, 6:10)</span></a>
-<a class="sourceLine" id="cb45-4" title="4"><span class="co">#&#39; sum(F, F, F, T, T)</span></a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="co">#&#39; @examples</span></a>
+<a class="sourceLine" id="cb46-2" title="2"><span class="co">#&#39; sum(1:10)</span></a>
+<a class="sourceLine" id="cb46-3" title="3"><span class="co">#&#39; sum(1:5, 6:10)</span></a>
+<a class="sourceLine" id="cb46-4" title="4"><span class="co">#&#39; sum(F, F, F, T, T)</span></a></code></pre></div>
+</div>
+<div id="增加数据文档" class="section level1">
+<h1><span class="header-section-number">27</span> 增加数据文档</h1>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1"><span class="op">--</span><span class="st"> </span>R CMD check results <span class="op">-----------------------------------</span><span class="st"> </span>rawKS <span class="dv">0</span>.<span class="dv">0</span>.<span class="fl">0.9000</span> <span class="op">----</span></a>
+<a class="sourceLine" id="cb47-2" title="2">Duration<span class="op">:</span><span class="st"> </span>1m <span class="fl">7.2</span>s</a>
+<a class="sourceLine" id="cb47-3" title="3"></a>
+<a class="sourceLine" id="cb47-4" title="4"><span class="op">&gt;</span><span class="st"> </span>checking <span class="cf">for</span> missing documentation entries ... WARNING</a>
+<a class="sourceLine" id="cb47-5" title="5">  Undocumented code objects<span class="op">:</span></a>
+<a class="sourceLine" id="cb47-6" title="6"><span class="st">    &#39;ks_plot&#39;</span> <span class="st">&#39;two_class_example_edited&#39;</span></a>
+<a class="sourceLine" id="cb47-7" title="7">  Undocumented data sets<span class="op">:</span></a>
+<a class="sourceLine" id="cb47-8" title="8"><span class="st">    &#39;two_class_example_edited&#39;</span></a>
+<a class="sourceLine" id="cb47-9" title="9">  All user<span class="op">-</span>level objects <span class="cf">in</span> a package should have documentation entries.</a>
+<a class="sourceLine" id="cb47-10" title="10">  See chapter <span class="st">&#39;Writing R documentation files&#39;</span> <span class="cf">in</span> the <span class="st">&#39;Writing R</span></a>
+<a class="sourceLine" id="cb47-11" title="11"><span class="st">  Extensions&#39;</span> manual.</a></code></pre></div>
+<p>如模板</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="co">#&#39; Prices of 50,000 round cut diamonds.</span></a>
+<a class="sourceLine" id="cb48-2" title="2"><span class="co">#&#39;</span></a>
+<a class="sourceLine" id="cb48-3" title="3"><span class="co">#&#39; A dataset containing the prices and other attributes of almost 54,000</span></a>
+<a class="sourceLine" id="cb48-4" title="4"><span class="co">#&#39; diamonds.</span></a>
+<a class="sourceLine" id="cb48-5" title="5"><span class="co">#&#39;</span></a>
+<a class="sourceLine" id="cb48-6" title="6"><span class="co">#&#39; @format A data frame with 53940 rows and 10 variables:</span></a>
+<a class="sourceLine" id="cb48-7" title="7"><span class="co">#&#39; \describe{</span></a>
+<a class="sourceLine" id="cb48-8" title="8"><span class="co">#&#39;   \item{price}{price, in US dollars}</span></a>
+<a class="sourceLine" id="cb48-9" title="9"><span class="co">#&#39;   \item{carat}{weight of the diamond, in carats}</span></a>
+<a class="sourceLine" id="cb48-10" title="10"><span class="co">#&#39;   ...</span></a>
+<a class="sourceLine" id="cb48-11" title="11"><span class="co">#&#39; }</span></a>
+<a class="sourceLine" id="cb48-12" title="12"><span class="co">#&#39; @source \url{http://www.diamondse.info/}</span></a>
+<a class="sourceLine" id="cb48-13" title="13"><span class="st">&quot;diamonds&quot;</span></a></code></pre></div>
+<p>再如</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1"><span class="co">#&#39; A sample with the target and predictions</span></a>
+<a class="sourceLine" id="cb49-2" title="2"><span class="co">#&#39;</span></a>
+<a class="sourceLine" id="cb49-3" title="3"><span class="co">#&#39; A dataset containing two columns, \code{yhat} and \code{y} as</span></a>
+<a class="sourceLine" id="cb49-4" title="4"><span class="co">#&#39; the inputs for the function \code{ks_table}.</span></a>
+<a class="sourceLine" id="cb49-5" title="5"><span class="co">#&#39;</span></a>
+<a class="sourceLine" id="cb49-6" title="6"><span class="co">#&#39; @format A data frame with 500 rows and 2 variables:</span></a>
+<a class="sourceLine" id="cb49-7" title="7"><span class="co">#&#39; \describe{</span></a>
+<a class="sourceLine" id="cb49-8" title="8"><span class="co">#&#39;   \item{yhat}{predictions}</span></a>
+<a class="sourceLine" id="cb49-9" title="9"><span class="co">#&#39;   \item{y}{target}</span></a>
+<a class="sourceLine" id="cb49-10" title="10"><span class="co">#&#39; }</span></a>
+<a class="sourceLine" id="cb49-11" title="11"><span class="co">#&#39; @source package \code{yardstick::two_class_example}</span></a>
+<a class="sourceLine" id="cb49-12" title="12"><span class="st">&quot;two_class_example_edited&quot;</span></a></code></pre></div>
+</div>
+<div id="加入-r-版本" class="section level1">
+<h1><span class="header-section-number">28</span> 加入 R 版本</h1>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="op">--</span><span class="st"> </span>R CMD check results <span class="op">-----------------------------------</span><span class="st"> </span>rawKS <span class="dv">0</span>.<span class="dv">0</span>.<span class="fl">0.9000</span> <span class="op">----</span></a>
+<a class="sourceLine" id="cb50-2" title="2">Duration<span class="op">:</span><span class="st"> </span><span class="fl">44.8</span>s</a>
+<a class="sourceLine" id="cb50-3" title="3"></a>
+<a class="sourceLine" id="cb50-4" title="4"><span class="op">&gt;</span><span class="st"> </span>checking data <span class="cf">for</span> ASCII and uncompressed saves ... WARNING</a>
+<a class="sourceLine" id="cb50-5" title="5">    Warning<span class="op">:</span><span class="st"> </span>package needs dependence on <span class="kw">R</span> (<span class="op">&gt;=</span><span class="st"> </span><span class="fl">2.10</span>)</a>
+<a class="sourceLine" id="cb50-6" title="6"></a>
+<a class="sourceLine" id="cb50-7" title="7"><span class="dv">0</span> errors <span class="op">&lt;</span>U<span class="op">+</span><span class="dv">2713</span><span class="op">&gt;</span><span class="st"> </span><span class="er">|</span><span class="st"> </span><span class="dv">1</span> warning x <span class="op">|</span><span class="st"> </span><span class="dv">0</span> notes <span class="op">&lt;</span>U<span class="op">+</span><span class="dv">2713</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb50-8" title="8">Warning <span class="cf">in</span> <span class="kw">readChar</span>(path, <span class="dt">nchars =</span> <span class="kw">file.info</span>(path)<span class="op">$</span>size, ...) <span class="op">:</span></a>
+<a class="sourceLine" id="cb50-9" title="9"><span class="st">  </span>��non<span class="op">-</span>UTF<span class="dv">-8</span> MBCS���Ի�����ֻ�ܶ�ȡ�ֽ�</a>
+<a class="sourceLine" id="cb50-10" title="10">����<span class="op">:</span><span class="st"> </span>R CMD check found WARNINGs</a>
+<a class="sourceLine" id="cb50-11" title="11">ִֹͣ��</a>
+<a class="sourceLine" id="cb50-12" title="12"></a>
+<a class="sourceLine" id="cb50-13" title="13">Exited with status <span class="fl">1.</span></a></code></pre></div>
+<p>R 版本没有限制，
+参考 <a href="https://github.com/USGS-R/loadflex/issues/25" class="uri">https://github.com/USGS-R/loadflex/issues/25</a></p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1">Depends<span class="op">:</span></a>
+<a class="sourceLine" id="cb51-2" title="2"><span class="st">    </span><span class="kw">R</span> (<span class="op">&gt;=</span><span class="st"> </span><span class="fl">2.10</span>)</a></code></pre></div>
+</div>
+<div id="r-版本限制" class="section level1">
+<h1><span class="header-section-number">29</span> R 版本限制</h1>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="op">--</span><span class="st"> </span>R CMD check results <span class="op">-----------------------------------</span><span class="st"> </span>add2bibtex <span class="dv">0</span>.<span class="fl">5.2</span> <span class="op">----</span></a>
+<a class="sourceLine" id="cb52-2" title="2">Duration<span class="op">:</span><span class="st"> </span><span class="fl">48.8</span>s</a>
+<a class="sourceLine" id="cb52-3" title="3"></a>
+<a class="sourceLine" id="cb52-4" title="4"><span class="op">&gt;</span><span class="st"> </span>checking DESCRIPTION meta<span class="op">-</span>information ... WARNING</a>
+<a class="sourceLine" id="cb52-5" title="5">  Dependence on R version <span class="st">&#39;3.5.1&#39;</span> not with patchlevel <span class="dv">0</span></a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1">Version<span class="op">:</span><span class="st"> </span><span class="dv">0</span>.<span class="fl">5.2</span></a>
+<a class="sourceLine" id="cb53-2" title="2">Authors<span class="op">@</span>R<span class="op">:</span></a>
+<a class="sourceLine" id="cb53-3" title="3"><span class="st">    </span><span class="kw">person</span>(<span class="dt">given =</span> <span class="st">&quot;Jiaxiang&quot;</span>,</a>
+<a class="sourceLine" id="cb53-4" title="4">           <span class="dt">family =</span> <span class="st">&quot;Li&quot;</span>,</a>
+<a class="sourceLine" id="cb53-5" title="5">           <span class="dt">role =</span> <span class="kw">c</span>(<span class="st">&quot;aut&quot;</span>, <span class="st">&quot;cre&quot;</span>),</a>
+<a class="sourceLine" id="cb53-6" title="6">           <span class="dt">email =</span> <span class="st">&quot;alex.lijiaxiang@foxmail.com&quot;</span>,</a>
+<a class="sourceLine" id="cb53-7" title="7">           <span class="dt">comment =</span> <span class="kw">c</span>(<span class="dt">ORCID =</span> <span class="st">&quot;https://orcid.org/0000-0003-3196-6492&quot;</span>))</a>
+<a class="sourceLine" id="cb53-8" title="8">Description<span class="op">:</span><span class="st"> </span>Easily Adding Bibliographies and Citations.</a>
+<a class="sourceLine" id="cb53-9" title="9">Depends<span class="op">:</span><span class="st"> </span><span class="kw">R</span> (<span class="op">&gt;=</span><span class="st"> </span><span class="dv">3</span>.<span class="fl">5.1</span>)</a></code></pre></div>
+<p>参考 <a href="https://stackoverflow.com/a/48433479/8625228" class="uri">https://stackoverflow.com/a/48433479/8625228</a></p>
+<p>这里如果 Version 要 <code>0.5.2</code>，那么<code>Depends: R (&gt;= 3.5.1)</code>中改为<code>3.5.0</code>。</p>
+</div>
+<div id="查看-non-ascii-文本" class="section level1">
+<h1><span class="header-section-number">30</span> 查看 non-ASCII 文本</h1>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="op">--</span><span class="st"> </span>R CMD check results <span class="op">-----------------------------------</span><span class="st"> </span>add2bibtex <span class="dv">0</span>.<span class="fl">5.2</span> <span class="op">----</span></a>
+<a class="sourceLine" id="cb54-2" title="2">Duration<span class="op">:</span><span class="st"> </span>1m 60s</a>
+<a class="sourceLine" id="cb54-3" title="3"></a>
+<a class="sourceLine" id="cb54-4" title="4"><span class="op">&gt;</span><span class="st"> </span>checking R files <span class="cf">for</span> non<span class="op">-</span>ASCII characters ... WARNING</a>
+<a class="sourceLine" id="cb54-5" title="5">  Found the following files with non<span class="op">-</span>ASCII characters<span class="op">:</span></a>
+<a class="sourceLine" id="cb54-6" title="6"><span class="st">    </span>add_amazon_cn.R</a>
+<a class="sourceLine" id="cb54-7" title="7">    add_bibtex.R</a>
+<a class="sourceLine" id="cb54-8" title="8">    add_wechat.R</a>
+<a class="sourceLine" id="cb54-9" title="9">  Portable packages must use only ASCII characters <span class="cf">in</span> their R code,</a>
+<a class="sourceLine" id="cb54-10" title="10">  except perhaps <span class="cf">in</span> comments.</a>
+<a class="sourceLine" id="cb54-11" title="11">  Use \uxxxx escapes <span class="cf">for</span> other characters.</a></code></pre></div>
+<p>参考 <a href="https://stackoverflow.com/a/34614485/8625228" class="uri">https://stackoverflow.com/a/34614485/8625228</a></p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1">lines &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_lines</span>(<span class="st">&quot;R/add_wechat.R&quot;</span>)</a>
+<a class="sourceLine" id="cb55-2" title="2">lines[<span class="op">!</span>stringi<span class="op">::</span><span class="kw">stri_enc_isascii</span>(lines)]</a></code></pre></div>
 </div>
 <div id="附录" class="section level1 unnumbered">
 <h1>附录</h1>

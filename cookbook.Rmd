@@ -290,13 +290,21 @@ add
 # 添加 global 变量
 
 ```r
-> checking R code for possible problems ... NOTE
-  add_zenodo_citation: no visible binding for global variable '.'
-  Undefined global functions or variables:
-    .
-
-0 errors <U+2713> | 1 warning x | 2 notes x
+Undefined global functions or variables:
+    . cutoff fpr key ks tpr value
 ```
+
+```r
+var_list <- 
+". cutoff fpr key ks tpr value" %>% 
+  strsplit("\\s") %>% 
+  .[[1]] %>% 
+  paste0("\"", ., "\"") %>% 
+  str_flatten(", ")
+glue::glue("globalVariables(c({var_list}))") %>% 
+  clipr::write_clip()
+```
+
 
 `globalVariables('.')`
 
@@ -535,6 +543,8 @@ Error in if (new_url$query$submit == "1") { : argument is of length zero
 
 # r-hub 通过示例
 
+自己上传 https://builder.r-hub.io/
+
 ![image](https://user-images.githubusercontent.com/15884785/72242811-435bc900-3625-11ea-8ef2-521cf436792b.png)
 
 地址 https://builder.r-hub.io/status/original/add2pkg_0.2.1.tar.gz-76c7b9d1252c2906bea2aeb92441ec27
@@ -738,6 +748,136 @@ usethis::use_data(two_class_example_edited, overwrite = TRUE)
 #' sum(F, F, F, T, T)
 ```
 
+
+
+
+
+# 增加数据文档
+
+```r
+-- R CMD check results ----------------------------------- rawKS 0.0.0.9000 ----
+Duration: 1m 7.2s
+
+> checking for missing documentation entries ... WARNING
+  Undocumented code objects:
+    'ks_plot' 'two_class_example_edited'
+  Undocumented data sets:
+    'two_class_example_edited'
+  All user-level objects in a package should have documentation entries.
+  See chapter 'Writing R documentation files' in the 'Writing R
+  Extensions' manual.
+```
+
+如模板
+
+```r
+#' Prices of 50,000 round cut diamonds.
+#'
+#' A dataset containing the prices and other attributes of almost 54,000
+#' diamonds.
+#'
+#' @format A data frame with 53940 rows and 10 variables:
+#' \describe{
+#'   \item{price}{price, in US dollars}
+#'   \item{carat}{weight of the diamond, in carats}
+#'   ...
+#' }
+#' @source \url{http://www.diamondse.info/}
+"diamonds"
+```
+
+再如
+
+```r
+#' A sample with the target and predictions
+#'
+#' A dataset containing two columns, \code{yhat} and \code{y} as
+#' the inputs for the function \code{ks_table}.
+#'
+#' @format A data frame with 500 rows and 2 variables:
+#' \describe{
+#'   \item{yhat}{predictions}
+#'   \item{y}{target}
+#' }
+#' @source package \code{yardstick::two_class_example}
+"two_class_example_edited"
+```
+
+# 加入 R 版本
+
+```r
+-- R CMD check results ----------------------------------- rawKS 0.0.0.9000 ----
+Duration: 44.8s
+
+> checking data for ASCII and uncompressed saves ... WARNING
+    Warning: package needs dependence on R (>= 2.10)
+
+0 errors <U+2713> | 1 warning x | 0 notes <U+2713>
+Warning in readChar(path, nchars = file.info(path)$size, ...) :
+  ��non-UTF-8 MBCS���Ի�����ֻ�ܶ�ȡ�ֽ�
+����: R CMD check found WARNINGs
+ִֹͣ��
+
+Exited with status 1.
+```
+
+R 版本没有限制，
+参考 https://github.com/USGS-R/loadflex/issues/25
+
+```r
+Depends:
+    R (>= 2.10)
+```
+
+# R 版本限制
+
+```r
+-- R CMD check results ----------------------------------- add2bibtex 0.5.2 ----
+Duration: 48.8s
+
+> checking DESCRIPTION meta-information ... WARNING
+  Dependence on R version '3.5.1' not with patchlevel 0
+```
+
+```r
+Version: 0.5.2
+Authors@R:
+    person(given = "Jiaxiang",
+           family = "Li",
+           role = c("aut", "cre"),
+           email = "alex.lijiaxiang@foxmail.com",
+           comment = c(ORCID = "https://orcid.org/0000-0003-3196-6492"))
+Description: Easily Adding Bibliographies and Citations.
+Depends: R (>= 3.5.1)
+```
+
+参考 https://stackoverflow.com/a/48433479/8625228
+
+这里如果 Version 要 `0.5.2`，那么`Depends: R (>= 3.5.1)`中改为`3.5.0`。
+
+
+# 查看 non-ASCII 文本
+
+```r
+-- R CMD check results ----------------------------------- add2bibtex 0.5.2 ----
+Duration: 1m 60s
+
+> checking R files for non-ASCII characters ... WARNING
+  Found the following files with non-ASCII characters:
+    add_amazon_cn.R
+    add_bibtex.R
+    add_wechat.R
+  Portable packages must use only ASCII characters in their R code,
+  except perhaps in comments.
+  Use \uxxxx escapes for other characters.
+```
+
+参考 https://stackoverflow.com/a/34614485/8625228
+
+```r
+lines <- readr::read_lines("R/add_wechat.R")
+lines[!stringi::stri_enc_isascii(lines)]
+```
 
 
 
