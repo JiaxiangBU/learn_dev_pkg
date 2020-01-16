@@ -924,7 +924,20 @@ Add reference tag into quote paragraphs.
 }
 ```
 
+# 删除不用的包
+    
+```r
 
+Build ID:	add2md_1.1.1.tar.gz-20e671205873580fb77ce80d9cce7aae
+Platform:	Debian Linux, R-devel, GCC
+Submitted:	18 minutes 44.5 seconds ago
+Build time:	18 minutes 42.2 seconds
+NOTES:
+* checking dependencies in R code ... NOTE
+Namespaces in Imports field not imported from:
+  ‘data.tree’ ‘git2r’ ‘tibble’
+  All declared Imports should be used.
+```
 
 # 附录 {-}
 
