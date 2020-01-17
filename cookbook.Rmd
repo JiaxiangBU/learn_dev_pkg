@@ -1130,7 +1130,7 @@ Exited with status 1.
 
 `doi:10.1002/dir.4000060408` 就是我们需要的，格式为`<doi:10.prefix/suffix>`
 
-# Vignette 命名注意
+# Vignette yaml 报错
 
 ```r
   New submission
@@ -1138,10 +1138,24 @@ Exited with status 1.
 Flavor: r-devel-linux-x86_64-debian-gcc, r-devel-windows-ix86+x86_64
 Check: package vignettes, Result: NOTE
   Package vignette with placeholder title 'Vignette Title':
-    'url.Rmd'
+    'more_for_url.Rmd'
 ```
 
-`url`是一些默认变量，避开这个名字。
+```r
+---
+title: "More for URL"
+author: "Jiaxiang Li"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+```
+
+在对应的 vignette 中 yaml 写着`%\VignetteIndexEntry{Vignette Title}`，没有自定义导致的。
+
 
 # DESC 避免使用双引号
 
