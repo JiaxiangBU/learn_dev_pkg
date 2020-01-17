@@ -24,7 +24,7 @@
 <meta name="author" content="李家翔" />
 
 
-<meta name="date" content="2020-01-16" />
+<meta name="date" content="2020-01-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -161,6 +161,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="30" data-path=""><a href="#查看-non-ascii-文本"><i class="fa fa-check"></i><b>30</b> 查看 non-ASCII 文本</a></li>
 <li class="chapter" data-level="31" data-path=""><a href="#注意-non-acsii-在-rd-的出现"><i class="fa fa-check"></i><b>31</b> 注意 non-ACSII 在 Rd 的出现</a></li>
 <li class="chapter" data-level="32" data-path=""><a href="#删除不用的包"><i class="fa fa-check"></i><b>32</b> 删除不用的包</a></li>
+<li class="chapter" data-level="33" data-path=""><a href="#回复速度"><i class="fa fa-check"></i><b>33</b> 回复速度</a></li>
+<li class="chapter" data-level="34" data-path=""><a href="#标题大小写问题"><i class="fa fa-check"></i><b>34</b> 标题大小写问题</a></li>
+<li class="chapter" data-level="35" data-path=""><a href="#elaborate-description"><i class="fa fa-check"></i><b>35</b> elaborate Description</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#附录"><i class="fa fa-check"></i>附录</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#参考文献"><i class="fa fa-check"></i>参考文献</a></li>
 </ul>
@@ -183,7 +186,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">R 开发包 Cookbook</h1>
 <p class="author"><em>李家翔</em></p>
-<p class="date"><em>2020-01-16</em></p>
+<p class="date"><em>2020-01-17</em></p>
 </div>
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -943,6 +946,46 @@ Add reference tag into quote paragraphs.
 <a class="sourceLine" id="cb58-8" title="8">Namespaces <span class="cf">in</span> Imports field not imported from<span class="op">:</span></a>
 <a class="sourceLine" id="cb58-9" title="9"><span class="st">  </span>‘data.tree’ ‘git2r’ ‘tibble’</a>
 <a class="sourceLine" id="cb58-10" title="10">  All declared Imports should be used.</a></code></pre></div>
+</div>
+<div id="回复速度" class="section level1">
+<h1><span class="header-section-number">33</span> 回复速度</h1>
+<p>的确是晚上回复比较快。</p>
+</div>
+<div id="标题大小写问题" class="section level1">
+<h1><span class="header-section-number">34</span> 标题大小写问题</h1>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1">Thanks, we see<span class="op">:</span></a>
+<a class="sourceLine" id="cb59-2" title="2"></a>
+<a class="sourceLine" id="cb59-3" title="3"><span class="st">   </span>The Title field should be <span class="cf">in</span> title case. Current version is<span class="op">:</span></a>
+<a class="sourceLine" id="cb59-4" title="4"><span class="st">   &#39;Easily get TPR, FPR and KS statistic&#39;</span></a>
+<a class="sourceLine" id="cb59-5" title="5">   In title case that is<span class="op">:</span></a>
+<a class="sourceLine" id="cb59-6" title="6"><span class="st">   &#39;Easily Get TPR, FPR and KS Statistic&#39;</span></a></code></pre></div>
+<p>注意这里 除了 <code>in</code>， <code>and</code> 进行小写以外，<code>Get</code> 需要大写。
+可以参考 <a href="https://cran.r-project.org/web/packages/gluedown/" class="uri">https://cran.r-project.org/web/packages/gluedown/</a></p>
+<blockquote>
+<p>gluedown: Wrap Vectors in Markdown Formatting</p>
+</blockquote>
+</div>
+<div id="elaborate-description" class="section level1">
+<h1><span class="header-section-number">35</span> elaborate Description</h1>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1">In the Description field, pelase elaborate. Is there some reference</a>
+<a class="sourceLine" id="cb60-2" title="2">about the method you can add <span class="cf">in</span> the Description field <span class="cf">in</span> the form</a>
+<a class="sourceLine" id="cb60-3" title="3"><span class="kw">Authors</span> (year) <span class="op">&lt;</span>doi<span class="op">:</span>.....<span class="op">&gt;</span>?</a>
+<a class="sourceLine" id="cb60-4" title="4"></a>
+<a class="sourceLine" id="cb60-5" title="5"></a>
+<a class="sourceLine" id="cb60-6" title="6">Please fix and resubmit.</a></code></pre></div>
+<p>这是 gluedown 的模板 <a href="https://github.com/kiernann/gluedown/blob/master/DESCRIPTION" class="uri">https://github.com/kiernann/gluedown/blob/master/DESCRIPTION</a></p>
+<blockquote>
+<p>Ease the transition between R vectors and markdown text. With ‘gluedown’ and ‘rmarkdown’, users can create traditional vectors in R, glue those strings together with the markdown syntax, and print those formatted vectors directly to the document. This package primarily uses GitHub Flavored Markdown (GFM), an offshoot of the unambiguous CommonMark specification by John MacFarlane (2019) <a href="https://spec.commonmark.org/" class="uri">https://spec.commonmark.org/</a>.</p>
+</blockquote>
+<p>最后的完成情况。</p>
+<blockquote>
+<p>The “K–S statistic” is a standard method to measure the model strength for credit risk scoring models. This package calculates the “K–S statistic” and plots the true-positive rate and false-positive rate to measure the model strength. This package was written with the credit marketer, who uses risk models in conjunction with his campaigns. The users could read more details from Thrasher (1992) <a href="doi:https://doi.org/10.1002/dir.4000060408" class="uri">doi:https://doi.org/10.1002/dir.4000060408</a> and a Python version ‘pyks’ <a href="https://pypi.org/project/pyks/" class="uri">https://pypi.org/project/pyks/</a>.</p>
+</blockquote>
+<p>也参考 <a href="https://www.jianshu.com/p/aee69df9e041" class="uri">https://www.jianshu.com/p/aee69df9e041</a></p>
+<pre><code>authors (year) &lt;doi:...&gt;
+authors (year) &lt;arXiv:...&gt;
+authors (year, ISBN:...)
+&lt;https:...&gt;</code></pre>
 </div>
 <div id="附录" class="section level1 unnumbered">
 <h1>附录</h1>

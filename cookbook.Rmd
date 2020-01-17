@@ -939,6 +939,54 @@ Namespaces in Imports field not imported from:
   All declared Imports should be used.
 ```
 
+# 回复速度
+
+的确是晚上回复比较快。
+
+# 标题大小写问题
+
+```r
+Thanks, we see:
+
+   The Title field should be in title case. Current version is:
+   'Easily get TPR, FPR and KS statistic'
+   In title case that is:
+   'Easily Get TPR, FPR and KS Statistic'
+```
+
+注意这里 除了 `in`， `and` 进行小写以外，`Get` 需要大写。
+可以参考 https://cran.r-project.org/web/packages/gluedown/
+
+> gluedown: Wrap Vectors in Markdown Formatting
+
+# elaborate Description
+
+```r
+In the Description field, pelase elaborate. Is there some reference
+about the method you can add in the Description field in the form
+Authors (year) <doi:.....>?
+
+
+Please fix and resubmit.
+```
+
+这是 gluedown 的模板 https://github.com/kiernann/gluedown/blob/master/DESCRIPTION
+
+> Ease the transition between R vectors and markdown text. With 'gluedown' and 'rmarkdown', users can create traditional vectors in R, glue those strings together with the markdown syntax, and print those formatted vectors directly to the document. This package primarily uses GitHub Flavored Markdown (GFM), an offshoot of the unambiguous CommonMark specification by John MacFarlane (2019) <https://spec.commonmark.org/>.
+
+最后的完成情况。
+
+> The “K–S statistic” is a standard method to measure the model strength for credit risk scoring models. This package calculates the “K–S statistic” and plots the true-positive rate and false-positive rate to measure the model strength. This package was written with the credit marketer, who uses risk models in conjunction with his campaigns. The users could read more details from Thrasher (1992) <doi:https://doi.org/10.1002/dir.4000060408> and a Python version 'pyks' <https://pypi.org/project/pyks/>.
+
+也参考 https://www.jianshu.com/p/aee69df9e041
+
+```
+authors (year) <doi:...>
+authors (year) <arXiv:...>
+authors (year, ISBN:...)
+<https:...>
+```
+
 # 附录 {-}
 
 # 参考文献 {-}
