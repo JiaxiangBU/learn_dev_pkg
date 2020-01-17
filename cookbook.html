@@ -173,6 +173,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="42" data-path=""><a href="#vignette-yaml-报错"><i class="fa fa-check"></i><b>42</b> Vignette yaml 报错</a></li>
 <li class="chapter" data-level="43" data-path=""><a href="#desc-避免使用双引号"><i class="fa fa-check"></i><b>43</b> DESC 避免使用双引号</a></li>
 <li class="chapter" data-level="44" data-path=""><a href="#python-包也用单引号"><i class="fa fa-check"></i><b>44</b> Python 包也用单引号</a></li>
+<li class="chapter" data-level="45" data-path=""><a href="#使用拼写检查就会产生test"><i class="fa fa-check"></i><b>45</b> 使用拼写检查就会产生test</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#附录"><i class="fa fa-check"></i>附录</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#参考文献"><i class="fa fa-check"></i>参考文献</a></li>
 </ul>
@@ -1157,6 +1158,16 @@ authors (year, ISBN:...)
 <ul>
 <li>Quote softare names in the right way.</li>
 </ul>
+</div>
+<div id="使用拼写检查就会产生test" class="section level1">
+<h1><span class="header-section-number">45</span> 使用拼写检查就会产生test</h1>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">use_spell_check</span>()</a>
+<a class="sourceLine" id="cb74-2" title="2">✔ Setting active project to <span class="st">&#39;D:/work/add2pkg&#39;</span></a>
+<a class="sourceLine" id="cb74-3" title="3">✔ Adding <span class="st">&#39;spelling&#39;</span> to Suggests field <span class="cf">in</span> DESCRIPTION</a>
+<a class="sourceLine" id="cb74-4" title="4">✔ Setting Language field <span class="cf">in</span> DESCRIPTION to <span class="st">&#39;en-US&#39;</span></a>
+<a class="sourceLine" id="cb74-5" title="5">No changes required to D<span class="op">:</span>\work\add2pkg\inst\WORDLIST</a>
+<a class="sourceLine" id="cb74-6" title="6">Updated D<span class="op">:</span><span class="er">/</span>work<span class="op">/</span>add2pkg<span class="op">/</span>tests<span class="op">/</span>spelling.R</a>
+<a class="sourceLine" id="cb74-7" title="7">● Run <span class="st">`</span><span class="dt">devtools::check()</span><span class="st">`</span> to trigger spell check</a></code></pre></div>
 </div>
 <div id="附录" class="section level1 unnumbered">
 <h1>附录</h1>

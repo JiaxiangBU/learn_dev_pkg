@@ -1190,6 +1190,18 @@ Please single quote softare names such as 'Python' in the Description field
 
 * Quote softare names in the right way.
 
+# 使用拼写检查就会产生test
+
+```r
+> use_spell_check()
+✔ Setting active project to 'D:/work/add2pkg'
+✔ Adding 'spelling' to Suggests field in DESCRIPTION
+✔ Setting Language field in DESCRIPTION to 'en-US'
+No changes required to D:\work\add2pkg\inst\WORDLIST
+Updated D:/work/add2pkg/tests/spelling.R
+● Run `devtools::check()` to trigger spell check
+```
+
 
 # 附录 {-}
 
