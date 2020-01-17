@@ -171,6 +171,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="40" data-path=""><a href="#pending-a-manual-inspection"><i class="fa fa-check"></i><b>40</b> pending a manual inspection</a></li>
 <li class="chapter" data-level="41" data-path=""><a href="#正确的doi书写"><i class="fa fa-check"></i><b>41</b> 正确的DOI书写</a></li>
 <li class="chapter" data-level="42" data-path=""><a href="#vignette-命名注意"><i class="fa fa-check"></i><b>42</b> Vignette 命名注意</a></li>
+<li class="chapter" data-level="43" data-path=""><a href="#desc-避免使用双引号"><i class="fa fa-check"></i><b>43</b> DESC 避免使用双引号</a></li>
+<li class="chapter" data-level="44" data-path=""><a href="#python-包也用单引号"><i class="fa fa-check"></i><b>44</b> Python 包也用单引号</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#附录"><i class="fa fa-check"></i>附录</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#参考文献"><i class="fa fa-check"></i>参考文献</a></li>
 </ul>
@@ -1115,6 +1117,36 @@ authors (year, ISBN:...)
 <a class="sourceLine" id="cb70-5" title="5">  Package vignette with placeholder title <span class="st">&#39;Vignette Title&#39;</span><span class="op">:</span></a>
 <a class="sourceLine" id="cb70-6" title="6"><span class="st">    &#39;url.Rmd&#39;</span></a></code></pre></div>
 <p><code>url</code>是一些默认变量，避开这个名字。</p>
+</div>
+<div id="desc-避免使用双引号" class="section level1">
+<h1><span class="header-section-number">43</span> DESC 避免使用双引号</h1>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1">Thanks, we see<span class="op">:</span></a>
+<a class="sourceLine" id="cb71-2" title="2"></a>
+<a class="sourceLine" id="cb71-3" title="3"><span class="st">   </span>Found the <span class="kw">following</span> (possibly) invalid DOIs<span class="op">:</span></a>
+<a class="sourceLine" id="cb71-4" title="4"><span class="st">     </span>DOI<span class="op">:</span><span class="st"> </span>https<span class="op">:</span><span class="er">//</span>doi.org<span class="op">/</span><span class="fl">10.1002</span><span class="op">/</span>dir<span class="fl">.4000060408</span></a>
+<a class="sourceLine" id="cb71-5" title="5">       From<span class="op">:</span><span class="st"> </span>DESCRIPTION</a>
+<a class="sourceLine" id="cb71-6" title="6">       Message<span class="op">:</span><span class="st"> </span>Invalid DOI</a>
+<a class="sourceLine" id="cb71-7" title="7"></a>
+<a class="sourceLine" id="cb71-8" title="8">   The Description field contains</a>
+<a class="sourceLine" id="cb71-9" title="9">     <span class="op">&lt;</span>doi<span class="op">:</span>https<span class="op">:</span><span class="er">//</span>doi.org<span class="op">/</span><span class="fl">10.1002</span><span class="op">/</span>dir<span class="fl">.4000060408</span><span class="op">&gt;</span>; and a Python version</a>
+<a class="sourceLine" id="cb71-10" title="10">   Please enclose URLs <span class="cf">in</span> angle <span class="kw">brackets</span> (<span class="op">&lt;</span>...<span class="op">&gt;</span>).</a>
+<a class="sourceLine" id="cb71-11" title="11">   The Description field contains</a>
+<a class="sourceLine" id="cb71-12" title="12">     <span class="op">&lt;</span>doi<span class="op">:</span>https<span class="op">:</span><span class="er">//</span>doi.org<span class="op">/</span><span class="fl">10.1002</span><span class="op">/</span>dir<span class="fl">.4000060408</span><span class="op">&gt;</span>; and a Python version</a>
+<a class="sourceLine" id="cb71-13" title="13">   Please write DOIs as <span class="op">&lt;</span>doi<span class="op">:</span><span class="fl">10.</span>prefix<span class="op">/</span>suffix<span class="op">&gt;</span>.</a>
+<a class="sourceLine" id="cb71-14" title="14"></a>
+<a class="sourceLine" id="cb71-15" title="15">Please do not use directed quotes as <span class="cf">in</span> “K–S statistic” <span class="cf">in</span> the</a>
+<a class="sourceLine" id="cb71-16" title="16">Description but undirected ones, i.e. <span class="st">&quot;KS....&quot;</span>.</a></code></pre></div>
+<ul>
+<li>Use undirected quotes, Kolmogorov-Smirnov (K-S) statistic instead of “K–S statistic”.</li>
+</ul>
+</div>
+<div id="python-包也用单引号" class="section level1">
+<h1><span class="header-section-number">44</span> Python 包也用单引号</h1>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1">Please single quote softare names such as <span class="st">&#39;Python&#39;</span> <span class="cf">in</span> the Description field</a></code></pre></div>
+<p><del>a Python version</del> ‘pyks’ <a href="https://pypi.org/project/pyks/" class="uri">https://pypi.org/project/pyks/</a></p>
+<ul>
+<li>Quote softare names in the right way.</li>
+</ul>
 </div>
 <div id="附录" class="section level1 unnumbered">
 <h1>附录</h1>
