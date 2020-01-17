@@ -166,6 +166,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="35" data-path=""><a href="#elaborate-description"><i class="fa fa-check"></i><b>35</b> elaborate Description</a></li>
 <li class="chapter" data-level="36" data-path=""><a href="#标题特殊拼写处理"><i class="fa fa-check"></i><b>36</b> 标题特殊拼写处理</a></li>
 <li class="chapter" data-level="37" data-path=""><a href="#失效的链接"><i class="fa fa-check"></i><b>37</b> 失效的链接</a></li>
+<li class="chapter" data-level="38" data-path=""><a href="#bib-文件的位置"><i class="fa fa-check"></i><b>38</b> bib 文件的位置</a></li>
+<li class="chapter" data-level="39" data-path=""><a href="#默认函数加上-import"><i class="fa fa-check"></i><b>39</b> 默认函数加上 import</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#附录"><i class="fa fa-check"></i>附录</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#参考文献"><i class="fa fa-check"></i>参考文献</a></li>
 </ul>
@@ -1041,6 +1043,31 @@ authors (year, ISBN:...)
 <a class="sourceLine" id="cb66-27" title="27">  Package vignette with placeholder title <span class="st">&#39;Vignette Title&#39;</span><span class="op">:</span></a>
 <a class="sourceLine" id="cb66-28" title="28"><span class="st">    &#39;url.Rmd&#39;</span></a></code></pre></div>
 <p>这种链接只是用来举例子的，不一定真的存在，所以直接消除。</p>
+</div>
+<div id="bib-文件的位置" class="section level1">
+<h1><span class="header-section-number">38</span> bib 文件的位置</h1>
+<p>参考 <a href="https://github.com/yihui/knitr/blob/master/inst/examples/knitr-manual.bib" class="uri">https://github.com/yihui/knitr/blob/master/inst/examples/knitr-manual.bib</a></p>
+<p>放在 <code>inst/examples</code></p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1"><span class="op">&gt;</span><span class="st"> </span>checking top<span class="op">-</span>level files ... NOTE</a>
+<a class="sourceLine" id="cb67-2" title="2">  Non<span class="op">-</span>standard files<span class="op">/</span>directories found at top level<span class="op">:</span></a>
+<a class="sourceLine" id="cb67-3" title="3"><span class="st">    &#39;add.bib&#39;</span> <span class="st">&#39;docs&#39;</span></a></code></pre></div>
+</div>
+<div id="默认函数加上-import" class="section level1">
+<h1><span class="header-section-number">39</span> 默认函数加上 import</h1>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1"><span class="op">&gt;</span><span class="st"> </span>checking R code <span class="cf">for</span> possible problems ... NOTE</a>
+<a class="sourceLine" id="cb68-2" title="2">  irr<span class="op">:</span><span class="st"> </span>no visible global <span class="cf">function</span> definition <span class="cf">for</span> <span class="st">&#39;optimise&#39;</span></a>
+<a class="sourceLine" id="cb68-3" title="3">  Undefined global functions or variables<span class="op">:</span></a>
+<a class="sourceLine" id="cb68-4" title="4"><span class="st">    </span>optimise</a>
+<a class="sourceLine" id="cb68-5" title="5">  Consider adding</a>
+<a class="sourceLine" id="cb68-6" title="6">    <span class="kw">importFrom</span>(<span class="st">&quot;stats&quot;</span>, <span class="st">&quot;optimise&quot;</span>)</a>
+<a class="sourceLine" id="cb68-7" title="7">  to your NAMESPACE file.</a>
+<a class="sourceLine" id="cb68-8" title="8"></a>
+<a class="sourceLine" id="cb68-9" title="9"><span class="dv">0</span> errors <span class="op">&lt;</span>U<span class="op">+</span><span class="dv">2713</span><span class="op">&gt;</span><span class="st"> </span><span class="er">|</span><span class="st"> </span><span class="dv">3</span> warnings x <span class="op">|</span><span class="st"> </span><span class="dv">2</span> notes x</a>
+<a class="sourceLine" id="cb68-10" title="10">����<span class="op">:</span><span class="st"> </span>R CMD check found WARNINGs</a>
+<a class="sourceLine" id="cb68-11" title="11">ִֹͣ��</a>
+<a class="sourceLine" id="cb68-12" title="12"></a>
+<a class="sourceLine" id="cb68-13" title="13">Exited with status <span class="fl">1.</span></a></code></pre></div>
+<p>这里 <code>importFrom("stats", "optimise")</code> 是的确的。</p>
 </div>
 <div id="附录" class="section level1 unnumbered">
 <h1>附录</h1>

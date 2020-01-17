@@ -1060,6 +1060,40 @@ Check: package vignettes, Result: NOTE
 这种链接只是用来举例子的，不一定真的存在，所以直接消除。
    
 
+
+# bib 文件的位置
+
+参考 https://github.com/yihui/knitr/blob/master/inst/examples/knitr-manual.bib
+
+放在 `inst/examples`
+
+```r
+> checking top-level files ... NOTE
+  Non-standard files/directories found at top level:
+    'add.bib' 'docs'
+```
+
+# 默认函数加上 import
+
+```r
+> checking R code for possible problems ... NOTE
+  irr: no visible global function definition for 'optimise'
+  Undefined global functions or variables:
+    optimise
+  Consider adding
+    importFrom("stats", "optimise")
+  to your NAMESPACE file.
+
+0 errors <U+2713> | 3 warnings x | 2 notes x
+����: R CMD check found WARNINGs
+ִֹͣ��
+
+Exited with status 1.
+```
+
+这里 `importFrom("stats", "optimise")` 是的确的。
+
+
 # 附录 {-}
 
 # 参考文献 {-}
