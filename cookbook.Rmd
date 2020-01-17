@@ -374,6 +374,12 @@ New submission
 
 # Add test and vignettes
 
+我的想法是，要把 example 都写到 readme，vignette，R 文档中，还要加上 test。
+
+```r
+  Package has a VignetteBuilder field but no prebuilt vignette index.
+```
+
 ```r
 Flavor: r-devel-linux-x86_64-debian-gcc, r-devel-windows-ix86+x86_64
 Check: for code which exercises the package, Result: WARNING
@@ -404,6 +410,9 @@ test_that("Plain Text", {
            comment = c(ORCID = "https://orcid.org/0000-0003-3196-6492"))')
 })
 ```
+
+
+`expect_that(add_bibtex("book"), prints_text())` 很好。
 
 加上 vignette
 
@@ -1003,7 +1012,6 @@ authors (year, ISBN:...)
 ```
 bibtex: Bibtex Parser
 ```
-
 
 # 附录 {-}
 
