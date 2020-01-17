@@ -305,8 +305,19 @@ glue::glue("globalVariables(c({var_list}))") %>%
   clipr::write_clip()
 ```
 
+注意这里别忘了 `c()`，否则报错。
+`number` 是一个包。
 
-`globalVariables('.')`
+```r
+-- R CMD check results --------------------------------------- add2gh 0.1.0 ----
+Duration: 42.7s
+
+> checking R code for possible problems ... NOTE
+  collect_comments: no visible binding for global variable 'number'
+  Undefined global functions or variables:
+    number
+```
+
 
 # 更新 NEWS.md
 
@@ -1012,6 +1023,42 @@ authors (year, ISBN:...)
 ```
 bibtex: Bibtex Parser
 ```
+
+# 失效的链接
+   
+```r
+  New submission
+ 
+  Found the following (possibly) invalid URLs:
+    URL: https://raw.githubusercontent.com/JiaxiangBU/picbackup/master/add2blog_sample_wallpaper.png
+      From: inst/doc/introduction.html
+      Status: 404
+      Message: Not Found
+ 
+  Found the following (possibly) invalid file URIs:
+    URI: www.example.com
+      From: inst/doc/url.html
+    URI: weirdlink
+      From: inst/doc/url.html
+    URI: data/whitehouse.csv
+      From: inst/doc/url.html
+    URI: app.yinxiang.com
+      From: inst/doc/url.html
+    URI: app.evernote.com
+      From: inst/doc/url.html
+    URI: .github/CODE_OF_CONDUCT.md
+      From: README.md
+    URI: LICENSE.md
+      From: README.md
+
+Flavor: r-devel-linux-x86_64-debian-gcc, r-devel-windows-ix86+x86_64
+Check: package vignettes, Result: NOTE
+  Package vignette with placeholder title 'Vignette Title':
+    'url.Rmd'
+```
+
+这种链接只是用来举例子的，不一定真的存在，所以直接消除。
+   
 
 # 附录 {-}
 
