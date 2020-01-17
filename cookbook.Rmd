@@ -987,6 +987,24 @@ authors (year, ISBN:...)
 <https:...>
 ```
 
+
+# 标题特殊拼写处理
+
+```r
+  New submission
+ 
+  Possibly mis-spelled words in DESCRIPTION:
+    BibTex (2:15)
+```    
+
+不确定的话，就全部用 title case 完成，如包 `bibtex`
+这样重复的话，用 readme read child 放过来。
+
+```
+bibtex: Bibtex Parser
+```
+
+
 # 附录 {-}
 
 # 参考文献 {-}

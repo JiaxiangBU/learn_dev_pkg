@@ -164,6 +164,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="33" data-path=""><a href="#回复速度"><i class="fa fa-check"></i><b>33</b> 回复速度</a></li>
 <li class="chapter" data-level="34" data-path=""><a href="#标题大小写问题"><i class="fa fa-check"></i><b>34</b> 标题大小写问题</a></li>
 <li class="chapter" data-level="35" data-path=""><a href="#elaborate-description"><i class="fa fa-check"></i><b>35</b> elaborate Description</a></li>
+<li class="chapter" data-level="36" data-path=""><a href="#标题特殊拼写处理"><i class="fa fa-check"></i><b>36</b> 标题特殊拼写处理</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#附录"><i class="fa fa-check"></i>附录</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#参考文献"><i class="fa fa-check"></i>参考文献</a></li>
 </ul>
@@ -986,6 +987,16 @@ Add reference tag into quote paragraphs.
 authors (year) &lt;arXiv:...&gt;
 authors (year, ISBN:...)
 &lt;https:...&gt;</code></pre>
+</div>
+<div id="标题特殊拼写处理" class="section level1">
+<h1><span class="header-section-number">36</span> 标题特殊拼写处理</h1>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1">  New submission</a>
+<a class="sourceLine" id="cb62-2" title="2"> </a>
+<a class="sourceLine" id="cb62-3" title="3">  Possibly mis<span class="op">-</span>spelled words <span class="cf">in</span> DESCRIPTION<span class="op">:</span></a>
+<a class="sourceLine" id="cb62-4" title="4"><span class="st">    </span><span class="kw">BibTex</span> (<span class="dv">2</span><span class="op">:</span><span class="dv">15</span>)</a></code></pre></div>
+<p>不确定的话，就全部用 title case 完成，如包 <code>bibtex</code>
+这样重复的话，用 readme read child 放过来。</p>
+<pre><code>bibtex: Bibtex Parser</code></pre>
 </div>
 <div id="附录" class="section level1 unnumbered">
 <h1>附录</h1>
