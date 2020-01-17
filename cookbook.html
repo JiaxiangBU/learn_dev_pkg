@@ -168,6 +168,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="37" data-path=""><a href="#失效的链接"><i class="fa fa-check"></i><b>37</b> 失效的链接</a></li>
 <li class="chapter" data-level="38" data-path=""><a href="#bib-文件的位置"><i class="fa fa-check"></i><b>38</b> bib 文件的位置</a></li>
 <li class="chapter" data-level="39" data-path=""><a href="#默认函数加上-import"><i class="fa fa-check"></i><b>39</b> 默认函数加上 import</a></li>
+<li class="chapter" data-level="40" data-path=""><a href="#pending-a-manual-inspection"><i class="fa fa-check"></i><b>40</b> pending a manual inspection</a></li>
+<li class="chapter" data-level="41" data-path=""><a href="#正确的doi书写"><i class="fa fa-check"></i><b>41</b> 正确的DOI书写</a></li>
+<li class="chapter" data-level="42" data-path=""><a href="#vignette-命名注意"><i class="fa fa-check"></i><b>42</b> Vignette 命名注意</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#附录"><i class="fa fa-check"></i>附录</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#参考文献"><i class="fa fa-check"></i>参考文献</a></li>
 </ul>
@@ -1068,6 +1071,50 @@ authors (year, ISBN:...)
 <a class="sourceLine" id="cb68-12" title="12"></a>
 <a class="sourceLine" id="cb68-13" title="13">Exited with status <span class="fl">1.</span></a></code></pre></div>
 <p>这里 <code>importFrom("stats", "optimise")</code> 是的确的。</p>
+</div>
+<div id="pending-a-manual-inspection" class="section level1">
+<h1><span class="header-section-number">40</span> pending a manual inspection</h1>
+<blockquote>
+<p>package rawKS_0.1.0.tar.gz has been auto-processed and is pending a manual inspection. A CRAN team member will typically respond to you within the next <strong>5 working days</strong>. For technical reasons you may receive a second copy of this message when a team member triggers a new check.</p>
+</blockquote>
+<p>这个一般会缩短到5个工作日内回复。</p>
+</div>
+<div id="正确的doi书写" class="section level1">
+<h1><span class="header-section-number">41</span> 正确的DOI书写</h1>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1"> </a>
+<a class="sourceLine" id="cb69-2" title="2">  Found the <span class="kw">following</span> (possibly) invalid URLs<span class="op">:</span></a>
+<a class="sourceLine" id="cb69-3" title="3"><span class="st">    </span>URL<span class="op">:</span><span class="st"> </span>https<span class="op">:</span><span class="er">//</span>doi.org<span class="op">/</span><span class="fl">10.1002</span><span class="op">/</span>dir<span class="fl">.4000060408</span></a>
+<a class="sourceLine" id="cb69-4" title="4">      From<span class="op">:</span><span class="st"> </span>DESCRIPTION</a>
+<a class="sourceLine" id="cb69-5" title="5">      Status<span class="op">:</span><span class="st"> </span>Error</a>
+<a class="sourceLine" id="cb69-6" title="6">      Message<span class="op">:</span><span class="st"> </span>libcurl error code <span class="dv">28</span><span class="op">:</span></a>
+<a class="sourceLine" id="cb69-7" title="7"><span class="st">        </span>Failed to connect to doi.wiley.com port <span class="dv">80</span><span class="op">:</span><span class="st"> </span>Connection timed out</a>
+<a class="sourceLine" id="cb69-8" title="8"> </a>
+<a class="sourceLine" id="cb69-9" title="9">  Found the <span class="kw">following</span> (possibly) invalid DOIs<span class="op">:</span></a>
+<a class="sourceLine" id="cb69-10" title="10"><span class="st">    </span>DOI<span class="op">:</span><span class="st"> </span>https<span class="op">:</span><span class="er">//</span>doi.org<span class="op">/</span><span class="fl">10.1002</span><span class="op">/</span>dir<span class="fl">.4000060408</span></a>
+<a class="sourceLine" id="cb69-11" title="11">      From<span class="op">:</span><span class="st"> </span>DESCRIPTION</a>
+<a class="sourceLine" id="cb69-12" title="12">      Message<span class="op">:</span><span class="st"> </span>Invalid DOI</a>
+<a class="sourceLine" id="cb69-13" title="13"> </a>
+<a class="sourceLine" id="cb69-14" title="14">  The Description field contains</a>
+<a class="sourceLine" id="cb69-15" title="15">    <span class="op">&lt;</span>doi<span class="op">:</span>https<span class="op">:</span><span class="er">//</span>doi.org<span class="op">/</span><span class="fl">10.1002</span><span class="op">/</span>dir<span class="fl">.4000060408</span><span class="op">&gt;</span>; and a Python version</a>
+<a class="sourceLine" id="cb69-16" title="16">  Please enclose URLs <span class="cf">in</span> angle <span class="kw">brackets</span> (<span class="op">&lt;</span>...<span class="op">&gt;</span>).</a>
+<a class="sourceLine" id="cb69-17" title="17">  The Description field contains</a>
+<a class="sourceLine" id="cb69-18" title="18">    <span class="op">&lt;</span>doi<span class="op">:</span>https<span class="op">:</span><span class="er">//</span>doi.org<span class="op">/</span><span class="fl">10.1002</span><span class="op">/</span>dir<span class="fl">.4000060408</span><span class="op">&gt;</span>; and a Python version</a>
+<a class="sourceLine" id="cb69-19" title="19">  Please write DOIs as <span class="op">&lt;</span>doi<span class="op">:</span><span class="fl">10.</span>prefix<span class="op">/</span>suffix<span class="op">&gt;</span>.</a></code></pre></div>
+<p>以下为例，参考 <a href="https://onlinelibrary.wiley.com/action/showCitFormats?doi=10.1002%2Fdir.4000060408" class="uri">https://onlinelibrary.wiley.com/action/showCitFormats?doi=10.1002%2Fdir.4000060408</a></p>
+<blockquote>
+<p>Thrasher, R.P. (1992), A note on the use of the K–S statistic as a measure of model strength. J. Direct Mark., 6: 40-47. <a href="doi:10.1002/dir.4000060408" class="uri">doi:10.1002/dir.4000060408</a></p>
+</blockquote>
+<p><code>doi:10.1002/dir.4000060408</code> 就是我们需要的，格式为<code>&lt;doi:10.prefix/suffix&gt;</code></p>
+</div>
+<div id="vignette-命名注意" class="section level1">
+<h1><span class="header-section-number">42</span> Vignette 命名注意</h1>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1">  New submission</a>
+<a class="sourceLine" id="cb70-2" title="2"></a>
+<a class="sourceLine" id="cb70-3" title="3">Flavor<span class="op">:</span><span class="st"> </span>r<span class="op">-</span>devel<span class="op">-</span>linux<span class="op">-</span>x86_<span class="dv">64</span><span class="op">-</span>debian<span class="op">-</span>gcc, r<span class="op">-</span>devel<span class="op">-</span>windows<span class="op">-</span>ix86<span class="op">+</span>x86_<span class="dv">64</span></a>
+<a class="sourceLine" id="cb70-4" title="4">Check<span class="op">:</span><span class="st"> </span>package vignettes, Result<span class="op">:</span><span class="st"> </span>NOTE</a>
+<a class="sourceLine" id="cb70-5" title="5">  Package vignette with placeholder title <span class="st">&#39;Vignette Title&#39;</span><span class="op">:</span></a>
+<a class="sourceLine" id="cb70-6" title="6"><span class="st">    &#39;url.Rmd&#39;</span></a></code></pre></div>
+<p><code>url</code>是一些默认变量，避开这个名字。</p>
 </div>
 <div id="附录" class="section level1 unnumbered">
 <h1>附录</h1>

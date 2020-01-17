@@ -1093,6 +1093,55 @@ Exited with status 1.
 
 这里 `importFrom("stats", "optimise")` 是的确的。
 
+# pending a manual inspection
+
+> package rawKS_0.1.0.tar.gz has been auto-processed and is pending a manual inspection. A CRAN team member will typically respond to you within the next **5 working days**. For technical reasons you may receive a second copy of this message when a team member triggers a new check.
+
+这个一般会缩短到5个工作日内回复。
+
+# 正确的DOI书写
+
+```r
+ 
+  Found the following (possibly) invalid URLs:
+    URL: https://doi.org/10.1002/dir.4000060408
+      From: DESCRIPTION
+      Status: Error
+      Message: libcurl error code 28:
+        Failed to connect to doi.wiley.com port 80: Connection timed out
+ 
+  Found the following (possibly) invalid DOIs:
+    DOI: https://doi.org/10.1002/dir.4000060408
+      From: DESCRIPTION
+      Message: Invalid DOI
+ 
+  The Description field contains
+    <doi:https://doi.org/10.1002/dir.4000060408>; and a Python version
+  Please enclose URLs in angle brackets (<...>).
+  The Description field contains
+    <doi:https://doi.org/10.1002/dir.4000060408>; and a Python version
+  Please write DOIs as <doi:10.prefix/suffix>.
+
+```
+
+以下为例，参考 https://onlinelibrary.wiley.com/action/showCitFormats?doi=10.1002%2Fdir.4000060408
+
+> Thrasher, R.P. (1992), A note on the use of the K–S statistic as a measure of model strength. J. Direct Mark., 6: 40-47. doi:10.1002/dir.4000060408
+
+`doi:10.1002/dir.4000060408` 就是我们需要的，格式为`<doi:10.prefix/suffix>`
+
+# Vignette 命名注意
+
+```r
+  New submission
+
+Flavor: r-devel-linux-x86_64-debian-gcc, r-devel-windows-ix86+x86_64
+Check: package vignettes, Result: NOTE
+  Package vignette with placeholder title 'Vignette Title':
+    'url.Rmd'
+```
+
+`url`是一些默认变量，避开这个名字。
 
 # 附录 {-}
 
