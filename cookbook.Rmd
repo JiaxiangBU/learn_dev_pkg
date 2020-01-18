@@ -165,7 +165,10 @@ c('clipr', 'glue', 'rstudioapi', 'rvest', 'usethis', 'xml2') %>%
 然后增加
 
 ```r
-c('here', 'readr', 'stringr', 'yaml') %>% 
+"'here' 'readr' 'stringr' 'yaml'" %>% 
+    str_split(" ") %>% 
+    .[[1]] %>% 
+    str_remove_all("'") %>% 
     purrr::walk(usethis::use_package)
 ```
 
