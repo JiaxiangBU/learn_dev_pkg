@@ -383,19 +383,18 @@ New submission
       From: README.md
 ```
 
-# Add test and vignettes
 
-我的想法是，要把 example 都写到 readme，vignette，R 文档中，还要加上 test。
-
-```r
-  Package has a VignetteBuilder field but no prebuilt vignette index.
-```
+# Add examples, tests, and vignettes
 
 ```r
 Flavor: r-devel-linux-x86_64-debian-gcc, r-devel-windows-ix86+x86_64
 Check: for code which exercises the package, Result: WARNING
   No examples, no tests, no vignettes
 ```
+
+1. 增加`usethis::use_spell_check()`，增加`test`
+1. 在 R 加入 `@examples`，新建 vignette，加入
+1. 加入 `README.Rmd`，用 child
 
 ```r
 > usethis::use_test("add_me")
@@ -1200,6 +1199,12 @@ Please single quote softare names such as 'Python' in the Description field
 No changes required to D:\work\add2pkg\inst\WORDLIST
 Updated D:/work/add2pkg/tests/spelling.R
 ● Run `devtools::check()` to trigger spell check
+```
+
+# 不要重复上传
+
+```
+The Server already contains a file with that name/version, please increase version number
 ```
 
 
