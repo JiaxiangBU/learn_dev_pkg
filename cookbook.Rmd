@@ -1207,6 +1207,45 @@ Updated D:/work/add2pkg/tests/spelling.R
 The Server already contains a file with that name/version, please increase version number
 ```
 
+# 复制功能的取舍
+
+复制功能在 rhub 测试时，因为系统不一样容易报错。
+
+增加一个 `is_paste` 方便构建测试。
+
+```r
+ERRORS:
+* checking examples ... ERROR
+Running examples in ‘add2bibtex-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: add_bibtex
+> ### Title: Bibtex and Biblatex Template
+> ### Aliases: add_bibtex
+> 
+> ### ** Examples
+> 
+> add_bibtex("online")
+Error: Clipboard on X11 requires 'xclip' (recommended) or 'xsel'.
+Execution halted
+WARNINGS:
+* checking re-building of vignette outputs ... WARNING
+Error(s) in re-building vignettes:
+  ...
+--- re-building ‘intro.Rmd’ using rmarkdown
+Quitting from lines 22-23 (intro.Rmd) 
+Error: processing vignette 'intro.Rmd' failed with diagnostics:
+Clipboard on X11 requires 'xclip' (recommended) or 'xsel'.
+--- failed re-building ‘intro.Rmd’
+
+SUMMARY: processing the following file failed:
+  ‘intro.Rmd’
+
+Error: Vignette re-building failed.
+Execution halted
+```
+
+
 
 # 附录 {-}
 
