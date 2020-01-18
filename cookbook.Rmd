@@ -295,6 +295,7 @@ add
 ```r
 Undefined global functions or variables:
     . cutoff fpr key ks tpr value
+
 ```
 
 ```r
@@ -321,6 +322,20 @@ Duration: 42.7s
     number
 ```
 
+# 给函数加上包名
+
+```r
+  Undefined global functions or variables:
+    . PC1 abs_err d global_mean lift local_mean m mae_d na.omit name
+    obs_pctg pos_pctg predict str_remove_all str_sub sysname
+    write_excel_csv y yhat yhat_bin yr
+  Consider adding
+    importFrom("stats", "na.omit", "predict")
+  to your NAMESPACE file.
+```
+
+类似于这种情况中，显然`write_excel_csv`是一个未加上报名的函数。
+加完以后记得加上 `@import`
 
 # 更新 NEWS.md
 
