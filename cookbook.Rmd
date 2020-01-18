@@ -1245,6 +1245,20 @@ Error: Vignette re-building failed.
 Execution halted
 ```
 
+# mis-spelling arguement
+
+参考 https://github.com/robbriers/biotic/blob/master/cran-comments.Rmd
+可以写
+
+```r
+  Possibly mis-spelled words in DESCRIPTION:
+    Github (2:15, 10:18)
+
+This is not a mis-spelling.
+```
+
+
+
 
 
 # 附录 {-}
