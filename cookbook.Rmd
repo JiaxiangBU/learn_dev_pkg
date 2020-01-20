@@ -141,6 +141,8 @@ c('clipr', 'glue', 'rstudioapi', 'rvest', 'usethis', 'xml2') %>%
     purrr::walk(usethis::use_package)
 ```
 
+现在可以用 `add2pkg::map_use_package`
+
 # 去除 library
 
 ```r
