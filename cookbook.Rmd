@@ -1281,6 +1281,59 @@ This is not a mis-spelling.
 
 
 
+
+# mis-spelling
+
+```r
+  New submission
+ 
+  Possibly mis-spelled words in DESCRIPTION:
+    GitBook (2:15, 10:46)
+    RMarkdown (10:22)
+```
+
+1. GitBook -> git book
+1. RMarkdown -> R markdown
+
+# 子路径内存太大
+
+```r
+-- R CMD check results --------------------------------- add2datacamp 0.1.1 ----
+Duration: 41.7s
+
+> checking installed package size ... NOTE
+    installed size is  6.5Mb
+    sub-directories of 1Mb or more:
+      doc      3.7Mb
+      figure   2.7Mb
+```
+
+# 函数说明不要太长
+
+```r
+-- R CMD check results --------------------------------- add2datacamp 0.1.1 ----
+Duration: 50.4s
+
+> checking Rd line widths ... NOTE
+  Rd file 'download_datacamp_slides.Rd':
+    \usage lines wider than 90 characters:
+         download_datacamp_slides(input = "https://s3.amazonaws.com/assets.datacamp.com/production/course_15268/slides/chapter{1:4}.pdf",
+```
+
+但是如果链接很长怎么办？
+处理方法
+
+
+```{r}
+"https://s3.amazonaws.com/assets.datacamp.com/production/course_15268/slides/chapter1.pdf" ==
+  file.path(
+    "https://s3.amazonaws.com/assets.datacamp.com/production",
+    "course_15268/slides/chapter1.pdf"
+  )
+```
+
+
+
 # 附录 {-}
 
 # 参考文献 {-}

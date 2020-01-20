@@ -178,6 +178,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="47" data-path=""><a href="#不要重复上传"><i class="fa fa-check"></i><b>47</b> 不要重复上传</a></li>
 <li class="chapter" data-level="48" data-path=""><a href="#复制功能的取舍"><i class="fa fa-check"></i><b>48</b> 复制功能的取舍</a></li>
 <li class="chapter" data-level="49" data-path=""><a href="#mis-spelling-arguement"><i class="fa fa-check"></i><b>49</b> mis-spelling arguement</a></li>
+<li class="chapter" data-level="50" data-path=""><a href="#mis-spelling"><i class="fa fa-check"></i><b>50</b> mis-spelling</a></li>
+<li class="chapter" data-level="51" data-path=""><a href="#子路径内存太大"><i class="fa fa-check"></i><b>51</b> 子路径内存太大</a></li>
+<li class="chapter" data-level="52" data-path=""><a href="#函数说明不要太长"><i class="fa fa-check"></i><b>52</b> 函数说明不要太长</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#附录"><i class="fa fa-check"></i>附录</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#参考文献"><i class="fa fa-check"></i>参考文献</a></li>
 </ul>
@@ -1238,6 +1241,47 @@ authors (year, ISBN:...)
 <a class="sourceLine" id="cb77-2" title="2"><span class="st">    </span><span class="kw">Github</span> (<span class="dv">2</span><span class="op">:</span><span class="dv">15</span>, <span class="dv">10</span><span class="op">:</span><span class="dv">18</span>)</a>
 <a class="sourceLine" id="cb77-3" title="3"></a>
 <a class="sourceLine" id="cb77-4" title="4">This is not a mis<span class="op">-</span>spelling.</a></code></pre></div>
+</div>
+<div id="mis-spelling" class="section level1">
+<h1><span class="header-section-number">50</span> mis-spelling</h1>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1">  New submission</a>
+<a class="sourceLine" id="cb78-2" title="2"> </a>
+<a class="sourceLine" id="cb78-3" title="3">  Possibly mis<span class="op">-</span>spelled words <span class="cf">in</span> DESCRIPTION<span class="op">:</span></a>
+<a class="sourceLine" id="cb78-4" title="4"><span class="st">    </span><span class="kw">GitBook</span> (<span class="dv">2</span><span class="op">:</span><span class="dv">15</span>, <span class="dv">10</span><span class="op">:</span><span class="dv">46</span>)</a>
+<a class="sourceLine" id="cb78-5" title="5">    <span class="kw">RMarkdown</span> (<span class="dv">10</span><span class="op">:</span><span class="dv">22</span>)</a></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>GitBook -&gt; git book</li>
+<li>RMarkdown -&gt; R markdown</li>
+</ol>
+</div>
+<div id="子路径内存太大" class="section level1">
+<h1><span class="header-section-number">51</span> 子路径内存太大</h1>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" title="1"><span class="op">--</span><span class="st"> </span>R CMD check results <span class="op">---------------------------------</span><span class="st"> </span>add2datacamp <span class="dv">0</span>.<span class="fl">1.1</span> <span class="op">----</span></a>
+<a class="sourceLine" id="cb79-2" title="2">Duration<span class="op">:</span><span class="st"> </span><span class="fl">41.7</span>s</a>
+<a class="sourceLine" id="cb79-3" title="3"></a>
+<a class="sourceLine" id="cb79-4" title="4"><span class="op">&gt;</span><span class="st"> </span>checking installed package size ... NOTE</a>
+<a class="sourceLine" id="cb79-5" title="5">    installed size is  <span class="fl">6.5</span>Mb</a>
+<a class="sourceLine" id="cb79-6" title="6">    sub<span class="op">-</span>directories of 1Mb or more<span class="op">:</span></a>
+<a class="sourceLine" id="cb79-7" title="7"><span class="st">      </span>doc      <span class="fl">3.7</span>Mb</a>
+<a class="sourceLine" id="cb79-8" title="8">      figure   <span class="fl">2.7</span>Mb</a></code></pre></div>
+</div>
+<div id="函数说明不要太长" class="section level1">
+<h1><span class="header-section-number">52</span> 函数说明不要太长</h1>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1"><span class="op">--</span><span class="st"> </span>R CMD check results <span class="op">---------------------------------</span><span class="st"> </span>add2datacamp <span class="dv">0</span>.<span class="fl">1.1</span> <span class="op">----</span></a>
+<a class="sourceLine" id="cb80-2" title="2">Duration<span class="op">:</span><span class="st"> </span><span class="fl">50.4</span>s</a>
+<a class="sourceLine" id="cb80-3" title="3"></a>
+<a class="sourceLine" id="cb80-4" title="4"><span class="op">&gt;</span><span class="st"> </span>checking Rd line widths ... NOTE</a>
+<a class="sourceLine" id="cb80-5" title="5">  Rd file <span class="st">&#39;download_datacamp_slides.Rd&#39;</span><span class="op">:</span></a>
+<a class="sourceLine" id="cb80-6" title="6"><span class="st">    </span>\usage lines wider than <span class="dv">90</span> characters<span class="op">:</span></a>
+<a class="sourceLine" id="cb80-7" title="7"><span class="st">         </span><span class="kw">download_datacamp_slides</span>(<span class="dt">input =</span> <span class="st">&quot;https://s3.amazonaws.com/assets.datacamp.com/production/course_15268/slides/chapter{1:4}.pdf&quot;</span>,</a></code></pre></div>
+<p>但是如果链接很长怎么办？
+处理方法</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" title="1"><span class="st">&quot;https://s3.amazonaws.com/assets.datacamp.com/production/course_15268/slides/chapter1.pdf&quot;</span> <span class="op">==</span></a>
+<a class="sourceLine" id="cb81-2" title="2"><span class="st">  </span><span class="kw">file.path</span>(</a>
+<a class="sourceLine" id="cb81-3" title="3">    <span class="st">&quot;https://s3.amazonaws.com/assets.datacamp.com/production&quot;</span>,</a>
+<a class="sourceLine" id="cb81-4" title="4">    <span class="st">&quot;course_15268/slides/chapter1.pdf&quot;</span></a>
+<a class="sourceLine" id="cb81-5" title="5">  )</a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
 </div>
 <div id="附录" class="section level1 unnumbered">
 <h1>附录</h1>
