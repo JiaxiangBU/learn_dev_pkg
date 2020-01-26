@@ -1364,6 +1364,8 @@ If a function does not return a value, please document that too, e.g.
 \value{None}.
 ```
 
+这只是针对 `@export` 的(`regarding exported methods`)
+
 加入`@return`，参考 http://r-pkgs.had.co.nz/man.html
 如果为空，写入 `@return None`
 
@@ -1414,6 +1416,195 @@ which_license.Rd is missing name/title. Skipping
 ```r
 #' @examples \dontrun{add_me()}
 ```
+
+# DESC 不用 title case
+
+```r
+Thanks,
+
+Please do not use title case in the description.
+Also please add more detail to the description.
+```
+
+# GitHub 等名字用引号括起来
+
+```
+Thanks,
+
+Please always write package names, software names and API names in
+single quotes in title and description. e.g: --> 'add2gh'
+```
+
+# 外部文件如何写 vignette
+
+```
+Please add small files needed for the examples in the inst/extdata
+subfolder of your package and use system.file() to get the correct
+package path.
+```
+
+`system.file()` 反馈的是路径。
+
+```r
+dir.create("inst/extdata")
+```
+
+参考 https://stackoverflow.com/questions/13463103/inst-and-extdata-folders-in-r-packaging
+例如 add2ggplot 包，这样写
+
+```r
+add_logo(
+  plot_path = system.file("extdata", "logo.png", package = "add2ggplot"),
+  logo_path = system.file("extdata", "jiaxiang.png", package = "add2ggplot"),
+  logo_position = "bottom right",
+  logo_scale = 5
+)
+```
+
+在 vignette 些例子。
+
+写可以共享的路径地址。
+
+```
+Please ensure that your functions do not write by default or in your
+examples/vignettes/tests in the user's homspace filee (including the
+package directory and getwd()). That is not allowed by CRAN policies.
+Please only write/save files if the user has specified a directory in
+the function themselves. Therefore please omit any default path =
+getwd() in writing functions.
+In your examples/vignettes/tests you can write to tempdir().
+```
+
+检查
+
+- [x] examples/
+- [x] vignettes/
+- ~~tests~~
+
+# dontrun 只用一个
+
+```
+(It also cannot work that way anyway as 1 \dontrun{} should be wrapped
+around all the code that should not be run - not one per line)
+
+Please fix and resubmit.
+
+Best,
+Martina Schmirl
+```
+
+# export 函数的要求
+
+```
+Please add small executable examples in your Rd-files to illustrate the
+use of the exported function but also enable automatic testing.
+```
+
+放 export 都要给 examples
+那些使用 addin 的，把`@export`删除。
+没有准备好的函数，先不要 export，平时`:::`调用就好了。
+
+# xclip 的问题
+
+加入一个`is_paste`进行逃避。
+然后 `@param` 进行解释。
+
+```
+All packages used in the package need to be listed in the DESCRIPTION
+file either in 'Depends', 'Suggests', 'Imports', 'Enhances'.
+(See Writing R Extenstion
+https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Package-Dependencies)
+
+e.g. 'xclip' or 'xsel' for build_iframe()
+```
+
+
+# donttest
+
+```
+\dontrun{} should only be used if the example really cannot be executed
+(e.g. because of missing additional software, missing API keys, ...) by
+the user. That's why wrapping examples in \dontrun{} adds the comment
+("# Not run:") as a warning for the user.
+Does not seem necessary.
+Please replace \dontrun with \donttest.
+
+Please fix and resubmit.
+
+Best,
+Martina Schmirl
+```
+
+# addin check 报错
+
+直接不要 export
+
+```
+-- R CMD check results --------------------------------------- add2md 1.1.1 ----
+Duration: 1m 44.4s
+
+> checking examples ... ERROR
+  Running examples in 'add2md-Ex.R' failed
+  The error most likely occurred in:
+  
+  > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+  > ### Name: diagrammer_shortcut
+  > ### Title: Quick paste a DiagrammeR template
+  > ### Aliases: diagrammer_shortcut
+  > 
+  > ### ** Examples
+  > 
+  > diagrammer_shortcut()
+  Error: RStudio not running
+  Execution halted
+
+1 error x | 0 warnings <U+2713> | 0 notes <U+2713>
+```
+
+我之前提问过这个问题
+https://community.rstudio.com/t/use-check-and-get-error-about-ex-r/18263/4
+
+但是不是重新启动的问题啊，我是用快捷键的，这是干净的呀。
+
+Running examples in '-Ex.R' failed The error most likely occurred in rstudio.dcf
+
+没有找到解决办法。
+
+
+# example 和 vignette 写 library
+
+```
+-- R CMD check results ---------------------------------------- rawKS 0.1.0 ----
+Duration: 3m 5s
+
+> checking for unstated dependencies in examples ... WARNING
+  'library' or 'require' call not declared from: 'tidyverse'
+```
+
+就是是在 examples 里面也要写在 imports。
+
+```
+> checking for unstated dependencies in vignettes ... NOTE
+  'library' or 'require' call not declared from: 'tidyverse'
+
+0 errors <U+2713> | 1 warning x | 2 notes x
+```
+
+
+# unable to verify current time
+
+```
+> checking for future file timestamps ... NOTE
+  unable to verify current time
+```
+
+相关问题
+https://community.rstudio.com/t/r-devel-r-cmd-check-failing-because-of-time-unable-to-verify-current-time/25589/3
+https://stat.ethz.ch/pipermail/r-package-devel/2019q1/003577.html
+
+
+
+
 
 # 附录 {-}
 

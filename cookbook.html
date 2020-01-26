@@ -187,6 +187,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="56" data-path=""><a href="#增加-verbose"><i class="fa fa-check"></i><b>56</b> 增加 verbose</a></li>
 <li class="chapter" data-level="57" data-path=""><a href="#missing-name-and-title"><i class="fa fa-check"></i><b>57</b> missing name and title</a></li>
 <li class="chapter" data-level="58" data-path=""><a href="#warning-example-doesnt-exist"><i class="fa fa-check"></i><b>58</b> warning example doesn’t exist</a></li>
+<li class="chapter" data-level="59" data-path=""><a href="#desc-不用-title-case"><i class="fa fa-check"></i><b>59</b> DESC 不用 title case</a></li>
+<li class="chapter" data-level="60" data-path=""><a href="#github-等名字用引号括起来"><i class="fa fa-check"></i><b>60</b> GitHub 等名字用引号括起来</a></li>
+<li class="chapter" data-level="61" data-path=""><a href="#外部文件如何写-vignette"><i class="fa fa-check"></i><b>61</b> 外部文件如何写 vignette</a></li>
+<li class="chapter" data-level="62" data-path=""><a href="#dontrun-只用一个"><i class="fa fa-check"></i><b>62</b> dontrun 只用一个</a></li>
+<li class="chapter" data-level="63" data-path=""><a href="#export-函数的要求"><i class="fa fa-check"></i><b>63</b> export 函数的要求</a></li>
+<li class="chapter" data-level="64" data-path=""><a href="#xclip-的问题"><i class="fa fa-check"></i><b>64</b> xclip 的问题</a></li>
+<li class="chapter" data-level="65" data-path=""><a href="#donttest"><i class="fa fa-check"></i><b>65</b> donttest</a></li>
+<li class="chapter" data-level="66" data-path=""><a href="#addin-check-报错"><i class="fa fa-check"></i><b>66</b> addin check 报错</a></li>
+<li class="chapter" data-level="67" data-path=""><a href="#example-和-vignette-写-library"><i class="fa fa-check"></i><b>67</b> example 和 vignette 写 library</a></li>
+<li class="chapter" data-level="68" data-path=""><a href="#unable-to-verify-current-time"><i class="fa fa-check"></i><b>68</b> unable to verify current time</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#附录"><i class="fa fa-check"></i>附录</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#参考文献"><i class="fa fa-check"></i>参考文献</a></li>
 </ul>
@@ -1313,6 +1323,7 @@ the functions results in the documentation.
 )
 If a function does not return a value, please document that too, e.g.
 \value{None}.</code></pre>
+<p>这只是针对 <code>@export</code> 的(<code>regarding exported methods</code>)</p>
 <p>加入<code>@return</code>，参考 <a href="http://r-pkgs.had.co.nz/man.html" class="uri">http://r-pkgs.had.co.nz/man.html</a>
 如果为空，写入 <code>@return None</code></p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1"><span class="co">#&#39; @return If all inputs are integer and logical, then the output</span></a>
@@ -1351,6 +1362,145 @@ which_license.Rd is missing name/title. Skipping</code></pre>
 <h1><span class="header-section-number">58</span> warning example doesn’t exist</h1>
 <p>参考 <a href="https://support.bioconductor.org/p/102575/" class="uri">https://support.bioconductor.org/p/102575/</a></p>
 <div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1"><span class="co">#&#39; @examples \dontrun{add_me()}</span></a></code></pre></div>
+</div>
+<div id="desc-不用-title-case" class="section level1">
+<h1><span class="header-section-number">59</span> DESC 不用 title case</h1>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" title="1">Thanks,</a>
+<a class="sourceLine" id="cb90-2" title="2"></a>
+<a class="sourceLine" id="cb90-3" title="3">Please do not use title case <span class="cf">in</span> the description.</a>
+<a class="sourceLine" id="cb90-4" title="4">Also please add more detail to the description.</a></code></pre></div>
+</div>
+<div id="github-等名字用引号括起来" class="section level1">
+<h1><span class="header-section-number">60</span> GitHub 等名字用引号括起来</h1>
+<pre><code>Thanks,
+
+Please always write package names, software names and API names in
+single quotes in title and description. e.g: --&gt; &#39;add2gh&#39;</code></pre>
+</div>
+<div id="外部文件如何写-vignette" class="section level1">
+<h1><span class="header-section-number">61</span> 外部文件如何写 vignette</h1>
+<pre><code>Please add small files needed for the examples in the inst/extdata
+subfolder of your package and use system.file() to get the correct
+package path.</code></pre>
+<p><code>system.file()</code> 反馈的是路径。</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" title="1"><span class="kw">dir.create</span>(<span class="st">&quot;inst/extdata&quot;</span>)</a></code></pre></div>
+<p>参考 <a href="https://stackoverflow.com/questions/13463103/inst-and-extdata-folders-in-r-packaging" class="uri">https://stackoverflow.com/questions/13463103/inst-and-extdata-folders-in-r-packaging</a>
+例如 add2ggplot 包，这样写</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" title="1"><span class="kw">add_logo</span>(</a>
+<a class="sourceLine" id="cb94-2" title="2">  <span class="dt">plot_path =</span> <span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;logo.png&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;add2ggplot&quot;</span>),</a>
+<a class="sourceLine" id="cb94-3" title="3">  <span class="dt">logo_path =</span> <span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;jiaxiang.png&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;add2ggplot&quot;</span>),</a>
+<a class="sourceLine" id="cb94-4" title="4">  <span class="dt">logo_position =</span> <span class="st">&quot;bottom right&quot;</span>,</a>
+<a class="sourceLine" id="cb94-5" title="5">  <span class="dt">logo_scale =</span> <span class="dv">5</span></a>
+<a class="sourceLine" id="cb94-6" title="6">)</a></code></pre></div>
+<p>在 vignette 些例子。</p>
+<p>写可以共享的路径地址。</p>
+<pre><code>Please ensure that your functions do not write by default or in your
+examples/vignettes/tests in the user&#39;s homspace filee (including the
+package directory and getwd()). That is not allowed by CRAN policies.
+Please only write/save files if the user has specified a directory in
+the function themselves. Therefore please omit any default path =
+getwd() in writing functions.
+In your examples/vignettes/tests you can write to tempdir().</code></pre>
+<p>检查</p>
+<ul>
+<li><input type="checkbox" disabled="" checked="" />
+examples/</li>
+<li><input type="checkbox" disabled="" checked="" />
+vignettes/</li>
+<li><del>tests</del></li>
+</ul>
+</div>
+<div id="dontrun-只用一个" class="section level1">
+<h1><span class="header-section-number">62</span> dontrun 只用一个</h1>
+<pre><code>(It also cannot work that way anyway as 1 \dontrun{} should be wrapped
+around all the code that should not be run - not one per line)
+
+Please fix and resubmit.
+
+Best,
+Martina Schmirl</code></pre>
+</div>
+<div id="export-函数的要求" class="section level1">
+<h1><span class="header-section-number">63</span> export 函数的要求</h1>
+<pre><code>Please add small executable examples in your Rd-files to illustrate the
+use of the exported function but also enable automatic testing.</code></pre>
+<p>放 export 都要给 examples
+那些使用 addin 的，把<code>@export</code>删除。
+没有准备好的函数，先不要 export，平时<code>:::</code>调用就好了。</p>
+</div>
+<div id="xclip-的问题" class="section level1">
+<h1><span class="header-section-number">64</span> xclip 的问题</h1>
+<p>加入一个<code>is_paste</code>进行逃避。
+然后 <code>@param</code> 进行解释。</p>
+<pre><code>All packages used in the package need to be listed in the DESCRIPTION
+file either in &#39;Depends&#39;, &#39;Suggests&#39;, &#39;Imports&#39;, &#39;Enhances&#39;.
+(See Writing R Extenstion
+https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Package-Dependencies)
+
+e.g. &#39;xclip&#39; or &#39;xsel&#39; for build_iframe()</code></pre>
+</div>
+<div id="donttest" class="section level1">
+<h1><span class="header-section-number">65</span> donttest</h1>
+<pre><code>\dontrun{} should only be used if the example really cannot be executed
+(e.g. because of missing additional software, missing API keys, ...) by
+the user. That&#39;s why wrapping examples in \dontrun{} adds the comment
+(&quot;# Not run:&quot;) as a warning for the user.
+Does not seem necessary.
+Please replace \dontrun with \donttest.
+
+Please fix and resubmit.
+
+Best,
+Martina Schmirl</code></pre>
+</div>
+<div id="addin-check-报错" class="section level1">
+<h1><span class="header-section-number">66</span> addin check 报错</h1>
+<p>直接不要 export</p>
+<pre><code>-- R CMD check results --------------------------------------- add2md 1.1.1 ----
+Duration: 1m 44.4s
+
+&gt; checking examples ... ERROR
+  Running examples in &#39;add2md-Ex.R&#39; failed
+  The error most likely occurred in:
+  
+  &gt; base::assign(&quot;.ptime&quot;, proc.time(), pos = &quot;CheckExEnv&quot;)
+  &gt; ### Name: diagrammer_shortcut
+  &gt; ### Title: Quick paste a DiagrammeR template
+  &gt; ### Aliases: diagrammer_shortcut
+  &gt; 
+  &gt; ### ** Examples
+  &gt; 
+  &gt; diagrammer_shortcut()
+  Error: RStudio not running
+  Execution halted
+
+1 error x | 0 warnings &lt;U+2713&gt; | 0 notes &lt;U+2713&gt;</code></pre>
+<p>我之前提问过这个问题
+<a href="https://community.rstudio.com/t/use-check-and-get-error-about-ex-r/18263/4" class="uri">https://community.rstudio.com/t/use-check-and-get-error-about-ex-r/18263/4</a></p>
+<p>但是不是重新启动的问题啊，我是用快捷键的，这是干净的呀。</p>
+<p>Running examples in ‘-Ex.R’ failed The error most likely occurred in rstudio.dcf</p>
+<p>没有找到解决办法。</p>
+</div>
+<div id="example-和-vignette-写-library" class="section level1">
+<h1><span class="header-section-number">67</span> example 和 vignette 写 library</h1>
+<pre><code>-- R CMD check results ---------------------------------------- rawKS 0.1.0 ----
+Duration: 3m 5s
+
+&gt; checking for unstated dependencies in examples ... WARNING
+  &#39;library&#39; or &#39;require&#39; call not declared from: &#39;tidyverse&#39;</code></pre>
+<p>就是是在 examples 里面也要写在 imports。</p>
+<pre><code>&gt; checking for unstated dependencies in vignettes ... NOTE
+  &#39;library&#39; or &#39;require&#39; call not declared from: &#39;tidyverse&#39;
+
+0 errors &lt;U+2713&gt; | 1 warning x | 2 notes x</code></pre>
+</div>
+<div id="unable-to-verify-current-time" class="section level1">
+<h1><span class="header-section-number">68</span> unable to verify current time</h1>
+<pre><code>&gt; checking for future file timestamps ... NOTE
+  unable to verify current time</code></pre>
+<p>相关问题
+<a href="https://community.rstudio.com/t/r-devel-r-cmd-check-failing-because-of-time-unable-to-verify-current-time/25589/3" class="uri">https://community.rstudio.com/t/r-devel-r-cmd-check-failing-because-of-time-unable-to-verify-current-time/25589/3</a>
+<a href="https://stat.ethz.ch/pipermail/r-package-devel/2019q1/003577.html" class="uri">https://stat.ethz.ch/pipermail/r-package-devel/2019q1/003577.html</a></p>
 </div>
 <div id="附录" class="section level1 unnumbered">
 <h1>附录</h1>
