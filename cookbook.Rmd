@@ -1332,7 +1332,88 @@ Duration: 50.4s
   )
 ```
 
+# 更新 LICENSE 年份
 
+```
+Should the year of the LICENSE file be updated?
+```
+
+# 合理写 title
+
+```
+"The mandatory ‘Title’ field should give a short description of the package"
+Please choose a more meaningful title.
+```
+
+> The Title field should give a short description of the package. It should be capitalized, not use any markup, not have any continuation lines, **and not end in a period**. Older versions of R used a separate file TITLE for giving this information; this is now defunct, and the Title field in DESCRIPTION is required.
+
+参考 https://cran.r-project.org/web/packages/knitr/index.html
+
+add2pkg: 
+A Assistant Package for Package Development in R
+
+# 写函数的 return
+
+```
+Please add \value to .Rd files regarding exported methods and explain
+the functions results in the documentation.
+(See: Writing R Extensions
+<https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Documenting-functions&gt;
+)
+If a function does not return a value, please document that too, e.g.
+\value{None}.
+```
+
+加入`@return`，参考 http://r-pkgs.had.co.nz/man.html
+如果为空，写入 `@return None`
+
+```r
+#' @return If all inputs are integer and logical, then the output
+#'   will be an integer. If integer overflow
+#'   \url{http://en.wikipedia.org/wiki/Integer_overflow} occurs, the output
+#'   will be NA with a warning. Otherwise it will be a length-one numeric or
+#'   complex vector.
+#'
+#'   Zero-length vectors have sum 0 by definition. See
+#'   \url{http://en.wikipedia.org/wiki/Empty_sum} for more details.
+```
+
+# 增加 verbose
+
+```
+You write information messages to the console that cannot be easily
+suppressed.
+It is more R like to generate objects that can be used to extract the
+information a user is interested in, and then print() that object.
+Instead of print()/cat() rather use message()/warning()  or
+if(verbose)cat(..) if you really have to write text to the console.
+(except for print() and summary() functions)
+
+Please fix and resubmit.
+
+Best,
+Martina Schmirl
+```
+
+使用 `if(verbose)`cat(...) 打印信息。
+
+# missing name and title
+
+```
+Writing NAMESPACE
+Warning message:
+which_license.Rd is missing name/title. Skipping
+```
+
+函数没有加 title。
+
+# warning example doesn't exist
+
+参考 https://support.bioconductor.org/p/102575/
+
+```r
+#' @examples \dontrun{add_me()}
+```
 
 # 附录 {-}
 

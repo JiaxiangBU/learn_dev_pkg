@@ -24,7 +24,7 @@
 <meta name="author" content="李家翔" />
 
 
-<meta name="date" content="2020-01-20" />
+<meta name="date" content="2020-01-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -181,6 +181,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="50" data-path=""><a href="#mis-spelling"><i class="fa fa-check"></i><b>50</b> mis-spelling</a></li>
 <li class="chapter" data-level="51" data-path=""><a href="#子路径内存太大"><i class="fa fa-check"></i><b>51</b> 子路径内存太大</a></li>
 <li class="chapter" data-level="52" data-path=""><a href="#函数说明不要太长"><i class="fa fa-check"></i><b>52</b> 函数说明不要太长</a></li>
+<li class="chapter" data-level="53" data-path=""><a href="#更新-license-年份"><i class="fa fa-check"></i><b>53</b> 更新 LICENSE 年份</a></li>
+<li class="chapter" data-level="54" data-path=""><a href="#合理写-title"><i class="fa fa-check"></i><b>54</b> 合理写 title</a></li>
+<li class="chapter" data-level="55" data-path=""><a href="#写函数的-return"><i class="fa fa-check"></i><b>55</b> 写函数的 return</a></li>
+<li class="chapter" data-level="56" data-path=""><a href="#增加-verbose"><i class="fa fa-check"></i><b>56</b> 增加 verbose</a></li>
+<li class="chapter" data-level="57" data-path=""><a href="#missing-name-and-title"><i class="fa fa-check"></i><b>57</b> missing name and title</a></li>
+<li class="chapter" data-level="58" data-path=""><a href="#warning-example-doesnt-exist"><i class="fa fa-check"></i><b>58</b> warning example doesn’t exist</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#附录"><i class="fa fa-check"></i>附录</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#参考文献"><i class="fa fa-check"></i>参考文献</a></li>
 </ul>
@@ -203,7 +209,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">R 开发包 Cookbook</h1>
 <p class="author"><em>李家翔</em></p>
-<p class="date"><em>2020-01-20</em></p>
+<p class="date"><em>2020-01-26</em></p>
 </div>
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -1146,7 +1152,7 @@ authors (year, ISBN:...)
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1"><span class="op">---</span></a>
 <a class="sourceLine" id="cb71-2" title="2">title<span class="op">:</span><span class="st"> &quot;More for URL&quot;</span></a>
 <a class="sourceLine" id="cb71-3" title="3">author<span class="op">:</span><span class="st"> &quot;Jiaxiang Li&quot;</span></a>
-<a class="sourceLine" id="cb71-4" title="4">date<span class="op">:</span><span class="st"> &quot;2020-01-20&quot;</span></a>
+<a class="sourceLine" id="cb71-4" title="4">date<span class="op">:</span><span class="st"> &quot;2020-01-26&quot;</span></a>
 <a class="sourceLine" id="cb71-5" title="5">output<span class="op">:</span><span class="st"> </span>rmarkdown<span class="op">::</span>html_vignette</a>
 <a class="sourceLine" id="cb71-6" title="6">vignette<span class="op">:</span><span class="st"> </span><span class="er">&gt;</span></a>
 <a class="sourceLine" id="cb71-7" title="7"><span class="st">  </span>%\VignetteIndexEntry{Vignette Title}</a>
@@ -1282,6 +1288,69 @@ authors (year, ISBN:...)
 <a class="sourceLine" id="cb81-4" title="4">    <span class="st">&quot;course_15268/slides/chapter1.pdf&quot;</span></a>
 <a class="sourceLine" id="cb81-5" title="5">  )</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
+</div>
+<div id="更新-license-年份" class="section level1">
+<h1><span class="header-section-number">53</span> 更新 LICENSE 年份</h1>
+<pre><code>Should the year of the LICENSE file be updated?</code></pre>
+</div>
+<div id="合理写-title" class="section level1">
+<h1><span class="header-section-number">54</span> 合理写 title</h1>
+<pre><code>&quot;The mandatory ‘Title’ field should give a short description of the package&quot;
+Please choose a more meaningful title.</code></pre>
+<blockquote>
+<p>The Title field should give a short description of the package. It should be capitalized, not use any markup, not have any continuation lines, <strong>and not end in a period</strong>. Older versions of R used a separate file TITLE for giving this information; this is now defunct, and the Title field in DESCRIPTION is required.</p>
+</blockquote>
+<p>参考 <a href="https://cran.r-project.org/web/packages/knitr/index.html" class="uri">https://cran.r-project.org/web/packages/knitr/index.html</a></p>
+<p>add2pkg:
+A Assistant Package for Package Development in R</p>
+</div>
+<div id="写函数的-return" class="section level1">
+<h1><span class="header-section-number">55</span> 写函数的 return</h1>
+<pre><code>Please add \value to .Rd files regarding exported methods and explain
+the functions results in the documentation.
+(See: Writing R Extensions
+&lt;https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Documenting-functions&amp;gt;
+)
+If a function does not return a value, please document that too, e.g.
+\value{None}.</code></pre>
+<p>加入<code>@return</code>，参考 <a href="http://r-pkgs.had.co.nz/man.html" class="uri">http://r-pkgs.had.co.nz/man.html</a>
+如果为空，写入 <code>@return None</code></p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1"><span class="co">#&#39; @return If all inputs are integer and logical, then the output</span></a>
+<a class="sourceLine" id="cb86-2" title="2"><span class="co">#&#39;   will be an integer. If integer overflow</span></a>
+<a class="sourceLine" id="cb86-3" title="3"><span class="co">#&#39;   \url{http://en.wikipedia.org/wiki/Integer_overflow} occurs, the output</span></a>
+<a class="sourceLine" id="cb86-4" title="4"><span class="co">#&#39;   will be NA with a warning. Otherwise it will be a length-one numeric or</span></a>
+<a class="sourceLine" id="cb86-5" title="5"><span class="co">#&#39;   complex vector.</span></a>
+<a class="sourceLine" id="cb86-6" title="6"><span class="co">#&#39;</span></a>
+<a class="sourceLine" id="cb86-7" title="7"><span class="co">#&#39;   Zero-length vectors have sum 0 by definition. See</span></a>
+<a class="sourceLine" id="cb86-8" title="8"><span class="co">#&#39;   \url{http://en.wikipedia.org/wiki/Empty_sum} for more details.</span></a></code></pre></div>
+</div>
+<div id="增加-verbose" class="section level1">
+<h1><span class="header-section-number">56</span> 增加 verbose</h1>
+<pre><code>You write information messages to the console that cannot be easily
+suppressed.
+It is more R like to generate objects that can be used to extract the
+information a user is interested in, and then print() that object.
+Instead of print()/cat() rather use message()/warning()  or
+if(verbose)cat(..) if you really have to write text to the console.
+(except for print() and summary() functions)
+
+Please fix and resubmit.
+
+Best,
+Martina Schmirl</code></pre>
+<p>使用 <code>if(verbose)</code>cat(…) 打印信息。</p>
+</div>
+<div id="missing-name-and-title" class="section level1">
+<h1><span class="header-section-number">57</span> missing name and title</h1>
+<pre><code>Writing NAMESPACE
+Warning message:
+which_license.Rd is missing name/title. Skipping</code></pre>
+<p>函数没有加 title。</p>
+</div>
+<div id="warning-example-doesnt-exist" class="section level1">
+<h1><span class="header-section-number">58</span> warning example doesn’t exist</h1>
+<p>参考 <a href="https://support.bioconductor.org/p/102575/" class="uri">https://support.bioconductor.org/p/102575/</a></p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1"><span class="co">#&#39; @examples \dontrun{add_me()}</span></a></code></pre></div>
 </div>
 <div id="附录" class="section level1 unnumbered">
 <h1>附录</h1>
