@@ -1603,6 +1603,10 @@ https://community.rstudio.com/t/r-devel-r-cmd-check-failing-because-of-time-unab
 https://stat.ethz.ch/pipermail/r-package-devel/2019q1/003577.html
 
 
+# 打开 GitHub Pages
+
+```{r,child="../test-gh/analysis/test-github-pages.Rmd"}
+```
 
 
 
