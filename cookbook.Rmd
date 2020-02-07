@@ -1610,6 +1610,16 @@ https://stat.ethz.ch/pipermail/r-package-devel/2019q1/003577.html
 
 
 
+# 审核成功
+
+```
+Thanks,
+on its way to CRAN.
+
+Best,
+Martina Schmirl
+```
+
 # 附录 {-}
 
 # 参考文献 {-}
