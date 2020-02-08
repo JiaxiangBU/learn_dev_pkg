@@ -24,7 +24,7 @@
 <meta name="author" content="李家翔" />
 
 
-<meta name="date" content="2020-02-07" />
+<meta name="date" content="2020-02-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -142,7 +142,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11" data-path=""><a href="#添加-global-变量"><i class="fa fa-check"></i><b>11</b> 添加 global 变量</a></li>
 <li class="chapter" data-level="12" data-path=""><a href="#给函数加上包名"><i class="fa fa-check"></i><b>12</b> 给函数加上包名</a></li>
 <li class="chapter" data-level="13" data-path=""><a href="#todos-进-commit"><i class="fa fa-check"></i><b>13</b> todos 进 commit</a></li>
-<li class="chapter" data-level="14" data-path=""><a href="#更新-news.md"><i class="fa fa-check"></i><b>14</b> 更新 NEWS.md</a></li>
+<li class="chapter" data-level="14" data-path=""><a href="#news"><i class="fa fa-check"></i><b>14</b> 更新 NEWS.md</a></li>
 <li class="chapter" data-level="15" data-path=""><a href="#cran-comments"><i class="fa fa-check"></i><b>15</b> CRAN Comments</a></li>
 <li class="chapter" data-level="16" data-path=""><a href="#ignore-readme.rmd"><i class="fa fa-check"></i><b>16</b> Ignore README.Rmd</a></li>
 <li class="chapter" data-level="17" data-path=""><a href="#update-desc"><i class="fa fa-check"></i><b>17</b> Update DESC</a></li>
@@ -200,7 +200,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="69" data-path=""><a href="#unable-to-verify-current-time"><i class="fa fa-check"></i><b>69</b> unable to verify current time</a></li>
 <li class="chapter" data-level="70" data-path=""><a href="#打开-github-pages"><i class="fa fa-check"></i><b>70</b> 打开 GitHub Pages</a></li>
 <li class="chapter" data-level="71" data-path=""><a href="#审核成功"><i class="fa fa-check"></i><b>71</b> 审核成功</a></li>
-<li class="chapter" data-level="72" data-path=""><a href="#发布博客"><i class="fa fa-check"></i><b>72</b> 发布博客</a></li>
+<li class="chapter" data-level="72" data-path=""><a href="#发布-r-cran-后续-workflow"><i class="fa fa-check"></i><b>72</b> 发布 R CRAN 后续 workflow</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#附录"><i class="fa fa-check"></i>附录</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#参考文献"><i class="fa fa-check"></i>参考文献</a></li>
 </ul>
@@ -223,7 +223,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">R 开发包 Cookbook</h1>
 <p class="author"><em>李家翔</em></p>
-<p class="date"><em>2020-02-07</em></p>
+<p class="date"><em>2020-02-08</em></p>
 </div>
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -481,17 +481,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">13</span> todos 进 commit</h1>
 <p>放到 commit 最后都可以整理成 NEWS 的！</p>
 </div>
-<div id="更新-news.md" class="section level1">
+<div id="news" class="section level1">
 <h1><span class="header-section-number">14</span> 更新 NEWS.md</h1>
 <p>以包 add2md 为例。</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">library</span>(git2r)</a>
-<a class="sourceLine" id="cb24-2" title="2">repo &lt;-<span class="st"> </span><span class="kw">repository</span>(<span class="st">&quot;../add2md&quot;</span>)</a>
-<a class="sourceLine" id="cb24-3" title="3"><span class="kw">commits</span>(repo) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb24-4" title="4"><span class="st">    </span><span class="kw">map_chr</span>(<span class="st">`</span><span class="dt">[[</span><span class="st">`</span>, <span class="st">&quot;message&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb24-5" title="5"><span class="st">    </span>.[<span class="dv">1</span><span class="op">:</span><span class="dv">22</span>] <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb24-6" title="6"><span class="st">    </span><span class="kw">paste</span>(<span class="st">&quot;*&quot;</span>, .) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb24-7" title="7"><span class="st">    </span>clipr<span class="op">::</span><span class="kw">write_clip</span>()</a>
-<a class="sourceLine" id="cb24-8" title="8"><span class="co"># 选择多少到对少的 commits 来更新 NEWS.md</span></a></code></pre></div>
+<pre class="r}"><code>add2git:::commit2news(repo_path = ,min = ,max = )</code></pre>
 <ol style="list-style-type: decimal">
 <li>updated the function of <code>checkbox</code> with the feature checked -&gt; unchecked.</li>
 <li>updated the function <code>checkbox</code> with the feature <code>checked</code>.</li>
@@ -1170,7 +1163,7 @@ authors (year, ISBN:...)
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1"><span class="op">---</span></a>
 <a class="sourceLine" id="cb71-2" title="2">title<span class="op">:</span><span class="st"> &quot;More for URL&quot;</span></a>
 <a class="sourceLine" id="cb71-3" title="3">author<span class="op">:</span><span class="st"> &quot;Jiaxiang Li&quot;</span></a>
-<a class="sourceLine" id="cb71-4" title="4">date<span class="op">:</span><span class="st"> &quot;2020-02-07&quot;</span></a>
+<a class="sourceLine" id="cb71-4" title="4">date<span class="op">:</span><span class="st"> &quot;2020-02-08&quot;</span></a>
 <a class="sourceLine" id="cb71-5" title="5">output<span class="op">:</span><span class="st"> </span>rmarkdown<span class="op">::</span>html_vignette</a>
 <a class="sourceLine" id="cb71-6" title="6">vignette<span class="op">:</span><span class="st"> </span><span class="er">&gt;</span></a>
 <a class="sourceLine" id="cb71-7" title="7"><span class="st">  </span>%\VignetteIndexEntry{Vignette Title}</a>
@@ -1550,9 +1543,21 @@ on its way to CRAN.
 Best,
 Martina Schmirl</code></pre>
 </div>
-<div id="发布博客" class="section level1">
-<h1><span class="header-section-number">72</span> 发布博客</h1>
-<p>把 md 复制粘贴到正文，并且加上 R CRAN 的链接。</p>
+<div id="发布-r-cran-后续-workflow" class="section level1">
+<h1><span class="header-section-number">72</span> 发布 R CRAN 后续 workflow</h1>
+<ol style="list-style-type: decimal">
+<li><p>发布博客
+把 md 复制粘贴到正文，并且加上 R CRAN 的链接。</p></li>
+<li><p>比如更新 README 模板，加入 R CRAN 的安装代码</p></li>
+<li><p>如果是 Python 包，通过 setting 更新 desc</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" title="1">add2pkg<span class="op">:::</span><span class="kw">setting2desc</span>()</a></code></pre></div></li>
+<li><p>Update NEWS <a href="#news">14</a></p></li>
+<li><p>release 产生 DOI 和 Citation 更新 R CRAN</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" title="1">usethis<span class="op">::</span><span class="kw">use_github_release</span>()</a></code></pre></div>
+<p>不用慌，可以再修改的，只会生成这样一个 untagged 的链接
+<a href="https://github.com/JiaxiangBU/rawKS/releases/tag/untagged-5dcfe009af815378d0b1" class="uri">https://github.com/JiaxiangBU/rawKS/releases/tag/untagged-5dcfe009af815378d0b1</a>
+确保 zenodo 打开。</p></li>
+</ol>
 </div>
 <div id="附录" class="section level1 unnumbered">
 <h1>附录</h1>

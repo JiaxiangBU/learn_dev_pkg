@@ -346,7 +346,7 @@ Duration: 42.7s
 ```
 
 
-# 更新 NEWS.md
+# 更新 NEWS.md {#news}
 
 
 ```{r,child="analysis/update_news.Rmd"}
@@ -1627,9 +1627,27 @@ Best,
 Martina Schmirl
 ```
 
-# 发布博客
+# 发布 R CRAN 后续 workflow
 
-把 md 复制粘贴到正文，并且加上 R CRAN 的链接。
+1. 发布博客
+    把 md 复制粘贴到正文，并且加上 R CRAN 的链接。
+1. 比如更新 README 模板，加入 R CRAN 的安装代码
+1. 如果是 Python 包，通过 setting 更新 desc
+    
+    ```r
+    add2pkg:::setting2desc()
+    ```
+
+1. Update NEWS \@ref(news)
+1. release 产生 DOI 和 Citation 更新 R CRAN
+    
+    ```r
+    usethis::use_github_release()
+    ```
+    
+    不用慌，可以再修改的，只会生成这样一个 untagged 的链接
+    https://github.com/JiaxiangBU/rawKS/releases/tag/untagged-5dcfe009af815378d0b1
+    确保 zenodo 打开。
 
 # 附录 {-}
 

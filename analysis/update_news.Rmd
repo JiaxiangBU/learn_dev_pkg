@@ -1,14 +1,7 @@
 以包 add2md 为例。
 
-```r
-library(git2r)
-repo <- repository("../add2md")
-commits(repo) %>% 
-    map_chr(`[[`, "message") %>% 
-    .[1:22] %>% 
-    paste("*", .) %>% 
-    clipr::write_clip()
-# 选择多少到对少的 commits 来更新 NEWS.md
+```r}
+add2git:::commit2news(repo_path = ,min = ,max = )
 ```
 
 1. updated the function of `checkbox` with the feature checked -> unchecked.
