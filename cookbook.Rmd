@@ -1654,6 +1654,11 @@ Martina Schmirl
 
 这个空格问题，转换成 unicode 然后合并到 archive 函数，**先不要嵌套到函数中，DOT**，分开开发。
 
+# devtools 2.2.2
+
+1. `submit_cran()` now returns a more informative error when the CRAN submission portal is down
+1. `release()` now works if the package root is not in the working directory.
+
 # 附录 {-}
 
 # 参考文献 {-}

@@ -24,7 +24,7 @@
 <meta name="author" content="李家翔" />
 
 
-<meta name="date" content="2020-02-15" />
+<meta name="date" content="2020-02-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -202,6 +202,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="71" data-path=""><a href="#审核成功"><i class="fa fa-check"></i><b>71</b> 审核成功</a></li>
 <li class="chapter" data-level="72" data-path=""><a href="#发布-r-cran-后续-workflow"><i class="fa fa-check"></i><b>72</b> 发布 R CRAN 后续 workflow</a></li>
 <li class="chapter" data-level="73" data-path=""><a href="#str_right_space"><i class="fa fa-check"></i><b>73</b> str_right_space</a></li>
+<li class="chapter" data-level="74" data-path=""><a href="#devtools-2.2.2"><i class="fa fa-check"></i><b>74</b> devtools 2.2.2</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#附录"><i class="fa fa-check"></i>附录</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#参考文献"><i class="fa fa-check"></i>参考文献</a></li>
 </ul>
@@ -224,7 +225,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">R 开发包 Cookbook</h1>
 <p class="author"><em>李家翔</em></p>
-<p class="date"><em>2020-02-15</em></p>
+<p class="date"><em>2020-02-19</em></p>
 </div>
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -1164,7 +1165,7 @@ authors (year, ISBN:...)
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1"><span class="op">---</span></a>
 <a class="sourceLine" id="cb71-2" title="2">title<span class="op">:</span><span class="st"> &quot;More for URL&quot;</span></a>
 <a class="sourceLine" id="cb71-3" title="3">author<span class="op">:</span><span class="st"> &quot;Jiaxiang Li&quot;</span></a>
-<a class="sourceLine" id="cb71-4" title="4">date<span class="op">:</span><span class="st"> &quot;2020-02-15&quot;</span></a>
+<a class="sourceLine" id="cb71-4" title="4">date<span class="op">:</span><span class="st"> &quot;2020-02-19&quot;</span></a>
 <a class="sourceLine" id="cb71-5" title="5">output<span class="op">:</span><span class="st"> </span>rmarkdown<span class="op">::</span>html_vignette</a>
 <a class="sourceLine" id="cb71-6" title="6">vignette<span class="op">:</span><span class="st"> </span><span class="er">&gt;</span></a>
 <a class="sourceLine" id="cb71-7" title="7"><span class="st">  </span>%\VignetteIndexEntry{Vignette Title}</a>
@@ -1563,6 +1564,13 @@ Martina Schmirl</code></pre>
 <div id="str_right_space" class="section level1">
 <h1><span class="header-section-number">73</span> str_right_space</h1>
 <p>这个空格问题，转换成 unicode 然后合并到 archive 函数，<strong>先不要嵌套到函数中，DOT</strong>，分开开发。</p>
+</div>
+<div id="devtools-2.2.2" class="section level1">
+<h1><span class="header-section-number">74</span> devtools 2.2.2</h1>
+<ol style="list-style-type: decimal">
+<li><code>submit_cran()</code> now returns a more informative error when the CRAN submission portal is down</li>
+<li><code>release()</code> now works if the package root is not in the working directory.</li>
+</ol>
 </div>
 <div id="附录" class="section level1 unnumbered">
 <h1>附录</h1>
