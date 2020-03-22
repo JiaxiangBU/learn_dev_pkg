@@ -294,11 +294,15 @@ add
 
 # 去除 global variables 的问题
 
+一般 check 时会出现这样的问题，这是使用 `.` 写 pipline 产生的。
+
 ```r
 Undefined global functions or variables:
     . cutoff fpr key ks tpr value
 
 ```
+
+一般有两种方法，
 
 ```r
 var_list <- 
@@ -323,6 +327,8 @@ Duration: 42.7s
   Undefined global functions or variables:
     number
 ```
+
+或者，
 
 (ref:global-var-plot) 防止建立包时，检测出现 notes，可以让`.data$var`尽量在`aes()`和`vars`里面[@Dunnington2020]
 

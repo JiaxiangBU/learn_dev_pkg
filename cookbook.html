@@ -447,8 +447,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="去除-global-variables-的问题" class="section level1">
 <h1><span class="header-section-number">11</span> 去除 global variables 的问题</h1>
+<p>一般 check 时会出现这样的问题，这是使用 <code>.</code> 写 pipline 产生的。</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">Undefined global functions or variables<span class="op">:</span></a>
 <a class="sourceLine" id="cb20-2" title="2"><span class="st">    </span>. cutoff fpr key ks tpr value</a></code></pre></div>
+<p>一般有两种方法，</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">var_list &lt;-<span class="st"> </span></a>
 <a class="sourceLine" id="cb21-2" title="2"><span class="st">&quot;. cutoff fpr key ks tpr value&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb21-3" title="3"><span class="st">  </span><span class="kw">strsplit</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">s&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -466,6 +468,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb22-5" title="5">  collect_comments<span class="op">:</span><span class="st"> </span>no visible binding <span class="cf">for</span> global variable <span class="st">&#39;number&#39;</span></a>
 <a class="sourceLine" id="cb22-6" title="6">  Undefined global functions or variables<span class="op">:</span></a>
 <a class="sourceLine" id="cb22-7" title="7"><span class="st">    </span>number</a></code></pre></div>
+<p>或者，</p>
 
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1">knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&quot;figure/20200322125624.png&quot;</span>)</a>
 <a class="sourceLine" id="cb23-2" title="2">knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&quot;figure/20200322125734.png&quot;</span>)</a></code></pre></div>
