@@ -7,7 +7,7 @@ output:
         split_by: none
         split_bib: TRUE
         df_print: paged
-bibliography: refs/add.bib
+bibliography: [refs/add.bib,../imp_rmd/add.bib]
 ---
 
 ```{r setup,echo = FALSE}
@@ -292,7 +292,7 @@ add
 
 直接删除。
 
-# 添加 global 变量
+# 去除 global variables 的问题
 
 ```r
 Undefined global functions or variables:
@@ -323,6 +323,14 @@ Duration: 42.7s
   Undefined global functions or variables:
     number
 ```
+
+(ref:global-var-plot) 防止建立包时，检测出现 notes，可以让`.data$var`尽量在`aes()`和`vars`里面[@Dunnington2020]
+
+```{r global-var-plot, fig.cap='(ref:global-var-plot)', out.width=c('50%','50%'), fig.show='hold'}
+knitr::include_graphics("figure/20200322125624.png")
+knitr::include_graphics("figure/20200322125734.png")
+```
+
 
 # 给函数加上包名
 
