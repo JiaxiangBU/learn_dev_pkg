@@ -203,6 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="72" data-path=""><a href="#发布-r-cran-后续-workflow"><i class="fa fa-check"></i><b>72</b> 发布 R CRAN 后续 workflow</a></li>
 <li class="chapter" data-level="73" data-path=""><a href="#str_right_space"><i class="fa fa-check"></i><b>73</b> str_right_space</a></li>
 <li class="chapter" data-level="74" data-path=""><a href="#devtools-2.2.2"><i class="fa fa-check"></i><b>74</b> devtools 2.2.2</a></li>
+<li class="chapter" data-level="75" data-path=""><a href="#变量参数加上vars"><i class="fa fa-check"></i><b>75</b> 变量参数加上<code>vars</code></a></li>
 <li class="chapter" data-level="" data-path=""><a href="#附录"><i class="fa fa-check"></i>附录</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#参考文献"><i class="fa fa-check"></i>参考文献</a></li>
 </ul>
@@ -1583,6 +1584,30 @@ Martina Schmirl</code></pre>
 <li><code>submit_cran()</code> now returns a more informative error when the CRAN submission portal is down</li>
 <li><code>release()</code> now works if the package root is not in the working directory.</li>
 </ol>
+</div>
+<div id="变量参数加上vars" class="section level1">
+<h1><span class="header-section-number">75</span> 变量参数加上<code>vars</code></h1>
+
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" title="1">knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&quot;figure/IMG_0276.png&quot;</span>)</a>
+<a class="sourceLine" id="cb112-2" title="2">plot_mpg &lt;-<span class="st"> </span><span class="cf">function</span>(col_var, facet_var) {</a>
+<a class="sourceLine" id="cb112-3" title="3">    <span class="kw">ggplot</span>(mpg) <span class="op">+</span></a>
+<a class="sourceLine" id="cb112-4" title="4"><span class="st">        </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(displ, hwy, <span class="dt">col =</span> .data[[col_var]])) <span class="op">+</span></a>
+<a class="sourceLine" id="cb112-5" title="5"><span class="st">        </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(.data[[facet_var]]))</a>
+<a class="sourceLine" id="cb112-6" title="6">}</a>
+<a class="sourceLine" id="cb112-7" title="7"><span class="kw">plot_mpg</span>(<span class="dt">col_var =</span> <span class="st">&#39;class&#39;</span>, <span class="dt">facet_var =</span> <span class="st">&#39;drv&#39;</span>)</a>
+<a class="sourceLine" id="cb112-8" title="8">plot_mpg &lt;-<span class="st"> </span><span class="cf">function</span>(.data, col_var, facet_var) {</a>
+<a class="sourceLine" id="cb112-9" title="9">    <span class="kw">ggplot</span>(.data) <span class="op">+</span></a>
+<a class="sourceLine" id="cb112-10" title="10"><span class="st">        </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(displ, hwy, <span class="dt">col =</span> .data[[col_var]])) <span class="op">+</span></a>
+<a class="sourceLine" id="cb112-11" title="11"><span class="st">        </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(.data[[facet_var]]))</a>
+<a class="sourceLine" id="cb112-12" title="12">}</a>
+<a class="sourceLine" id="cb112-13" title="13">mpg <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb112-14" title="14"><span class="st">    </span><span class="kw">plot_mpg</span>(<span class="dt">col_var =</span> <span class="st">&#39;class&#39;</span>, <span class="dt">facet_var =</span> <span class="st">&#39;drv&#39;</span>)</a></code></pre></div>
+<div class="figure"><span id="fig:var-arg-plot"></span>
+<img src="figure/IMG_0276.png" alt="这样可以避免输入是文本时，需要调用 eval 和 parse写表达式 (Dunnington 2020)" width="33%" /><img src="cookbook_files/figure-html/var-arg-plot-2.png" alt="这样可以避免输入是文本时，需要调用 eval 和 parse写表达式 (Dunnington 2020)" width="33%" /><img src="cookbook_files/figure-html/var-arg-plot-3.png" alt="这样可以避免输入是文本时，需要调用 eval 和 parse写表达式 (Dunnington 2020)" width="33%" />
+<p class="caption">
+Figure 75.1: 这样可以避免输入是文本时，需要调用 <code>eval</code> 和 <code>parse</code>写表达式 <span class="citation">(Dunnington 2020)</span>
+</p>
+</div>
 </div>
 <div id="附录" class="section level1 unnumbered">
 <h1>附录</h1>

@@ -22,6 +22,11 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 1. 相关问题提交到
     <a class="github-button" href="https://github.com/JiaxiangBU/tutoring2/issues" data-show-count="true" aria-label="Issue JiaxiangBU/tutoring on GitHub">Issue</a>
 
+```{r include=FALSE}
+library(tidyverse)
+```
+
+
 # 完成状态
 
 ```r
@@ -1672,6 +1677,29 @@ Martina Schmirl
 
 1. `submit_cran()` now returns a more informative error when the CRAN submission portal is down
 1. `release()` now works if the package root is not in the working directory.
+
+# 变量参数加上`vars`
+
+(ref:var-arg-plot) 这样可以避免输入是文本时，需要调用 `eval` 和 `parse`写表达式 [@Dunnington2020]
+
+```{r var-arg-plot, fig.cap='(ref:var-arg-plot)', out.width=c('33%','33%','33%'), fig.show='hold'}
+knitr::include_graphics("figure/IMG_0276.png")
+plot_mpg <- function(col_var, facet_var) {
+    ggplot(mpg) +
+        geom_point(aes(displ, hwy, col = .data[[col_var]])) +
+        facet_wrap(vars(.data[[facet_var]]))
+}
+plot_mpg(col_var = 'class', facet_var = 'drv')
+plot_mpg <- function(.data, col_var, facet_var) {
+    ggplot(.data) +
+        geom_point(aes(displ, hwy, col = .data[[col_var]])) +
+        facet_wrap(vars(.data[[facet_var]]))
+}
+mpg %>%
+    plot_mpg(col_var = 'class', facet_var = 'drv')
+```
+
+
 
 # 附录 {-}
 
