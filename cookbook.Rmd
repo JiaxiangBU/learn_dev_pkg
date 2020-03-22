@@ -335,6 +335,8 @@ Duration: 42.7s
 
 或者，
 
+> Quoted arguments in tidyverse functions can trigger an **R CMD check NOTE** about undefined global variables. To avoid this: 1.Import `rlang::.data` to your package,  perhaps with the roxygen2 tag `@importFrom rlang .data` 2.Use the `.data$` pronoun in front of variable names in tidyverse[@tidyeval-2]
+
 (ref:global-var-plot) 防止建立包时，检测出现 notes，可以让`.data$var`尽量在`aes()`和`vars`里面[@Dunnington2020]
 
 ```{r global-var-plot, fig.cap='(ref:global-var-plot)', out.width=c('50%','50%'), fig.show='hold'}
@@ -342,6 +344,12 @@ knitr::include_graphics("figure/20200322125624.png")
 knitr::include_graphics("figure/20200322125734.png")
 ```
 
+```{r}
+#' @importFrom rlang .data 
+mutate_y <- function(df) {
+    dplyr::mutate(df, y = .data$a + 1)
+}
+```
 
 # 给函数加上包名
 
