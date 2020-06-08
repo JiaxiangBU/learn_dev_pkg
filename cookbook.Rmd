@@ -1709,6 +1709,30 @@ mpg %>%
 
 
 
+
+# 查看包结构
+
+```{r}
+fs::dir_tree(find.package("rhub"))
+```
+
+# 查询 vignette
+
+```{r eval=FALSE}
+vignette(package = "rhub")
+browseVignettes(package = "rhub")
+```
+
+# vignette 和 suggest
+
+> that packages used in the vignette need to be listed in DESCRIPTION (under Suggests if they’re only used in the vignette [@Salmon2020]
+
+只在 vignette 使用的包，只需要放到 suggest。
+
+
+
+
+
 # 附录 {-}
 
 # 参考文献 {-}
